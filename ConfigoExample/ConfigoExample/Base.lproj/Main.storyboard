@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzb-8x-iyc">
+                                <rect key="frame" x="99" y="30" width="122" height="30"/>
+                                <state key="normal" title="Pull Configuration">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pullConfig:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QgY-R9-P5Z"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Drill Config" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S4W-yp-sVN">
+                                <rect key="frame" x="8" y="76" width="196" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWR-TC-SGb">
+                                <rect key="frame" x="209" y="76" width="49" height="30"/>
+                                <state key="normal" title="Drill">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="drill:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4K3-Cb-bMA"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZt-qH-R9h">
+                                <rect key="frame" x="8" y="114" width="304" height="438"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saf-Fe-EoK">
+                                <rect key="frame" x="263" y="76" width="49" height="30"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mRL-FN-8Bg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="S4W-yp-sVN" firstAttribute="leading" secondItem="IZt-qH-R9h" secondAttribute="leading" id="04W-lj-PRe"/>
+                            <constraint firstItem="S4W-yp-sVN" firstAttribute="top" secondItem="Tzb-8x-iyc" secondAttribute="bottom" constant="16" id="3uH-jY-c8H"/>
+                            <constraint firstItem="saf-Fe-EoK" firstAttribute="trailing" secondItem="IZt-qH-R9h" secondAttribute="trailing" id="6Nx-8y-1Nb"/>
+                            <constraint firstItem="IZt-qH-R9h" firstAttribute="top" secondItem="S4W-yp-sVN" secondAttribute="bottom" constant="8" id="DLa-nE-svK"/>
+                            <constraint firstItem="S4W-yp-sVN" firstAttribute="width" secondItem="uWR-TC-SGb" secondAttribute="width" multiplier="4" id="FR9-Q3-aYW"/>
+                            <constraint firstItem="S4W-yp-sVN" firstAttribute="centerY" secondItem="uWR-TC-SGb" secondAttribute="centerY" id="HMY-Jn-YSl"/>
+                            <constraint firstAttribute="centerX" secondItem="Tzb-8x-iyc" secondAttribute="centerX" id="HpF-cB-c6f"/>
+                            <constraint firstItem="saf-Fe-EoK" firstAttribute="leading" secondItem="uWR-TC-SGb" secondAttribute="trailing" constant="5" id="KMW-iP-LSm"/>
+                            <constraint firstItem="uWR-TC-SGb" firstAttribute="leading" secondItem="S4W-yp-sVN" secondAttribute="trailing" constant="5" id="VFu-gW-VFN"/>
+                            <constraint firstAttribute="trailing" secondItem="saf-Fe-EoK" secondAttribute="trailing" constant="8" id="VUc-EY-wgh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IZt-qH-R9h" secondAttribute="bottom" constant="16" id="XeT-kh-Vux"/>
+                            <constraint firstItem="S4W-yp-sVN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="Z2h-qy-wDz"/>
+                            <constraint firstItem="Tzb-8x-iyc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="abp-i5-ocw"/>
+                            <constraint firstItem="saf-Fe-EoK" firstAttribute="width" secondItem="uWR-TC-SGb" secondAttribute="width" id="i7v-sE-Wsu"/>
+                            <constraint firstItem="saf-Fe-EoK" firstAttribute="centerY" secondItem="uWR-TC-SGb" secondAttribute="centerY" id="pCb-QQ-bVq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="configView" destination="IZt-qH-R9h" id="AeA-Sl-pUr"/>
+                        <outlet property="drillField" destination="S4W-yp-sVN" id="HTG-kp-vJp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="336" y="414"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
