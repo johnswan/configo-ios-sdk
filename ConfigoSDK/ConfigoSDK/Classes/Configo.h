@@ -23,11 +23,13 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 @interface Configo : NSObject
 
 @property (nonatomic, readonly) CFGConfigLoadState state;
+@property (nonatomic) BOOL dynamicallyRefreshValues;
 
 + (void)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 + (instancetype)sharedConfigo;
 
 - (void)pullConfig;
+- (void)refreshValues;
 
 - (void)setCustomUserId:(NSString *)userId;
 - (void)setCustomUserId:(NSString *)userId userContext:(NSDictionary *)context;

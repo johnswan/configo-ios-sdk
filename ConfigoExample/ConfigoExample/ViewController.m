@@ -30,12 +30,7 @@
                                                       NSLog(@"Configuration Loaded: %@", config);
                                                       [self clear: nil];
                                                   }];
-    [Configo initWithDevKey: @"123" appId: @"YOUR_APP_ID"];
     
-    [[Configo sharedConfigo] setCustomUserId: @"natanavra@gmail.com" userContext: @{@"age" : @22,
-                                                                                    @"roles" : @[@"CTO", @"Co-founder"],
-                                                                                    @"attributes" : @{@"height" : @182.5,
-                                                                                                      @"charisma" : @"high"}}];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo: self.view animated: YES];
     hud.labelText =  @"Hello";
@@ -44,6 +39,9 @@
 
 - (IBAction)pullConfig:(id)sender {
     [[Configo sharedConfigo] pullConfig];
+}
+- (IBAction)changeParams:(id)sender {
+    [[Configo sharedConfigo] setCustomUserId: @"nat123"];
 }
 
 - (IBAction)drill:(id)sender {

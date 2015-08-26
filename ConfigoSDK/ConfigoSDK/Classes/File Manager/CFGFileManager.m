@@ -8,10 +8,12 @@
 
 #import "CFGFileManager.h"
 #import "CFGConfigoData.h"
+#import "CFGResponse.h"
 #import "CFGConstants.h"
 
 #import <NNLibraries/NNUtilities.h>
 #import <NNLibraries/NNJSONUtilities.h>
+#import <NNLibraries/NNSecurity.h>
 
 @implementation CFGFileManager
 
@@ -33,46 +35,117 @@
     return self;
 }
 
-- (CFGConfigoData *)configoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
+#pragma mark - Configo Response
+
+- (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId error:(NSError **)err{
+    BOOL success = NO;
+    NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
+    success = [self saveAndEncryptObject: response toFile: filePath error: err];
+    return success;
+}
+
+- (CFGResponse *)loadLastResponseForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
+    CFGResponse *retval = nil;
+    NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
+    retval = [self loadAndDecryptDataFromFile: filePath error: err];
+    return nil;
+}
+
+#pragma mark - Configo Data
+
+- (CFGConfigoData *)loadConfigoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGConfigoData *retval = nil;
-    NSString *filePath = [self filePathWithDevKey: devKey appId: appId];
-    NSData *jsonData = [NSData dataWithContentsOfFile: filePath];
-    if(jsonData) {
-        NSDictionary *json = [NNJSONUtilities JSONObjectFromData: jsonData error: err];
-        retval = [[CFGConfigoData alloc] initWithDictionary: json];
-    } else if(err) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"Configuration file not found in storage"};
-        *err = [NSError errorWithDomain: @"com.configo.config.load" code: CFGErrorCodeFileNotFound userInfo: userInfo];
-    }
+    NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoData"];
+    retval = [self loadAndDecryptDataFromFile: filePath error: err];
     return retval;
 }
 
 - (BOOL)saveConfigoData:(CFGConfigoData *)configoData withDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     BOOL success = NO;
-    NSDictionary *json = [configoData dictionaryRepresentation];
-    NSData *jsonData = [NNJSONUtilities JSONDataFromObject: json error: err];
-    if(jsonData) {
-        NSString *filePath = [self filePathWithDevKey: devKey appId: appId];
-        success = [jsonData writeToFile: filePath options: NSDataWritingFileProtectionComplete error: err];
-    } else if(err) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"Unable to create JSON from configoData"};
-        *err = [NSError errorWithDomain: @"com.configo.config.save" code: CFGErrorCodeInvalidData userInfo: userInfo];
+    NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoData"];
+    success = [self saveAndEncryptObject: configoData toFile: filePath error: err];
+    return success;
+}
+
+#pragma mark - Generic Data Saving & Loading
+
+- (BOOL)saveAndEncryptObject:(id)object toFile:(NSString *)filePath error:(NSError **)err {
+    if(!object || !filePath) {
+        return NO;
+    }
+    BOOL success = NO;
+    NSData *data = nil;
+    if([object isKindOfClass: [NSData class]]) {
+        data = object;
+    } else {
+        data = [NNJSONUtilities JSONDataFromObject: object error: err];
+        if(!data && [object conformsToProtocol: @protocol(NSCoding)]) {
+            data = [NSKeyedArchiver archivedDataWithRootObject: object];
+        }
+    }
+        
+    if(data) {
+        NSString *key = [self cryptoKeyFromKey: CFGCryptoKey];
+        NSData *encrypted = [NNSecurity encryptData: data withKey: key error: err];
+        if(encrypted) {
+            success = [encrypted writeToFile: filePath atomically: YES];
+        }
     }
     return success;
 }
-             
+
+- (id)loadAndDecryptDataFromFile:(NSString *)filePath error:(NSError **)err {
+    if(!filePath) {
+        return nil;
+    }
+    id retval = nil;
+    NSData *fileData = [NSData dataWithContentsOfFile: filePath];
+    if(fileData) {
+        NSString *key = [self cryptoKeyFromKey: CFGCryptoKey];
+        NSData *data = [NNSecurity decrypt: fileData withKey: key error: err];
+        id json = [NNJSONUtilities JSONObjectFromData: data error: err];
+        retval = json ? : data;
+    }
+    return retval;
+}
 
 #pragma mark - Helpers
 
-- (NSString *)filePathWithDevKey:(NSString *)devKey appId:(NSString *)appId {
-    NSString *fileName = [self fileNameWithDevKey: devKey appId: appId];
+- (NSString *)filePathWithDevKey:(NSString *)devKey appId:(NSString *)appId suffix:(NSString *)suffix {
+    NSString *fileName = [self fileNameWithDevKey: devKey appId: appId suffix: suffix];
     NSString *filePath = [NNUtilities pathToFileInDocumentsDirectory: fileName];
     return filePath;
 }
 
-- (NSString *)fileNameWithDevKey:(NSString *)devKey appId:(NSString *)appId {
-    NSString *fileName = [NSString stringWithFormat: @"%@-%@-%@", CFGFileNamePrefix, devKey, appId];
+- (NSString *)fileNameWithDevKey:(NSString *)devKey appId:(NSString *)appId suffix:(NSString *)suffix {
+    NSMutableString *fileName = [NSMutableString string];
+    [fileName appendString: CFGFileNamePrefix];
+    if(devKey) {
+        [fileName appendFormat: @"-%@", devKey];
+    }
+    if(appId) {
+        [fileName appendFormat: @"-%@", appId];
+    }
+    if(suffix) {
+        [fileName appendFormat: @"-%@", suffix];
+    }
     return fileName;
+}
+
+- (NSString *)cryptoKeyFromKey:(NSString *)key {
+    NSUInteger length = key.length;
+    unichar buffer[length + 1];
+    for(NSUInteger i = 0 ; i < length ; i ++) {
+        unichar current = buffer[i];
+        if(current == 'A') {
+            buffer[i] = 'B';
+        } else if(current == 'B') {
+            buffer[i] = 'C';
+        } else if(current == '1') {
+            buffer[i] = '3';
+        }
+    }
+    return [NSString stringWithCharacters: buffer length: length];
 }
 
 @end

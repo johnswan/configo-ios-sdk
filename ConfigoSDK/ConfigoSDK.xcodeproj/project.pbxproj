@@ -25,6 +25,8 @@
 		5CACCDB91B81E546009E343C /* CFGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDB71B81E546009E343C /* CFGConstants.m */; };
 		5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACCDC21B821120009E343C /* CFGResponseHeader.h */; };
 		5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDC31B821120009E343C /* CFGResponseHeader.m */; };
+		5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */; };
+		5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		5CACCDB71B81E546009E343C /* CFGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGConstants.m; path = Constants/CFGConstants/CFGConstants.m; sourceTree = "<group>"; };
 		5CACCDC21B821120009E343C /* CFGResponseHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponseHeader.h; path = "Classes/Models/Response Header/CFGResponseHeader.h"; sourceTree = "<group>"; };
 		5CACCDC31B821120009E343C /* CFGResponseHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponseHeader.m; path = "Classes/Models/Response Header/CFGResponseHeader.m"; sourceTree = "<group>"; };
+		5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConfigoDataController.h; path = Classes/Controllers/CFGConfigoDataController.h; sourceTree = "<group>"; };
+		5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGConfigoDataController.m; path = Classes/Controllers/CFGConfigoDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,9 +239,9 @@
 		5C93DEE61B8074530074D62A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5CEA82E31B8DA0A8008F6D3B /* Configo */,
 				5C33AB111B8CB30000D85791 /* File Manager */,
-				5C93DEE21B80744D0074D62A /* Configo.h */,
-				5C93DEE31B80744D0074D62A /* Configo.m */,
+				5CEA82ED1B8DF95A008F6D3B /* Controllers */,
 				5C37E9E31B821A36001B80D6 /* Models */,
 			);
 			name = Classes;
@@ -252,6 +256,32 @@
 			name = CFGResponseHeader;
 			sourceTree = "<group>";
 		};
+		5CEA82E31B8DA0A8008F6D3B /* Configo */ = {
+			isa = PBXGroup;
+			children = (
+				5C93DEE21B80744D0074D62A /* Configo.h */,
+				5C93DEE31B80744D0074D62A /* Configo.m */,
+			);
+			name = Configo;
+			sourceTree = "<group>";
+		};
+		5CEA82ED1B8DF95A008F6D3B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5CEA82F41B8DFC5A008F6D3B /* ConfigoData Controller */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5CEA82F41B8DFC5A008F6D3B /* ConfigoData Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */,
+				5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */,
+			);
+			name = "ConfigoData Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -264,6 +294,7 @@
 				5CACCDB81B81E546009E343C /* CFGConstants.h in Headers */,
 				5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */,
 				5C93DEE41B80744D0074D62A /* Configo.h in Headers */,
+				5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */,
 				5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */,
 				5C37E9E91B821AAD001B80D6 /* CFGResponse.h in Headers */,
 				5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */,
@@ -407,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */,
 				5C93DEE51B80744D0074D62A /* Configo.m in Sources */,
 				5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */,
 				5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */,
@@ -460,7 +492,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 126;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -507,7 +539,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 126;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -534,7 +566,7 @@
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 83;
+				DYLIB_CURRENT_VERSION = 126;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/include/**";
 				INFOPLIST_FILE = ConfigoSDK/Info.plist;
@@ -555,7 +587,7 @@
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 83;
+				DYLIB_CURRENT_VERSION = 126;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/include/**";
 				INFOPLIST_FILE = ConfigoSDK/Info.plist;
