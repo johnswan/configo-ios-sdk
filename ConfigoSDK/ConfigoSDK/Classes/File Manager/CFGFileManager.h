@@ -9,16 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class CFGConfigoData;
+@class CFGResponse;
 
 @interface CFGFileManager : NSObject
 
 + (instancetype)sharedManager;
 
-- (CFGConfigoData *)configoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;
+- (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId error:(NSError **)err;
+- (CFGResponse *)loadLastResponseForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;
 
-- (BOOL)saveConfigoData:(CFGConfigoData *)configoData
-             withDevKey:(NSString *)devKey
-                  appId:(NSString *)appId
-                  error:(NSError **)err;
-
+- (BOOL)saveConfigoData:(CFGConfigoData *)configoData withDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;
+- (CFGConfigoData *)loadConfigoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;
 @end

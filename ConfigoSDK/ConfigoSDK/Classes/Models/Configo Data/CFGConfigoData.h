@@ -8,13 +8,16 @@
 
 #import <NNLibraries/NNJSONObject.h>
 
-@interface CFGConfigoData : NNJSONObject
+@interface CFGConfigoData : NNJSONObject <NSCopying>
 
 @property (nonatomic, copy) NSString *udid;
 @property (nonatomic, copy) NSString *customUserId;
-@property (nonatomic, strong) NSDictionary *userContext;
 @property (nonatomic, strong) NSDictionary *deviceDetails;
 
-- (NSDictionary *)dictionaryRepresentation;
+
+- (NSDictionary *)userContext;
+- (void)setUserContext:(NSDictionary *)userContext;
+
+- (void)setUserContextValue:(id)value forKey:(NSString *)key;
 
 @end

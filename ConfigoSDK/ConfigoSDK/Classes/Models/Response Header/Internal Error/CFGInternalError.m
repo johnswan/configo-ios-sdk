@@ -37,6 +37,10 @@ static NSString *const kInternalErrorSubdomain = @"internalError";
     return dict;
 }
 
+- (NSDictionary *)dictionaryRepresentation {
+    return [self jsonRepresentation];
+}
+
 - (NSError *)error {
     NSString *errorDomain = [NSString stringWithFormat: @"%@.%@", CFGErrorDomain, kInternalErrorSubdomain];
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey : _errorDescription};

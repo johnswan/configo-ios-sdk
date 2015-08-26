@@ -45,4 +45,8 @@ static NSString *const kInternalErrorKey = @"internalError";
     return dict;
 }
 
+- (NSDictionary *)dictionaryRepresentation {
+    return [self jsonRepresentation];
+}
+
 @end

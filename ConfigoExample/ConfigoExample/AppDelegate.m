@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <ConfigoSDK/ConfigoSDK.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Configo initWithDevKey: @"123" appId: @"9cd20be9cc21d6115a57e2bcbc534fd4"];
     return YES;
 }
 

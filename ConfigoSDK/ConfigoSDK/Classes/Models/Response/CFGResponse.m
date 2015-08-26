@@ -7,10 +7,14 @@
 //
 
 #import "CFGResponse.h"
+#import "CFGResponseHeader.h"
+
 #import <NNLibraries/NNJSONUtilities.h>
 #import <NNLibraries/NSDictionary+NNAdditions.h>
 
 #pragma mark - Constants
+static NSString *const kHeaderKey = @"header";
+static NSString *const kResponseKey = @"response";
 static NSString *const kConfigIDKey = @"_id";
 static NSString *const kConfigKey = @"config";
 
@@ -18,17 +22,28 @@ static NSString *const kConfigKey = @"config";
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if(self = [super initWithDictionary: dict]) {
-        _configID = [NNJSONUtilities validObjectFromObject: dict[kConfigIDKey]];
-        _config = [NNJSONUtilities validObjectFromObject: dict[kConfigKey]];
+        NSDictionary *header = [NNJSONUtilities validObjectFromObject: dict[kHeaderKey]];
+        _responseHeader = [[CFGResponseHeader alloc] initWithDictionary: header];
+        
+        NSDictionary *response = [NNJSONUtilities validObjectFromObject: dict[kResponseKey]];
+        _configID = [NNJSONUtilities validObjectFromObject: response[kConfigIDKey]];
+        _config = [NNJSONUtilities validObjectFromObject: response[kConfigKey]];
     }
     return self;
 }
 
 - (NSDictionary *)jsonRepresentation {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict nnSafeSetObject: _configID forKey: kConfigIDKey];
-    [dict nnSafeSetObject: _config forKey: kConfigKey];
+    [dict nnSafeSetObject: [_responseHeader dictionaryRepresentation] forKey: kHeaderKey];
+    NSMutableDictionary *response = [NSMutableDictionary dictionary];
+    [response nnSafeSetObject: _configID forKey: kConfigIDKey];
+    [response nnSafeSetObject: _config forKey: kConfigKey];
+    [dict nnSafeSetObject: response forKey: kResponseKey];
     return dict;
+}
+
+-(NSDictionary *)dictionaryRepresentation {
+    return [self jsonRepresentation];
 }
 
 @end

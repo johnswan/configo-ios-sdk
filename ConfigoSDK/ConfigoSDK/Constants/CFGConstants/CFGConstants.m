@@ -11,7 +11,7 @@
 #pragma mark - Global Constants
 
 NSString *const CFGFileNamePrefix = @"configo";
-NSString *const CFGCryptoKey = @"natan";
+NSString *const CFGCryptoKey = @"this123is51AVerY89LongKey19andItsHardToGUESs87!AK#aslDkm6*a12sdBorkenC4TwelveNine776B1oc5";
 
 NSString *const CFGErrorDomain = @"com.configo.error";
 

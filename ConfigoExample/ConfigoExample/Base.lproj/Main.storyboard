@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzb-8x-iyc">
-                                <rect key="frame" x="99" y="30" width="122" height="30"/>
+                                <rect key="frame" x="16" y="30" width="139" height="30"/>
                                 <state key="normal" title="Pull Configuration">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -56,6 +56,15 @@
                                     <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mRL-FN-8Bg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSS-P9-LUY">
+                                <rect key="frame" x="165" y="30" width="139" height="30"/>
+                                <state key="normal" title="Change Params">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeParams:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nEp-B3-vid"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,14 +74,18 @@
                             <constraint firstItem="IZt-qH-R9h" firstAttribute="top" secondItem="S4W-yp-sVN" secondAttribute="bottom" constant="8" id="DLa-nE-svK"/>
                             <constraint firstItem="S4W-yp-sVN" firstAttribute="width" secondItem="uWR-TC-SGb" secondAttribute="width" multiplier="4" id="FR9-Q3-aYW"/>
                             <constraint firstItem="S4W-yp-sVN" firstAttribute="centerY" secondItem="uWR-TC-SGb" secondAttribute="centerY" id="HMY-Jn-YSl"/>
-                            <constraint firstAttribute="centerX" secondItem="Tzb-8x-iyc" secondAttribute="centerX" id="HpF-cB-c6f"/>
                             <constraint firstItem="saf-Fe-EoK" firstAttribute="leading" secondItem="uWR-TC-SGb" secondAttribute="trailing" constant="5" id="KMW-iP-LSm"/>
+                            <constraint firstItem="rSS-P9-LUY" firstAttribute="centerY" secondItem="Tzb-8x-iyc" secondAttribute="centerY" id="RS0-G2-LaE"/>
                             <constraint firstItem="uWR-TC-SGb" firstAttribute="leading" secondItem="S4W-yp-sVN" secondAttribute="trailing" constant="5" id="VFu-gW-VFN"/>
                             <constraint firstAttribute="trailing" secondItem="saf-Fe-EoK" secondAttribute="trailing" constant="8" id="VUc-EY-wgh"/>
+                            <constraint firstItem="Tzb-8x-iyc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="WUg-Er-WpQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IZt-qH-R9h" secondAttribute="bottom" constant="16" id="XeT-kh-Vux"/>
                             <constraint firstItem="S4W-yp-sVN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="Z2h-qy-wDz"/>
                             <constraint firstItem="Tzb-8x-iyc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="abp-i5-ocw"/>
+                            <constraint firstItem="rSS-P9-LUY" firstAttribute="width" secondItem="Tzb-8x-iyc" secondAttribute="width" id="eIu-Of-iqA"/>
+                            <constraint firstAttribute="trailing" secondItem="rSS-P9-LUY" secondAttribute="trailing" constant="16" id="hko-q5-RYq"/>
                             <constraint firstItem="saf-Fe-EoK" firstAttribute="width" secondItem="uWR-TC-SGb" secondAttribute="width" id="i7v-sE-Wsu"/>
+                            <constraint firstItem="rSS-P9-LUY" firstAttribute="leading" secondItem="Tzb-8x-iyc" secondAttribute="trailing" constant="10" id="lgs-gH-tHX"/>
                             <constraint firstItem="saf-Fe-EoK" firstAttribute="centerY" secondItem="uWR-TC-SGb" secondAttribute="centerY" id="pCb-QQ-bVq"/>
                         </constraints>
                     </view>
