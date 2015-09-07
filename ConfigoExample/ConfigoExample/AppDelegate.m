@@ -19,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Configo initWithDevKey: @"123" appId: @"YOUR_APP_ID"];
+    //Changed again
     return YES;
 }
 

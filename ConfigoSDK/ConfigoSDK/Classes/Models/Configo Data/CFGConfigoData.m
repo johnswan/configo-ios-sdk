@@ -26,8 +26,8 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
     if(self = [super initWithDictionary: dict]) {
         self.udid = [NNJSONUtilities validObjectFromObject: dict[kUdidKey]];
         self.customUserId = [NNJSONUtilities validObjectFromObject: dict[kCustomUserIdKey]];
-        NSDictionary *dict = [NNJSONUtilities validObjectFromObject: dict[kUserContextKey]];
-        self.userContext = [NSMutableDictionary dictionaryWithDictionary: dict];
+        NSDictionary *contextDict = [NNJSONUtilities validObjectFromObject: dict[kUserContextKey]];
+        self.userContext = [NSMutableDictionary dictionaryWithDictionary: contextDict];
         self.deviceDetails = [NNJSONUtilities validObjectFromObject: dict[kDeviceDetailsKey]];
     }
     return self;
@@ -36,6 +36,10 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
 - (id)copyWithZone:(NSZone *)zone {
     CFGConfigoData *copy = [[CFGConfigoData alloc] initWithDictionary: [self dictionaryRepresentation]];
     return copy;
+}
+
+- (NSDictionary *)jsonRepresentation {
+    return [self dictionaryRepresentation];
 }
 
 - (NSDictionary *)dictionaryRepresentation {
@@ -52,7 +56,11 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
 }
 
 - (void)setUserContext:(NSDictionary *)userContext {
-    _mutableUserContext = [NSMutableDictionary dictionaryWithDictionary: userContext];
+    if(userContext) {
+        _mutableUserContext = [NSMutableDictionary dictionaryWithDictionary: userContext];
+    } else {
+        _mutableUserContext = nil;
+    }
 }
 
 - (void)setUserContextValue:(id)value forKey:(NSString *)key {
