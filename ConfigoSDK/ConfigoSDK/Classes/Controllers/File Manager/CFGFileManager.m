@@ -14,6 +14,7 @@
 #import <NNLibraries/NNUtilities.h>
 #import <NNLibraries/NNJSONUtilities.h>
 #import <NNLibraries/NNSecurity.h>
+#import <NNLibraries/NNJSONObject.h>
 
 @implementation CFGFileManager
 
@@ -47,7 +48,8 @@
 - (CFGResponse *)loadLastResponseForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGResponse *retval = nil;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
-    retval = [self loadAndDecryptDataFromFile: filePath error: err];
+    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath error: err];
+    retval = [[CFGResponse alloc] initWithDictionary: json];
     return nil;
 }
 
@@ -56,7 +58,8 @@
 - (CFGConfigoData *)loadConfigoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGConfigoData *retval = nil;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoData"];
-    retval = [self loadAndDecryptDataFromFile: filePath error: err];
+    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath error: err];
+    retval = [[CFGConfigoData alloc] initWithDictionary: json];
     return retval;
 }
 
@@ -77,11 +80,13 @@
     NSData *data = nil;
     if([object isKindOfClass: [NSData class]]) {
         data = object;
-    } else {
+    } else if([object isKindOfClass: [NNJSONObject class]] || [object conformsToProtocol: @protocol(NNJSONObject)]) {
+        NSDictionary *json = [(NNJSONObject *)object dictionaryRepresentation];
+        data = [NNJSONUtilities JSONDataFromObject: json error: err];
+    } else if([object isKindOfClass: [NSDictionary class]] || [object isKindOfClass: [NSArray class]]) {
         data = [NNJSONUtilities JSONDataFromObject: object error: err];
-        if(!data && [object conformsToProtocol: @protocol(NSCoding)]) {
-            data = [NSKeyedArchiver archivedDataWithRootObject: object];
-        }
+    } else if([object conformsToProtocol: @protocol(NSCoding)]) {
+        data = [NSKeyedArchiver archivedDataWithRootObject: object];
     }
         
     if(data) {
@@ -135,6 +140,8 @@
 - (NSString *)cryptoKeyFromKey:(NSString *)key {
     NSUInteger length = key.length;
     unichar buffer[length + 1];
+    [key getCharacters: buffer];
+    
     for(NSUInteger i = 0 ; i < length ; i ++) {
         unichar current = buffer[i];
         if(current == 'A') {

@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 - (void)setCustomUserId:(NSString *)userId userContext:(NSDictionary *)context error:(NSError *)err;
 - (void)setUserContextValue:(id)value forKey:(NSString *)key;
 
-- (NSDictionary *)config;
-- (id)configForKeyPath:(NSString *)keyPath;
+- (NSDictionary *)rawConfig;
+- (id)configValueForKeyPath:(NSString *)keyPath;
 
 @end

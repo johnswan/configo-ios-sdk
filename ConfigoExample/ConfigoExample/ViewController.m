@@ -26,14 +26,13 @@
                                                       object: nil
                                                        queue: [NSOperationQueue mainQueue]
                                                   usingBlock: ^(NSNotification *note) {
-                                                      NSDictionary *config = [note object];
-                                                      NSLog(@"Configuration Loaded: %@", config);
+//                                                      NSDictionary *config = [note object];
                                                       [self clear: nil];
                                                   }];
     
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo: self.view animated: YES];
-    hud.labelText =  @"Hello";
+    hud.labelText =  NSLocalizedString(@"greet.text", @"Hello World!");
     [hud hide: YES afterDelay: 3];    
 }
 
@@ -45,13 +44,13 @@
 }
 
 - (IBAction)drill:(id)sender {
-    id value = [[Configo sharedConfigo] configForKeyPath: _drillField.text];
+    id value = [[Configo sharedConfigo] configValueForKeyPath: _drillField.text];
     [_configView setText: value ? [NSString stringWithFormat: @"(%@): \n%@", NSStringFromClass([value class]), value] : @"Value not found"];
 }
 
 - (IBAction)clear:(id)sender {
     _drillField.text = nil;
-    [_configView setText: [NSString stringWithFormat: @"%@", [[Configo sharedConfigo] config]]];
+    [_configView setText: [NSString stringWithFormat: @"%@", [[Configo sharedConfigo] rawConfig]]];
 }
 
 - (void)didReceiveMemoryWarning {

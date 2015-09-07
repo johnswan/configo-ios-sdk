@@ -9,15 +9,12 @@
 #import "Configo.h"
 #import "CFGFileManager.h"
 #import "CFGConfigoDataController.h"
+#import "CFGNetworkController.h"
 
 #import "CFGConstants.h"
-#import "CFGConfigoData.h"
 #import "CFGResponse.h"
-#import "CFGResponseHeader.h"
-#import "CFGInternalError.h"
 
 #import <NNLibraries/NNLibrariesEssentials.h>
-#import <NNLibraries/NNURLConnectionManager.h>
 #import <NNLibraries/NNReachabilityManager.h>
 
 @import CoreTelephony;
@@ -29,17 +26,6 @@ NSString *const ConfigoConfigurationLoadCompleteNotification = @"com.configo.con
 NSString *const ConfigoConfigurationLoadErrorNotification = @"com.configo.config.loadError";
 NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 
-//Keychain constants
-static NSString *const kKeychainKey_deviceDetails = @"deviceDetails";
-
-//HTTP header keys constants
-static NSString *const kHTTPHeaderKey_authHeader = @"x-configo-auth";
-static NSString *const kHTTPHeaderKey_devKey = @"x-configo-devKey";
-static NSString *const kHTTPHeaderKey_appId = @"x-configo-appId";
-
-//HTTP JSON Response key consants
-static NSString *const kResponseKey_header = @"header";
-static NSString *const kResponseKey_response = @"response";
 
 #pragma mark - Private Declarations
 
@@ -47,6 +33,7 @@ static NSString *const kResponseKey_response = @"response";
 @property (nonatomic, copy) NSString *devKey;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
+@property (nonatomic, strong) CFGNetworkController *networkController;
 
 @property (nonatomic, strong) CFGResponse *activeConfigoResponse;
 @property (nonatomic, strong) CFGResponse *configoResponse;
@@ -85,6 +72,7 @@ static id _shared = nil;
         
         self.devKey = devKey;
         self.appId = appId;
+        _networkController = [[CFGNetworkController alloc] init];
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
         
         _configoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
@@ -118,55 +106,25 @@ static id _shared = nil;
     NNLogDebug(@"Loading Config: start", nil);
     _state = CFGConfigLoadingInProgress;
     
-    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
-    
-    NSDictionary *headers = @{kHTTPHeaderKey_authHeader : @"natanavra",
-                              kHTTPHeaderKey_devKey : _devKey,
-                              kHTTPHeaderKey_appId : _appId};
-    [connectionMgr setHttpHeaders: headers];
-    connectionMgr.requestSerializer = [NNJSONRequestSerializer serializer];
-    connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: [_configoDataController configoDataForRequest]];
-    
-    NSURL *baseConfigURL = [CFGConstants getConfigURL];
-    NNLogDebug(@"Loading Config: GET", (@{@"URL" : baseConfigURL, @"Headers" : headers, @"Params" : params}));
-    
-    [connectionMgr GET: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
-        NNLogDebug(@"LoadingConfig: HTTPResponse", response);
-        NSError *retError = error;
-        
-        if([object isKindOfClass: [NSDictionary class]]) {
-            _configoResponse = [[CFGResponse alloc] initWithDictionary: object];
-            CFGResponseHeader *responseHeader = [_configoResponse responseHeader];
-            if(responseHeader.internalError) {
-                _state = CFGConfigFailedLoading;
-                NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
-                retError = [responseHeader.internalError error];
-            } else if(_configoResponse) {
-                _state = CFGConfigLoadedFromServer;
-                [_configoDataController saveConfigDataWithDevKey: _devKey appId: _appId error: nil];
-                [self saveResponse: _configoResponse withDevKey: _devKey withAppId: _appId];
-                NNLogDebug(@"Loading Config: Done", _configoResponse.config);
-            } else {
-                _state = CFGConfigFailedLoading;
-                retError = [NSError errorWithDomain: @"com.configo.config.badResponse" code: 41 userInfo: nil];
+    NSDictionary *configoData = [_configoDataController configoDataForRequest];
+    [_networkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
+        if(response) {
+            _state = CFGConfigLoadedFromServer;
+            _configoResponse = response;
+            
+            [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
+            [self saveResponse: _configoResponse withDevKey: _devKey withAppId: _appId];
+            
+            if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
+                _activeConfigoResponse = _configoResponse;
             }
             
-            if(!_activeConfigoResponse) {
-                _activeConfigoResponse = _configoResponse;
-            } else if(_dynamicallyRefreshValues) {
-                _activeConfigoResponse = _configoResponse;
-            }
-        }
-        
-        if(retError) {
-            _state = CFGConfigFailedLoading;
-            NNLogDebug(@"Loading Config: Error", retError);
-            NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : retError};
-            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification object: self userInfo: userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification object: self userInfo: [self rawConfig]];
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification object: self userInfo: [self config]];
+            _state = CFGConfigFailedLoading;
+            NNLogDebug(@"Loading Config: Error", error);
+            NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : error};
+            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification object: self userInfo: userInfo];
         }
     }];
 }
@@ -198,11 +156,11 @@ static id _shared = nil;
 
 #pragma mark - Getters
 
-- (NSDictionary *)config {
+- (NSDictionary *)rawConfig {
     return _activeConfigoResponse.config;
 }
 
-- (id)configForKeyPath:(NSString *)keyPath {
+- (id)configValueForKeyPath:(NSString *)keyPath {
     NSDictionary *config = _activeConfigoResponse.config;
     id value = [NNJSONUtilities valueForKeyPath: keyPath inObject: config];
     return value;

@@ -12,9 +12,9 @@
 
 #import <CoreTelephony/CTCarrier.h>
 
+#import <NNLibraries/NNLibrariesEssentials.h>
 #import <NNLibraries/UIDevice+NNAdditions.h>
 #import <NNLibraries/NNReachabilityManager.h>
-#import <NNLibraries/NNJSONUtilities.h>
 #import <NNLibraries/NSDictionary+NNAdditions.h>
 
 static NSString *const kPOSTKey_deviceDetails = @"deviceDetails";
@@ -57,8 +57,12 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     if(self = [super init]) {
         NSError *err = nil;
         _configoData = [[CFGFileManager sharedManager] loadConfigoDataForDevKey: devKey appId: appId error: &err];
+        
         if(!_configoData) {
+            NNLogDebug(@"ConfigoData file not found", err);
             [self basicLoad];
+        } else {
+            NNLogDebug(@"ConfigoData loaded from file", _configoData);
         }
     }
     return self;
@@ -91,25 +95,34 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     dict[kPOSTKey_Udid] = udid;
     
     if(udidChanged || _customUserIdChanged) {
+        NNLogDebug(@"UDID or CustomUserId changed, sending userContext and deviceDetails", nil);
         //If the UDID changed or the customUserId set context and details (i.e. new user)
         [dict nnSafeSetObject: _configoData.userContext forKey: kPOSTKey_userContext];
         [dict nnSafeSetObject: deviceDetails forKey: kPOSTKey_deviceDetails];
     } else if(_userContextChanged) {
+        NNLogDebug(@"UserContext changed", nil);
         //If only the user context changed - we send it out
         [dict nnSafeSetObject: _configoData.userContext forKey: kPOSTKey_userContext];
     } else if(deviceDetailsChanged) {
+        NNLogDebug(@"DeviceDetails changed", nil);
         //If any details changed - we send them
         [dict nnSafeSetObject: deviceDetails forKey: kPOSTKey_deviceDetails];
     }
     return dict;
 }
 
-- (BOOL)saveConfigDataWithDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
+- (BOOL)saveConfigoDataWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    return [self saveConfigoDataWithDevKey: devKey appId: appId error: nil];
+}
+
+- (BOOL)saveConfigoDataWithDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     _customUserIdChanged = NO;
     _userContextChanged = NO;
     _configoData.deviceDetails = [self deviceDetails];
     _configoData.udid = [UIDevice udidFromKeychain: nil];
-    return [[CFGFileManager sharedManager] saveConfigoData: _configoData withDevKey: devKey appId: appId error: err];
+    BOOL success = [[CFGFileManager sharedManager] saveConfigoData: _configoData withDevKey: devKey appId: appId error: err];
+    NNLogDebug(success ? @"ConfigoData save success" : @"ConfigoData save failed" , err ? *err : nil);
+    return success;
 }
 
 #pragma mark - Getters
@@ -121,6 +134,10 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
 #pragma mark - Setters
 
 - (BOOL)setCustomUserId:(NSString *)customUserId {
+    if(!customUserId && !_configoData.customUserId) {
+        return NO;
+    }
+    
     if(![_configoData.customUserId isEqualToString: customUserId]) {
         _configoData.customUserId = customUserId;
         _customUserIdChanged = YES;
@@ -130,12 +147,17 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
 }
 
 - (BOOL)setUserContext:(NSDictionary *)userContext {
-    if(![_configoData.userContext isEqualToDictionary: userContext]) {
-        id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
+    if(!userContext && !_configoData.userContext) {
+        return NO;
+    }
+    
+    id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
+    if(![_configoData.userContext isEqualToDictionary: validContext]) {
         _configoData.userContext = validContext;
         _userContextChanged = YES;
         return YES;
     }
+    
     return NO;
 }
 
@@ -149,14 +171,17 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     if(original) {
         if(![original isEqual: value]) {
             [_configoData setUserContextValue: value forKey: key];
-            _userContextChanged = YES;
             retval = YES;
         }
     } else {
         [_configoData setUserContextValue: value forKey: key];
-        _userContextChanged = YES;
         retval = YES;
     }
+    
+    if(retval) {
+        _userContextChanged = retval;
+    }
+    
     return retval;
 }
 
@@ -178,7 +203,7 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     NSString *carrierName = [carrier carrierName] ? : @"NA"; //Not always available, e.g. iPad
     
     NSString *language = @"en";
-    NSArray *preferredLanguages = [[NSBundle mainBundle] preferredLocalizations];
+    NSArray *preferredLanguages = [NSLocale preferredLanguages];
     if(preferredLanguages.count > 0) {
         language = preferredLanguages[0];
     }

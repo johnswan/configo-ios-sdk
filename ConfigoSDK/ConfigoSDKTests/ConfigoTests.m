@@ -36,7 +36,7 @@
     
     [self waitForExpectationsWithTimeout: 10.0 handler: ^(NSError *error) {
         if(!error) {
-            id value = [[Configo sharedConfig] configForKeyPath: @"data.items.tags[0]"];
+            id value = [[Configo sharedConfig] configValueForKeyPath: @"data.items.tags[0]"];
             XCTAssertEqualObjects(@"GDD07", value);
         } else {
             XCTFail(@"%@", [error description]);
