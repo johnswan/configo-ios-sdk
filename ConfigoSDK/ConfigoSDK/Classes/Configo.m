@@ -147,6 +147,10 @@ static id _shared = nil;
     }
 }
 
+- (void)setUserContext:(NSDictionary *)context {
+    [self setCustomUserId: nil userContext: context];
+}
+
 - (void)setUserContextValue:(id)value forKey:(NSString *)key {
     BOOL contextChanged = [_configoDataController setUserContextValue: value forKey: key];
     if(contextChanged) {
