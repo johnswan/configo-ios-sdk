@@ -111,13 +111,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C1B63211B8F459E000CCD9D /* Configo Network Controller */ = {
+		5C1B63211B8F459E000CCD9D /* Network Controller */ = {
 			isa = PBXGroup;
 			children = (
 				5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */,
 				5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */,
 			);
-			name = "Configo Network Controller";
+			name = "Network Controller";
 			sourceTree = "<group>";
 		};
 		5C33AB051B8CA64E00D85791 /* CFGConfigoData */ = {
@@ -282,19 +282,19 @@
 			isa = PBXGroup;
 			children = (
 				5C33AB111B8CB30000D85791 /* File Manager */,
-				5C1B63211B8F459E000CCD9D /* Configo Network Controller */,
-				5CEA82F41B8DFC5A008F6D3B /* ConfigoData Controller */,
+				5C1B63211B8F459E000CCD9D /* Network Controller */,
+				5CEA82F41B8DFC5A008F6D3B /* Data Controller */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		5CEA82F41B8DFC5A008F6D3B /* ConfigoData Controller */ = {
+		5CEA82F41B8DFC5A008F6D3B /* Data Controller */ = {
 			isa = PBXGroup;
 			children = (
 				5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */,
 				5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */,
 			);
-			name = "ConfigoData Controller";
+			name = "Data Controller";
 			path = "Classes/Controllers/ConfigoData Controller";
 			sourceTree = "<group>";
 		};
@@ -446,7 +446,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo ${PROJECT_DIR}/bump_build.sh\necho ${PROJECT_DIR}/${INFOPLIST_FILE}\n/bin/sh ${PROJECT_DIR}/bump_build.sh \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "/bin/sh ${PROJECT_DIR}/bump_build.sh \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
