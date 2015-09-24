@@ -20,9 +20,17 @@ FOUNDATION_EXPORT NSString *const CFGErrorDomain;
 /********************************************************
  Interface Declaration
  ********************************************************/
+
+typedef NS_ENUM(NSUInteger, CFGEnvironment) {
+    CFGEnvironmentLocal = 0,
+    CFGEnvironmentDevelopment,
+    CFGEnvironmentProduction,
+};
+
 @interface CFGConstants : NSObject
 
 + (NSURL *)getConfigURL;
 + (NSString *)baseURLString;
++ (CFGEnvironment)currentEnvironment;
 
 @end

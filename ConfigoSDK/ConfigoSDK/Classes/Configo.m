@@ -33,7 +33,6 @@ NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 @property (nonatomic, copy) NSString *devKey;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
-@property (nonatomic, strong) CFGNetworkController *networkController;
 
 @property (nonatomic, strong) CFGResponse *activeConfigoResponse;
 @property (nonatomic, strong) CFGResponse *configoResponse;
@@ -68,11 +67,11 @@ static id _shared = nil;
     }
     
     if(self = [super init]) {
+        NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
         [NNReachabilityManager sharedManager];
         
         self.devKey = devKey;
         self.appId = appId;
-        _networkController = [[CFGNetworkController alloc] init];
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
         
         _configoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
@@ -84,8 +83,6 @@ static id _shared = nil;
         }
         
         [self pullConfig];
-        
-        NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
     }
     return self;
 }
@@ -107,19 +104,28 @@ static id _shared = nil;
     _state = CFGConfigLoadingInProgress;
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
-    [_networkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
+    [CFGNetworkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
         if(response) {
             _state = CFGConfigLoadedFromServer;
             _configoResponse = response;
             
-            [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
-            [self saveResponse: _configoResponse withDevKey: _devKey withAppId: _appId];
-            
-            if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
-                _activeConfigoResponse = _configoResponse;
+            if(!error) {
+                [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
+                [self saveResponse: _configoResponse withDevKey: _devKey withAppId: _appId];
+                
+                if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
+                    _activeConfigoResponse = _configoResponse;
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification
+                                                                    object: self
+                                                                  userInfo: [self rawConfig]];
+            } else {
+                NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : error};
+                [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification
+                                                                    object: self
+                                                                  userInfo: userInfo];
             }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification object: self userInfo: [self rawConfig]];
         } else {
             _state = CFGConfigFailedLoading;
             NNLogDebug(@"Loading Config: Error", error);
@@ -175,7 +181,7 @@ static id _shared = nil;
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId {
     NSError *err = nil;
     BOOL success = [[CFGFileManager sharedManager] saveResponse: response withDevKey: devKey withAppId: appId error: &err];
-    NNLogDebug(([NSString stringWithFormat: @"Configo save response %@", success ? @"success" : @"failed"]), (success ? nil : err));
+    NNLogDebug(([NSString stringWithFormat: @"Configo save response to file %@", success ? @"success" : @"failed"]), (success ? nil : err));
     return success;
 }
 
@@ -183,8 +189,55 @@ static id _shared = nil;
     CFGResponse *retval = nil;
     NSError *err = nil;
     retval = [[CFGFileManager sharedManager] loadLastResponseForDevKey: devKey appId: appId error: &err];
-    NNLogDebug(([NSString stringWithFormat: @"Configo load response %@", retval ? @"success" : @"failed"]), (retval ? nil : err));
+    NNLogDebug(([NSString stringWithFormat: @"Configo load response from file %@", retval ? @"success" : @"failed"]), (retval ? nil : err));
     return retval;
 }
+
+#pragma mark - DEBUG only code
+
+
++ (NSString *)developmentDevKey {
+    NSString *retval = nil;
+    switch ([CFGConstants currentEnvironment]) {
+        case CFGEnvironmentLocal: {
+            retval = @"YOUR_DEV_KEY";
+            break;
+        }
+        case CFGEnvironmentDevelopment: {
+            retval = @"123";
+            break;
+        }
+        case CFGEnvironmentProduction: {
+            retval = @"123";
+            break;
+        }
+        default:
+            break;
+    }
+    return retval;
+}
+
++ (NSString *)developmentAppId {
+    NSString *retval = nil;
+    switch ([CFGConstants currentEnvironment]) {
+        case CFGEnvironmentLocal: {
+            retval = @"YOUR_APP_ID";
+            break;
+        }
+        case CFGEnvironmentDevelopment: {
+            retval = @"YOUR_APP_ID";
+            break;
+        }
+        case CFGEnvironmentProduction: {
+            retval = @"YOUR_APP_ID";
+            break;
+        }
+        default:
+            break;
+    }
+    return retval;
+}
+
+#endif
 
 @end
