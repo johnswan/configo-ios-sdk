@@ -5,10 +5,10 @@
 //  Created by Natan Abramov on 26/08/15.
 //  Copyright (c) 2015 Turrisio. All rights reserved.
 //
-
 #import "CFGConfigoDataController.h"
 #import "CFGConfigoData.h"
 #import "CFGFileManager.h"
+#import "CFGConstants.h"
 
 #import <CoreTelephony/CTCarrier.h>
 
@@ -22,6 +22,7 @@ static NSString *const kPOSTKey_userContext = @"userContext";
 static NSString *const kPOSTKey_customUserId = @"customUserId";
 
 static NSString *const kPOSTKey_Udid = @"udid";
+static NSString *const kPOSTKey_deviceDetails_sdkVersion = @"sdkVersion";
 static NSString *const kPOSTKey_deviceDetails_deviceName = @"deviceName";
 static NSString *const kPOSTKey_deviceDetails_carrierName = @"carrierName";
 static NSString *const kPOSTKey_deviceDetails_deviceModel = @"deviceModel";
@@ -227,6 +228,7 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
         connectionType = @"Unknown";
     }
     
+    details[kPOSTKey_deviceDetails_sdkVersion] = [CFGConstants sdkVersionString];
     details[kPOSTKey_deviceDetails_deviceName] = deviceName;
     details[kPOSTKey_deviceDetails_carrierName] = carrierName;
     details[kPOSTKey_deviceDetails_deviceModel] = deviceModel;

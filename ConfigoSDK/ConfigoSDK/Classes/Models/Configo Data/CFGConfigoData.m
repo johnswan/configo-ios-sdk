@@ -26,9 +26,10 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
     if(self = [super initWithDictionary: dict]) {
         self.udid = [NNJSONUtilities validObjectFromObject: dict[kUdidKey]];
         self.customUserId = [NNJSONUtilities validObjectFromObject: dict[kCustomUserIdKey]];
+        self.deviceDetails = [NNJSONUtilities validObjectFromObject: dict[kDeviceDetailsKey]];
+        
         NSDictionary *contextDict = [NNJSONUtilities validObjectFromObject: dict[kUserContextKey]];
         self.userContext = [NSMutableDictionary dictionaryWithDictionary: contextDict];
-        self.deviceDetails = [NNJSONUtilities validObjectFromObject: dict[kDeviceDetailsKey]];
     }
     return self;
 }

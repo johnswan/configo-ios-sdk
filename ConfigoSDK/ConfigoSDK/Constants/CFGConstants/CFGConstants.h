@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 
 @interface CFGConstants : NSObject
 
++ (NSString *)sdkVersionString;
+
 + (NSURL *)getConfigURL;
 + (NSString *)baseURLString;
 + (CFGEnvironment)currentEnvironment;
