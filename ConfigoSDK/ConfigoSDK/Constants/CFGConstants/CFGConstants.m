@@ -31,6 +31,10 @@ NSString *const CFGAppIdKey = @"app_id";
 
 @implementation CFGConstants
 
++ (NSString *)sdkVersionString {
+    return @"0.1";
+}
+
 + (NSURL *)getConfigURL {
     NSString *urlString = [self baseURLStringWithPath: CFGGetConfigPath];
     return [NSURL URLWithString: urlString];

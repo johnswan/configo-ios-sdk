@@ -28,6 +28,8 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 + (void)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 + (instancetype)sharedConfigo;
 
++ (NSString *)sdkVersionString;
+
 - (void)pullConfig;
 - (void)refreshValues;
 

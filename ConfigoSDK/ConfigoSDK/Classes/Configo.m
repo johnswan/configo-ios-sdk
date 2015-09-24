@@ -87,6 +87,10 @@ static id _shared = nil;
     return self;
 }
 
++ (NSString *)sdkVersionString {
+    return [CFGConstants sdkVersionString];
+}
+
 #pragma mark - Config Handling
 
 - (void)refreshValues {
