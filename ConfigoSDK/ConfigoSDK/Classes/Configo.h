@@ -40,4 +40,9 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 - (NSDictionary *)rawConfig;
 - (id)configValueForKeyPath:(NSString *)keyPath;
 
+#ifdef DEBUG
++ (NSString *)developmentDevKey;
++ (NSString *)developmentAppId;
+#endif
+
 @end

@@ -15,6 +15,6 @@ typedef void(^CFGConfigLoadCallback)(CFGResponse *, NSError *);
 
 @interface CFGNetworkController : NSObject
 
-- (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback;
++ (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback;
 
 @end

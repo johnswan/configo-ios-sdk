@@ -15,8 +15,8 @@ NSString *const CFGCryptoKey = @"14504D2A42F6C2F08B9E8A1B2309A5BA";
 
 NSString *const CFGErrorDomain = @"com.configo.error";
 
-
-NSString *const CFGBaseDevelopmentPath = @"http://192.168.1.103:8001";
+NSString *const CFGBaseLocalPath = @"http://192.168.1.251:8001";
+NSString *const CFGBaseDevelopmentPath = @"http://192.168.1.252:8001";
 NSString *const CFGBaseProductionPath = @"http://configo.io";
 
 NSString *const CFGCurrentVersionPath = @"/v1";
@@ -45,7 +45,23 @@ NSString *const CFGAppIdKey = @"app_id";
 }
 
 + (NSString *)baseURLString {
-    return CFGBaseDevelopmentPath;
+    NSString *retval = nil;
+    switch([self currentEnvironment]) {
+        case CFGEnvironmentLocal:
+            retval = CFGBaseLocalPath;
+            break;
+        case CFGEnvironmentDevelopment:
+            retval = CFGBaseDevelopmentPath;
+            break;
+        case CFGEnvironmentProduction:
+            retval = CFGBaseProductionPath;
+            break;
+    }
+    return retval;
+}
+
++ (CFGEnvironment)currentEnvironment {
+    return CFGEnvironmentLocal;
 }
 
 @end

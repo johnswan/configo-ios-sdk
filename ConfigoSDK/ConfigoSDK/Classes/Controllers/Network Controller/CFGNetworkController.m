@@ -26,7 +26,7 @@ static NSString *const kResponseKey_response = @"response";
 
 @implementation CFGNetworkController
 
-- (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
++ (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
     
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
@@ -41,17 +41,20 @@ static NSString *const kResponseKey_response = @"response";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
     
     NSURL *baseConfigURL = [CFGConstants getConfigURL];
-    NNLogDebug(@"Loading Config: GET", (@{@"URL" : baseConfigURL, @"Headers" : headers, @"Params" : params}));
+    NNLogDebug(@"Loading Config: POST", (@{@"URL" : baseConfigURL, @"Headers" : headers, @"Params" : params}));
     
-    [connectionMgr GET: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
-        NNLogDebug(@"LoadingConfig: HTTPResponse", response);
+    [connectionMgr POST: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
+        NNLogDebug(@"Loading Config: HTTPResponse", response);
+        NNLogDebug(@"Loading Config: Response Data", object);
         NSError *retError = error;
         
         CFGResponse *configoResponse = nil;
         if([object isKindOfClass: [NSDictionary class]]) {
             configoResponse = [[CFGResponse alloc] initWithDictionary: object];
             CFGResponseHeader *responseHeader = [configoResponse responseHeader];
-            if(responseHeader.internalError) {
+            if(error) {
+                NNLogDebug(@"Loading Config: Error", error);
+            } else if(responseHeader.internalError) {
                 NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
                 retError = [responseHeader.internalError error];
             } else if(configoResponse) {

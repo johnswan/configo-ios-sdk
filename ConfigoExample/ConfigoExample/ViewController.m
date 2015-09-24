@@ -30,17 +30,13 @@
                                                       [self clear: nil];
                                                   }];
     
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo: self.view animated: YES];
-    hud.labelText =  NSLocalizedString(@"greet.text", @"Hello World!");
-    [hud hide: YES afterDelay: 3];    
 }
 
 - (IBAction)pullConfig:(id)sender {
     [[Configo sharedConfigo] pullConfig];
 }
 - (IBAction)changeParams:(id)sender {
-    [[Configo sharedConfigo] setCustomUserId: @"nat123"];
+    [[Configo sharedConfigo] setCustomUserId: @"nat1234"];
 }
 
 - (IBAction)drill:(id)sender {
