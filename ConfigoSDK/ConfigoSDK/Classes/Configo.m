@@ -16,6 +16,7 @@
 
 #import <NNLibraries/NNLibrariesEssentials.h>
 #import <NNLibraries/NNReachabilityManager.h>
+#import <NNLibraries/UIColor+NNAdditions.h>
 
 @import CoreTelephony;
 
@@ -25,6 +26,8 @@
 NSString *const ConfigoConfigurationLoadCompleteNotification = @"com.configo.config.loadFinished";
 NSString *const ConfigoConfigurationLoadErrorNotification = @"com.configo.config.loadError";
 NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
+NSString *const ConfigoNotificationUserInfoRawConfigKey = @"rawConfig";
+NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 
 
 #pragma mark - Private Declarations
@@ -35,7 +38,10 @@ NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
 
 @property (nonatomic, strong) CFGResponse *activeConfigoResponse;
-@property (nonatomic, strong) CFGResponse *configoResponse;
+@property (nonatomic, strong) CFGResponse *latestConfigoResponse;
+
+@property (nonatomic, copy) CFGCallback listenerCallback;
+@property (nonatomic, copy) CFGCallback tempListenerCallback;
 @end
 
 #pragma mark - Implementation
@@ -47,9 +53,13 @@ NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 static id _shared = nil;
 
 + (void)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    [self initWithDevKey: devKey appId: appId callback: nil];
+}
+
++ (void)initWithDevKey:(NSString *)devKey appId:(NSString *)appId callback:(CFGCallback)callback {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _shared = [[self alloc] initWithDevKey: devKey appId: appId];
+        _shared = [[self alloc] initWithDevKey: devKey appId: appId callback: callback];
     });
 }
 
@@ -61,7 +71,7 @@ static id _shared = nil;
     return nil;
 }
 
-- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId callback:(CFGCallback)callback {
     if(!devKey || !appId) {
         return nil;
     }
@@ -74,14 +84,15 @@ static id _shared = nil;
         self.appId = appId;
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
         
-        _configoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
-        _activeConfigoResponse = _configoResponse;
-        if(_configoResponse) {
+        _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
+        _activeConfigoResponse = _latestConfigoResponse;
+        if(_latestConfigoResponse) {
             _state = CFGConfigLoadedFromStorage;
         } else {
             _state = CFGConfigNotAvailable;
         }
         
+        self.listenerCallback = callback;
         [self pullConfig];
     }
     return self;
@@ -93,56 +104,58 @@ static id _shared = nil;
 
 #pragma mark - Config Handling
 
-- (void)refreshValues {
-    if(_activeConfigoResponse != _configoResponse) {
-        _activeConfigoResponse = _configoResponse;
+- (void)forceRefreshValues {
+    if(_activeConfigoResponse != _latestConfigoResponse) {
+        _activeConfigoResponse = _latestConfigoResponse;
     }
 }
 
 - (void)pullConfig {
-    [self pullBaseConfig];
+    [self pullConfig: nil];
 }
 
-- (void)pullBaseConfig {
+- (void)pullConfig:(CFGCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
     _state = CFGConfigLoadingInProgress;
+    
+    self.tempListenerCallback = callback;
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [CFGNetworkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
         if(response) {
             _state = CFGConfigLoadedFromServer;
-            _configoResponse = response;
+            _latestConfigoResponse = response;
             
-            if(!error) {
-                [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
-                [self saveResponse: _configoResponse withDevKey: _devKey withAppId: _appId];
-                
-                if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
-                    _activeConfigoResponse = _configoResponse;
-                }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification
-                                                                    object: self
-                                                                  userInfo: [self rawConfig]];
-            } else {
-                NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : error};
-                [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification
-                                                                    object: self
-                                                                  userInfo: userInfo];
+            [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
+            [self saveResponse: _latestConfigoResponse withDevKey: _devKey withAppId: _appId];
+            
+            if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
+                _activeConfigoResponse = _latestConfigoResponse;
             }
+            
+            [self invokeListenerCallback];
+            [self invokeAndDeleteTempCallback];
+            [self invokeSuccessNotification];
         } else {
-            _state = CFGConfigFailedLoading;
+            _state = CFGConfigFailedLoadingFromServer;
             NNLogDebug(@"Loading Config: Error", error);
-            NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : error};
-            [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification object: self userInfo: userInfo];
+            [self invokeErrorNotification: error];
         }
     }];
 }
 
 #pragma mark - Setters
 
+- (void)setCallback:(CFGCallback)callback {
+    self.listenerCallback = callback;
+    if(_state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
+        [self invokeListenerCallback];
+    }
+}
+
 - (void)setCustomUserId:(NSString *)userId {
-    [self setCustomUserId: userId userContext: nil];
+    //Incorrect, will trigger changing the customUserId
+    [_configoDataController setCustomUserId: userId];
 }
 
 - (void)setCustomUserId:(NSString *)userId userContext:(NSDictionary *)context {
@@ -158,26 +171,46 @@ static id _shared = nil;
 }
 
 - (void)setUserContext:(NSDictionary *)context {
-    [self setCustomUserId: nil userContext: context];
+    //Incorrect, will trigger changing the customUserId
+    //[self setCustomUserId: nil userContext: context];
+    [_configoDataController setUserContext: context];
 }
 
 - (void)setUserContextValue:(id)value forKey:(NSString *)key {
     BOOL contextChanged = [_configoDataController setUserContextValue: value forKey: key];
     if(contextChanged) {
-        [self pullConfig];
+        //If user calls this method consecutively - this will be triggered every time.
+        //[self pullConfig];
     }
 }
 
-#pragma mark - Getters
+#pragma mark - Config Getters
 
 - (NSDictionary *)rawConfig {
     return _activeConfigoResponse.config;
 }
 
 - (id)configValueForKeyPath:(NSString *)keyPath {
-    NSDictionary *config = _activeConfigoResponse.config;
+    NSDictionary *config = [self rawConfig];
     id value = [NNJSONUtilities valueForKeyPath: keyPath inObject: config];
     return value;
+}
+
+#pragma mark - Feature Getters
+
+- (NSArray *)featuresList {
+    return _activeConfigoResponse.features;
+}
+
+- (BOOL)featureFlagForKey:(NSString *)key {
+    if(!key) {
+        return NO;
+    }
+    
+    BOOL retval = NO;
+    NSArray *features = [self featuresList];
+    retval = [features containsObject: key];
+    return retval;
 }
 
 #pragma mark - File Storage
@@ -197,22 +230,46 @@ static id _shared = nil;
     return retval;
 }
 
+#pragma mark - Helpers
+
+- (void)invokeListenerCallback {
+    if(_listenerCallback) {
+        _listenerCallback([self rawConfig], [self featuresList]);
+    }
+}
+
+- (void)invokeAndDeleteTempCallback {
+    if(_tempListenerCallback) {
+        _tempListenerCallback([self rawConfig], [self featuresList]);
+        self.tempListenerCallback = nil;
+    }
+}
+
+- (void)invokeSuccessNotification {
+    NSDictionary *userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig],
+                               ConfigoNotificationUserInfoFeaturesListKey : [self featuresList]};
+    [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification object: self userInfo: userInfo];
+}
+
+- (void)invokeErrorNotification:(NSError *)err {
+    NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : err};
+    [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification
+                                                        object: self
+                                                      userInfo: userInfo];
+}
+
 #pragma mark - DEBUG only code
 #ifdef DEBUG
 
 + (NSString *)developmentDevKey {
     NSString *retval = nil;
     switch ([CFGConstants currentEnvironment]) {
-        case CFGEnvironmentLocal: {
+        case CFGEnvironmentDevelopment: {
             retval = @"6cfadcead7bf0514480e8d1d8f062b72";
             break;
         }
-        case CFGEnvironmentDevelopment: {
-            retval = @"123";
-            break;
-        }
         case CFGEnvironmentProduction: {
-            retval = @"123";
+            retval = @"2f0ad31bb0b266507483c96cc9f24cf0";
             break;
         }
         default:
@@ -224,16 +281,12 @@ static id _shared = nil;
 + (NSString *)developmentAppId {
     NSString *retval = nil;
     switch ([CFGConstants currentEnvironment]) {
-        case CFGEnvironmentLocal: {
+        case CFGEnvironmentDevelopment: {
             retval = @"13a3e1b5ce827c75a941380de210a94f";
             break;
         }
-        case CFGEnvironmentDevelopment: {
-            retval = @"9cd20be9cc21d6115a57e2bcbc534fd4";
-            break;
-        }
         case CFGEnvironmentProduction: {
-            retval = @"9cd20be9cc21d6115a57e2bcbc534fd4";
+            retval = @"9976714e67d629a9b80199e4be40f60e";
             break;
         }
         default:

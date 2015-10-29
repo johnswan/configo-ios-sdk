@@ -16,6 +16,7 @@
 #import <NNLibraries/UIDevice+NNAdditions.h>
 #import <NNLibraries/NNReachabilityManager.h>
 #import <NNLibraries/NSDictionary+NNAdditions.h>
+#import <NNLibraries/NSDate+NNAdditions.h>
 
 static NSString *const kPOSTKey_deviceDetails = @"deviceDetails";
 static NSString *const kPOSTKey_userContext = @"userContext";
@@ -35,10 +36,12 @@ static NSString *const kPOSTKey_deviceDetails_appName = @"appName";
 static NSString *const kPOSTKey_deviceDetails_appVersion = @"appVersion";
 static NSString *const kPOSTKey_deviceDetails_appBuild = @"appBuildNumber";
 static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType";
+static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 
 
 @interface CFGConfigoDataController ()
 @property (nonatomic, strong) CFGConfigoData *configoData;
+@property (nonatomic, strong) NSDictionary *currentDeviceDetails;
 @property (nonatomic) BOOL userContextChanged;
 @property (nonatomic) BOOL customUserIdChanged;
 @end
@@ -85,21 +88,20 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
 
 - (NSDictionary *)configoDataForRequest {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    NSDictionary *deviceDetails = [self deviceDetails];
+    _currentDeviceDetails = [self deviceDetails];
     NSString *udid = [UIDevice udidFromKeychain: nil];
     
+    /** This is disabled we decided not to pre-optimize */
+    /*
     BOOL udidChanged = ![udid isEqualToString: _configoData.udid];
-    BOOL deviceDetailsChanged = ![deviceDetails isEqualToDictionary: _configoData.deviceDetails];
+    BOOL deviceDetailsChanged = ![_currentDeviceDetails isEqualToDictionary: _configoData.deviceDetails];
     
-    //Add UDID and CustomUserId to all requests (Identifiers)
-    [dict nnSafeSetObject: _configoData.customUserId forKey: kPOSTKey_customUserId];
-    dict[kPOSTKey_Udid] = udid;
     
     if(udidChanged || _customUserIdChanged) {
         NNLogDebug(@"UDID or CustomUserId changed, sending userContext and deviceDetails", nil);
         //If the UDID changed or the customUserId set context and details (i.e. new user)
         [dict nnSafeSetObject: _configoData.userContext forKey: kPOSTKey_userContext];
-        [dict nnSafeSetObject: deviceDetails forKey: kPOSTKey_deviceDetails];
+        [dict nnSafeSetObject: _currentDeviceDetails forKey: kPOSTKey_deviceDetails];
     } else if(_userContextChanged) {
         NNLogDebug(@"UserContext changed", nil);
         //If only the user context changed - we send it out
@@ -107,8 +109,16 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     } else if(deviceDetailsChanged) {
         NNLogDebug(@"DeviceDetails changed", nil);
         //If any details changed - we send them
-        [dict nnSafeSetObject: deviceDetails forKey: kPOSTKey_deviceDetails];
+        [dict nnSafeSetObject: _currentDeviceDetails forKey: kPOSTKey_deviceDetails];
     }
+    */
+    
+    //Always add data to request
+    //Add UDID and CustomUserId to all requests (Identifiers)
+    [dict nnSafeSetObject: _configoData.customUserId forKey: kPOSTKey_customUserId];
+    dict[kPOSTKey_Udid] = udid;
+    [dict nnSafeSetObject: _configoData.userContext forKey: kPOSTKey_userContext];
+    [dict nnSafeSetObject: _currentDeviceDetails forKey: kPOSTKey_deviceDetails];
     return dict;
 }
 
@@ -119,7 +129,7 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
 - (BOOL)saveConfigoDataWithDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     _customUserIdChanged = NO;
     _userContextChanged = NO;
-    _configoData.deviceDetails = [self deviceDetails];
+    _configoData.deviceDetails = _currentDeviceDetails;
     _configoData.udid = [UIDevice udidFromKeychain: nil];
     BOOL success = [[CFGFileManager sharedManager] saveConfigoData: _configoData withDevKey: devKey appId: appId error: err];
     NNLogDebug(success ? @"ConfigoData save success" : @"ConfigoData save failed" , err ? *err : nil);
@@ -137,39 +147,36 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
 - (BOOL)setCustomUserId:(NSString *)customUserId {
     if(!customUserId && !_configoData.customUserId) {
         return NO;
-    }
-    
-    if(![_configoData.customUserId isEqualToString: customUserId]) {
+    } else if(![_configoData.customUserId isEqualToString: customUserId]) {
         _configoData.customUserId = customUserId;
         _customUserIdChanged = YES;
         return YES;
+    } else {
+        return NO;
     }
-    return NO;
 }
 
 - (BOOL)setUserContext:(NSDictionary *)userContext {
-    if(!userContext && !_configoData.userContext) {
-        return NO;
-    }
-    
     id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
-    if(![_configoData.userContext isEqualToDictionary: validContext]) {
+    
+    if(!validContext && !_configoData.userContext) {
+        return NO;
+    } else if(![_configoData.userContext isEqualToDictionary: validContext]) {
         _configoData.userContext = validContext;
         _userContextChanged = YES;
         return YES;
+    } else {
+        return NO;
     }
-    
-    return NO;
 }
 
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
-    if(!value || !key) {
-        return NO;
-    }
-    
     BOOL retval = NO;
     id original = [_configoData.userContext objectForKey: key];
-    if(original) {
+    
+    if(!value || !key) {
+        //retval = NO;
+    } else if(original) {
         if(![original isEqual: value]) {
             [_configoData setUserContextValue: value forKey: key];
             retval = YES;
@@ -228,6 +235,10 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
         connectionType = @"Unknown";
     }
     
+    NSInteger secondsFromGMT = [[NSTimeZone defaultTimeZone] secondsFromGMT];
+    NSInteger hoursFromGMT = [NSDate hoursFromSeconds: secondsFromGMT];
+    NSNumber *timezoneOffset = [NSNumber numberWithInteger: hoursFromGMT];
+    
     details[kPOSTKey_deviceDetails_sdkVersion] = [CFGConstants sdkVersionString];
     details[kPOSTKey_deviceDetails_deviceName] = deviceName;
     details[kPOSTKey_deviceDetails_carrierName] = carrierName;
@@ -241,6 +252,7 @@ static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType"
     details[kPOSTKey_deviceDetails_appVersion] = appVersion;
     details[kPOSTKey_deviceDetails_appBuild] = buildNumber;
     details[kPOSTKey_deviceDetails_connectionType] = connectionType;
+    details[kPOSTKey_deviceDetails_timezone] = timezoneOffset;
     
     return details;
 }
