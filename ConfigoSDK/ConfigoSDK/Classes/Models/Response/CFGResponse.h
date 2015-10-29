@@ -14,7 +14,7 @@
 @interface CFGResponse : NNJSONObject
 
 @property (nonatomic, readonly) CFGResponseHeader *responseHeader;
-@property (nonatomic, readonly) NSString *configID;
 @property (nonatomic, readonly) NSDictionary *config;
+@property (nonatomic, readonly) NSArray *features;
 
 @end

@@ -58,7 +58,7 @@ static NSString *const kResponseKey_response = @"response";
                 NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
                 retError = [responseHeader.internalError error];
             } else if(configoResponse) {
-                NNLogDebug(@"Loading Config: Done", configoResponse.config);
+                NNLogDebug(@"Loading Config: Done", nil);
             } else {
                 retError = [NSError errorWithDomain: @"com.configo.config.badResponse" code: 41 userInfo: nil];
             }

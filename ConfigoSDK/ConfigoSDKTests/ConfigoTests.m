@@ -29,14 +29,14 @@
 
 - (void)testValueForKeyPath {
     XCTestExpectation *expectation = [self expectationWithDescription: @"wait for config"];
-    [Configo initWithDevKey: @"123" withAppID: @"YOUR_APP_ID"];
+    [Configo initWithDevKey: @"123" appId: @"YOUR_APP_ID"];
     [[NSNotificationCenter defaultCenter] addObserverForName: ConfigoConfigurationLoadCompleteNotification object: nil queue: [NSOperationQueue mainQueue] usingBlock: ^(NSNotification *note) {
         [expectation fulfill];
     }];
     
     [self waitForExpectationsWithTimeout: 10.0 handler: ^(NSError *error) {
         if(!error) {
-            id value = [[Configo sharedConfig] configValueForKeyPath: @"data.items.tags[0]"];
+            id value = [[Configo sharedConfigo] configValueForKeyPath: @"data.items.tags[0]"];
             XCTAssertEqualObjects(@"GDD07", value);
         } else {
             XCTFail(@"%@", [error description]);

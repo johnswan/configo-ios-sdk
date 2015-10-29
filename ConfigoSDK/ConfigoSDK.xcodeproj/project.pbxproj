@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		5C8CBE0C1BDE26A4006465D2 /* Configo-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5C8CBE101BDE26A4006465D2 /* Build configuration list for PBXAggregateTarget "Configo-Universal" */;
+			buildPhases = (
+				5C8CBE111BDE26AD006465D2 /* Universal Framework Generator */,
+			);
+			dependencies = (
+			);
+			name = "Configo-Universal";
+			productName = "Configo-Universal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
@@ -13,14 +27,12 @@
 		5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB081B8CA84500D85791 /* CFGConfigoData.m */; };
 		5C33AB0E1B8CAD6400D85791 /* CFGFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB0C1B8CAD6400D85791 /* CFGFileManager.h */; };
 		5C33AB0F1B8CAD6400D85791 /* CFGFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB0D1B8CAD6400D85791 /* CFGFileManager.m */; };
+		5C371A881BD8F03700B492E0 /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C371A851BD8EEB200B492E0 /* NNLibraries.a */; };
 		5C37E9E91B821AAD001B80D6 /* CFGResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C37E9E71B821AAD001B80D6 /* CFGResponse.h */; };
 		5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9E81B821AAD001B80D6 /* CFGResponse.m */; };
 		5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C54701D1B84B55700C026D8 /* CFGInternalError.h */; };
 		5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C54701E1B84B55700C026D8 /* CFGInternalError.m */; };
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C93DE891B806E150074D62A /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */; };
-		5C93DE901B806E150074D62A /* ConfigoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DE8F1B806E150074D62A /* ConfigoTests.m */; };
-		5C93DEDF1B8072580074D62A /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DEDE1B80724C0074D62A /* NNLibraries.a */; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE51B80744D0074D62A /* Configo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEE31B80744D0074D62A /* Configo.m */; };
 		5CACCDB81B81E546009E343C /* CFGConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACCDB61B81E546009E343C /* CFGConstants.h */; };
@@ -32,33 +44,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5C93DE8A1B806E150074D62A /* PBXContainerItemProxy */ = {
+		5C371A841BD8EEB200B492E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DE741B806E150074D62A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C93DE7C1B806E150074D62A;
-			remoteInfo = ConfigoSDK;
-		};
-		5C93DEDD1B80724C0074D62A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */;
+			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5C0157BC1A4BF3B200F6ECAF;
 			remoteInfo = NNLibraries;
 		};
-		5C93DEE01B80725C0074D62A /* PBXContainerItemProxy */ = {
+		5C371A861BD8EEB200B492E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C0157BB1A4BF3B200F6ECAF;
-			remoteInfo = NNLibraries;
-		};
-		5CACCDBB1B81E546009E343C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */;
+			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5C1A7BCA1B80996F00BAA12F;
 			remoteInfo = NNLibrariesTests;
+		};
+		5C371A891BD8F03C00B492E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C0157BB1A4BF3B200F6ECAF;
+			remoteInfo = NNLibraries;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,6 +75,7 @@
 		5C33AB0C1B8CAD6400D85791 /* CFGFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGFileManager.h; sourceTree = "<group>"; };
 		5C33AB0D1B8CAD6400D85791 /* CFGFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGFileManager.m; sourceTree = "<group>"; };
 		5C33AB121B8CB58E00D85791 /* CFGErrorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGErrorConstants.h; path = Constants/CFGErrorConstants.h; sourceTree = "<group>"; };
+		5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNLibraries.xcodeproj; path = ../../../NNLibraries/NNLibraries.xcodeproj; sourceTree = "<group>"; };
 		5C37E9E71B821AAD001B80D6 /* CFGResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponse.h; path = Classes/Models/Response/CFGResponse.h; sourceTree = "<group>"; };
 		5C37E9E81B821AAD001B80D6 /* CFGResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponse.m; path = Classes/Models/Response/CFGResponse.m; sourceTree = "<group>"; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; };
@@ -77,10 +83,8 @@
 		5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConfigoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DE811B806E150074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DE821B806E150074D62A /* ConfigoSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigoSDK.h; sourceTree = "<group>"; };
-		5C93DE881B806E150074D62A /* ConfigoSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigoSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DE8E1B806E150074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DE8F1B806E150074D62A /* ConfigoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoTests.m; sourceTree = "<group>"; };
-		5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNLibraries.xcodeproj; path = /Users/natanavra/Development/Turrisio/Configo/../../NNLibraries/NNLibraries.xcodeproj; sourceTree = "<absolute>"; };
 		5C93DEE21B80744D0074D62A /* Configo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Configo.h; path = Classes/Configo.h; sourceTree = "<group>"; };
 		5C93DEE31B80744D0074D62A /* Configo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Configo.m; path = Classes/Configo.m; sourceTree = "<group>"; };
 		5CACCDB61B81E546009E343C /* CFGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConstants.h; path = Constants/CFGConstants/CFGConstants.h; sourceTree = "<group>"; };
@@ -96,15 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C93DEDF1B8072580074D62A /* NNLibraries.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5C93DE851B806E150074D62A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C93DE891B806E150074D62A /* ConfigoSDK.framework in Frameworks */,
+				5C371A881BD8F03700B492E0 /* NNLibraries.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +153,15 @@
 			name = CFGConstants;
 			sourceTree = "<group>";
 		};
+		5C371A801BD8EEB200B492E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C371A851BD8EEB200B492E0 /* NNLibraries.a */,
+				5C371A871BD8EEB200B492E0 /* NNLibrariesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5C37E9E31B821A36001B80D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +194,7 @@
 		5C93DE731B806E150074D62A = {
 			isa = PBXGroup;
 			children = (
-				5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */,
+				5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */,
 				5C93DE7F1B806E150074D62A /* ConfigoSDK */,
 				5C93DE8C1B806E150074D62A /* ConfigoSDKTests */,
 				5C93DE7E1B806E150074D62A /* Products */,
@@ -200,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */,
-				5C93DE881B806E150074D62A /* ConfigoSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,15 +243,6 @@
 				5C93DE8E1B806E150074D62A /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5C93DEDA1B80724C0074D62A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5C93DEDE1B80724C0074D62A /* NNLibraries.a */,
-				5CACCDBC1B81E546009E343C /* NNLibrariesTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		5C93DEE61B8074530074D62A /* Classes */ = {
@@ -334,30 +329,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				5C93DEE11B80725C0074D62A /* PBXTargetDependency */,
+				5C371A8A1BD8F03C00B492E0 /* PBXTargetDependency */,
 			);
 			name = ConfigoSDK;
 			productName = ConfigoSDK;
 			productReference = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		5C93DE871B806E150074D62A /* ConfigoSDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5C93DE961B806E150074D62A /* Build configuration list for PBXNativeTarget "ConfigoSDKTests" */;
-			buildPhases = (
-				5C93DE841B806E150074D62A /* Sources */,
-				5C93DE851B806E150074D62A /* Frameworks */,
-				5C93DE861B806E150074D62A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5C93DE8B1B806E150074D62A /* PBXTargetDependency */,
-			);
-			name = ConfigoSDKTests;
-			productName = ConfigoSDKTests;
-			productReference = 5C93DE881B806E150074D62A /* ConfigoSDKTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -368,11 +345,12 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Turrisio;
 				TargetAttributes = {
+					5C8CBE0C1BDE26A4006465D2 = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					5C93DE7C1B806E150074D62A = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					5C93DE871B806E150074D62A = {
-						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = QR3EF439CY;
 					};
 				};
 			};
@@ -388,44 +366,37 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5C93DEDA1B80724C0074D62A /* Products */;
-					ProjectRef = 5C93DED91B80724C0074D62A /* NNLibraries.xcodeproj */;
+					ProductGroup = 5C371A801BD8EEB200B492E0 /* Products */;
+					ProjectRef = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				5C93DE7C1B806E150074D62A /* ConfigoSDK */,
-				5C93DE871B806E150074D62A /* ConfigoSDKTests */,
+				5C8CBE0C1BDE26A4006465D2 /* Configo-Universal */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5C93DEDE1B80724C0074D62A /* NNLibraries.a */ = {
+		5C371A851BD8EEB200B492E0 /* NNLibraries.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = NNLibraries.a;
-			remoteRef = 5C93DEDD1B80724C0074D62A /* PBXContainerItemProxy */;
+			remoteRef = 5C371A841BD8EEB200B492E0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5CACCDBC1B81E546009E343C /* NNLibrariesTests.xctest */ = {
+		5C371A871BD8EEB200B492E0 /* NNLibrariesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = NNLibrariesTests.xctest;
-			remoteRef = 5CACCDBB1B81E546009E343C /* PBXContainerItemProxy */;
+			remoteRef = 5C371A861BD8EEB200B492E0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5C93DE7B1B806E150074D62A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5C93DE861B806E150074D62A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -448,6 +419,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh ${PROJECT_DIR}/bump_build.sh \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
+		5C8CBE111BDE26AD006465D2 /* Universal Framework Generator */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Universal Framework Generator";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\nif [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -467,30 +452,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5C93DE841B806E150074D62A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C93DE901B806E150074D62A /* ConfigoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5C93DE8B1B806E150074D62A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5C93DE7C1B806E150074D62A /* ConfigoSDK */;
-			targetProxy = 5C93DE8A1B806E150074D62A /* PBXContainerItemProxy */;
-		};
-		5C93DEE11B80725C0074D62A /* PBXTargetDependency */ = {
+		5C371A8A1BD8F03C00B492E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = NNLibraries;
-			targetProxy = 5C93DEE01B80725C0074D62A /* PBXContainerItemProxy */;
+			targetProxy = 5C371A891BD8F03C00B492E0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5C8CBE0D1BDE26A4006465D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5C8CBE0E1BDE26A4006465D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		5C93DE911B806E150074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -582,6 +568,9 @@
 		5C93DE941B806E150074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 187;
@@ -589,20 +578,29 @@
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/include/**";
 				INFOPLIST_FILE = ConfigoSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = Debug;
 		};
 		5C93DE951B806E150074D62A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 187;
@@ -610,50 +608,34 @@
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/include/**";
 				INFOPLIST_FILE = ConfigoSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}";
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		5C93DE971B806E150074D62A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ConfigoSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		5C93DE981B806E150074D62A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ConfigoSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5C8CBE101BDE26A4006465D2 /* Build configuration list for PBXAggregateTarget "Configo-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C8CBE0D1BDE26A4006465D2 /* Debug */,
+				5C8CBE0E1BDE26A4006465D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5C93DE771B806E150074D62A /* Build configuration list for PBXProject "ConfigoSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -668,15 +650,6 @@
 			buildConfigurations = (
 				5C93DE941B806E150074D62A /* Debug */,
 				5C93DE951B806E150074D62A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5C93DE961B806E150074D62A /* Build configuration list for PBXNativeTarget "ConfigoSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5C93DE971B806E150074D62A /* Debug */,
-				5C93DE981B806E150074D62A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

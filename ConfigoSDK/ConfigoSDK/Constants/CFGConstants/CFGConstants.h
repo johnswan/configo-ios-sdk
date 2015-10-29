@@ -22,7 +22,6 @@ FOUNDATION_EXPORT NSString *const CFGErrorDomain;
  ********************************************************/
 
 typedef NS_ENUM(NSUInteger, CFGEnvironment) {
-    CFGEnvironmentLocal = 0,
     CFGEnvironmentDevelopment,
     CFGEnvironmentProduction,
 };

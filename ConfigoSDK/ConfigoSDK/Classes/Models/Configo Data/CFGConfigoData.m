@@ -53,7 +53,11 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
 }
 
 - (NSDictionary *)userContext {
-    return [_mutableUserContext copy];
+    NSDictionary *retval = nil;
+    if(_mutableUserContext.count > 0) {
+        retval = [_mutableUserContext copy];
+    }
+    return retval;
 }
 
 - (void)setUserContext:(NSDictionary *)userContext {

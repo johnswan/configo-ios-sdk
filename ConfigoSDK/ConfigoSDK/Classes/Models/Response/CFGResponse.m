@@ -15,8 +15,8 @@
 #pragma mark - Constants
 static NSString *const kHeaderKey = @"header";
 static NSString *const kResponseKey = @"response";
-static NSString *const kConfigIDKey = @"_id";
 static NSString *const kConfigKey = @"config";
+static NSString *const kFeaturesKey = @"features";
 
 @implementation CFGResponse
 
@@ -26,8 +26,8 @@ static NSString *const kConfigKey = @"config";
         _responseHeader = [[CFGResponseHeader alloc] initWithDictionary: header];
         
         NSDictionary *response = [NNJSONUtilities validObjectFromObject: dict[kResponseKey]];
-        _configID = [NNJSONUtilities validObjectFromObject: response[kConfigIDKey]];
         _config = [NNJSONUtilities validObjectFromObject: response[kConfigKey]];
+        _features = [NNJSONUtilities validObjectFromObject: response[kFeaturesKey]];
     }
     return self;
 }
@@ -36,8 +36,8 @@ static NSString *const kConfigKey = @"config";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict nnSafeSetObject: [_responseHeader dictionaryRepresentation] forKey: kHeaderKey];
     NSMutableDictionary *response = [NSMutableDictionary dictionary];
-    [response nnSafeSetObject: _configID forKey: kConfigIDKey];
     [response nnSafeSetObject: _config forKey: kConfigKey];
+    [response nnSafeSetObject: _features forKey: kFeaturesKey];
     [dict nnSafeSetObject: response forKey: kResponseKey];
     return dict;
 }
