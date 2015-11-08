@@ -17,6 +17,7 @@
 #import <NNLibraries/NNLibrariesEssentials.h>
 #import <NNLibraries/NNReachabilityManager.h>
 #import <NNLibraries/UIColor+NNAdditions.h>
+#import <NNLibraries/NNTimer.h>
 
 @import CoreTelephony;
 
@@ -42,6 +43,8 @@ NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 
 @property (nonatomic, copy) CFGCallback listenerCallback;
 @property (nonatomic, copy) CFGCallback tempListenerCallback;
+
+@property (nonatomic, copy) NSTimer *pullConfigTimer;
 @end
 
 #pragma mark - Implementation
@@ -63,7 +66,7 @@ static id _shared = nil;
     });
 }
 
-+ (instancetype)sharedConfigo {
++ (instancetype)sharedInstance {
     return _shared;
 }
 
@@ -93,7 +96,9 @@ static id _shared = nil;
         }
         
         self.listenerCallback = callback;
+        
         [self pullConfig];
+        [self setupPullConfigTimer];
     }
     return self;
 }
@@ -103,6 +108,20 @@ static id _shared = nil;
 }
 
 #pragma mark - Config Handling
+
+- (void)setupPullConfigTimer {
+    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: kPullConfigTimerDelay target: self selector: @selector(checkNeedsPullConfig) userInfo: nil repeats: YES];
+}
+
+- (void)checkNeedsPullConfig {
+    NNLogDebug(@"TICK - Checking if pullConfig required", nil);
+    //If the user's details changed (Device, context, custom id)
+    //No loading progress currently
+    if([_configoDataController detailsChanged] &&
+       _state != CFGConfigLoadingInProgress) {
+        [self pullConfig];
+    }
+}
 
 - (void)forceRefreshValues {
     if(_activeConfigoResponse != _latestConfigoResponse) {
@@ -116,30 +135,38 @@ static id _shared = nil;
 
 - (void)pullConfig:(CFGCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
-    _state = CFGConfigLoadingInProgress;
     
     self.tempListenerCallback = callback;
     
+    if([self shouldUpdateActiveConfig]) {
+        //Change the current config state only if the user is expecting it. It's possible the user does not need to know about the update.
+        _state = CFGConfigLoadingInProgress;
+    }
+    
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [CFGNetworkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
-        if(response) {
-            _state = CFGConfigLoadedFromServer;
+        if(response && !error) {
             _latestConfigoResponse = response;
             
             [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
             [self saveResponse: _latestConfigoResponse withDevKey: _devKey withAppId: _appId];
             
-            if(!_activeConfigoResponse || _dynamicallyRefreshValues) {
+            if([self shouldUpdateActiveConfig]) {
+                _state = CFGConfigLoadedFromServer;
                 _activeConfigoResponse = _latestConfigoResponse;
             }
-            
-            [self invokeListenerCallback];
-            [self invokeAndDeleteTempCallback];
-            [self invokeSuccessNotification];
-        } else {
+        }
+        //Declare an "error" state only if the config was supposed to be updated. So false states are not reported.
+        else if([self shouldUpdateActiveConfig]) {
             _state = CFGConfigFailedLoadingFromServer;
             NNLogDebug(@"Loading Config: Error", error);
-            [self invokeErrorNotification: error];
+        }
+        
+        if([self shouldUpdateActiveConfig]) {
+            //Invoke only if the user was expecting an update to the config
+            //Invoke callbacks and send notifications with either success or errors (depends on the error object passed).
+            [self sendNotificationWithError: error];
+            [self invokeListenersCallbacksWithError: error];
         }
     }];
 }
@@ -147,41 +174,45 @@ static id _shared = nil;
 #pragma mark - Setters
 
 - (void)setCallback:(CFGCallback)callback {
+    BOOL shouldInvokeCallback = NO;
+    
+    if(!self.listenerCallback) {
+        if(_state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
+            shouldInvokeCallback = YES;
+        }
+    }
+    
     self.listenerCallback = callback;
-    if(_state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
-        [self invokeListenerCallback];
+    
+    if(shouldInvokeCallback) {
+        [self invokeListenersCallbacksWithError: nil];
     }
 }
 
 - (void)setCustomUserId:(NSString *)userId {
-    //Incorrect, will trigger changing the customUserId
     [_configoDataController setCustomUserId: userId];
 }
 
-- (void)setCustomUserId:(NSString *)userId userContext:(NSDictionary *)context {
-    [self setCustomUserId: userId userContext: context error: nil];
-}
-
-- (void)setCustomUserId:(NSString *)userId userContext:(NSDictionary *)context error:(NSError *)err {
-    BOOL userIdChanged = [_configoDataController setCustomUserId: userId];
-    BOOL contextChanged = [_configoDataController setUserContext: context];
-    if(userIdChanged || contextChanged) {
-        [self pullConfig];
-    }
-}
-
-- (void)setUserContext:(NSDictionary *)context {
+- (BOOL)setUserContext:(NSDictionary *)context {
     //Incorrect, will trigger changing the customUserId
     //[self setCustomUserId: nil userContext: context];
-    [_configoDataController setUserContext: context];
+    if([NNJSONUtilities isValidJSONObject: context]) {
+        [_configoDataController setUserContext: context];
+        return YES;
+    }
+    return NO;
 }
 
-- (void)setUserContextValue:(id)value forKey:(NSString *)key {
-    BOOL contextChanged = [_configoDataController setUserContextValue: value forKey: key];
-    if(contextChanged) {
-        //If user calls this method consecutively - this will be triggered every time.
-        //[self pullConfig];
+- (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
+    if([NNJSONUtilities isValidJSONObject: value]) {
+        [_configoDataController setUserContextValue: value forKey: key];
+        return YES;
     }
+    return NO;
+    /*if(contextChanged) {
+     //If user calls this method consecutively - this will be triggered every time.
+     //[self pullConfig];
+     }*/
 }
 
 #pragma mark - Config Getters
@@ -196,6 +227,11 @@ static id _shared = nil;
     return value;
 }
 
+- (id)configValueForKeyPath:(NSString *)keyPath fallbackValue:(id)fallbackValue {
+    id val = [self configValueForKeyPath: keyPath];
+    return val ?: fallbackValue;
+}
+
 #pragma mark - Feature Getters
 
 - (NSArray *)featuresList {
@@ -203,6 +239,10 @@ static id _shared = nil;
 }
 
 - (BOOL)featureFlagForKey:(NSString *)key {
+    return [self featureFlagForKey: key fallback: NO];
+}
+
+- (BOOL)featureFlagForKey:(NSString *)key fallback:(BOOL)fallbackFlag {
     if(!key) {
         return NO;
     }
@@ -210,7 +250,7 @@ static id _shared = nil;
     BOOL retval = NO;
     NSArray *features = [self featuresList];
     retval = [features containsObject: key];
-    return retval;
+    return retval ?: fallbackFlag;
 }
 
 #pragma mark - File Storage
@@ -218,7 +258,7 @@ static id _shared = nil;
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId {
     NSError *err = nil;
     BOOL success = [[CFGFileManager sharedManager] saveResponse: response withDevKey: devKey withAppId: appId error: &err];
-    NNLogDebug(([NSString stringWithFormat: @"Configo save response to file %@", success ? @"success" : @"failed"]), (success ? nil : err));
+    NNLogDebug(([NSString stringWithFormat: @"Configo save response to file %@", success ? @"success" : @"failed"]), err);
     return success;
 }
 
@@ -232,30 +272,39 @@ static id _shared = nil;
 
 #pragma mark - Helpers
 
-- (void)invokeListenerCallback {
-    if(_listenerCallback) {
-        _listenerCallback([self rawConfig], [self featuresList]);
-    }
+- (BOOL)shouldUpdateActiveConfig {
+    //If there's no currently active config (first time load)
+    //If the currently active config is loaded from storage.
+    //If the user set the 'dynamicalylRefreshValues' to YES.
+    //If it's a 'pullConfig' that awaits a callback
+    return (!_activeConfigoResponse ||
+            _state == CFGConfigLoadedFromStorage ||
+            _dynamicallyRefreshValues ||
+            _tempListenerCallback);
 }
 
-- (void)invokeAndDeleteTempCallback {
+- (void)invokeListenersCallbacksWithError:(NSError *)error {
+    if(_listenerCallback) {
+        _listenerCallback(error, [self rawConfig], [self featuresList]);
+    }
     if(_tempListenerCallback) {
-        _tempListenerCallback([self rawConfig], [self featuresList]);
+        _tempListenerCallback(error, [self rawConfig], [self featuresList]);
         self.tempListenerCallback = nil;
     }
 }
 
-- (void)invokeSuccessNotification {
-    NSDictionary *userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig],
-                               ConfigoNotificationUserInfoFeaturesListKey : [self featuresList]};
-    [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadCompleteNotification object: self userInfo: userInfo];
-}
-
-- (void)invokeErrorNotification:(NSError *)err {
-    NSDictionary *userInfo = @{ConfigoNotificationUserInfoErrorKey : err};
-    [[NSNotificationCenter defaultCenter] postNotificationName: ConfigoConfigurationLoadErrorNotification
-                                                        object: self
-                                                      userInfo: userInfo];
+- (void)sendNotificationWithError:(NSError *)err {
+    NSString *notificationName = nil;
+    NSDictionary *userInfo = nil;
+    if(err) {
+        userInfo = @{ConfigoNotificationUserInfoErrorKey : err};
+        notificationName = ConfigoConfigurationLoadErrorNotification;
+    } else {
+        userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig],
+                     ConfigoNotificationUserInfoFeaturesListKey : [self featuresList]};
+        notificationName = ConfigoConfigurationLoadCompleteNotification;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName: notificationName object: self userInfo: userInfo];
 }
 
 #pragma mark - DEBUG only code

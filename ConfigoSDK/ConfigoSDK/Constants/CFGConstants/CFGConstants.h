@@ -18,6 +18,11 @@ FOUNDATION_EXPORT NSString *const CFGCryptoKey;
 FOUNDATION_EXPORT NSString *const CFGErrorDomain;
 
 /********************************************************
+ Other Constants
+ ********************************************************/
+FOUNDATION_EXPORT NSInteger const kPullConfigTimerDelay;
+
+/********************************************************
  Interface Declaration
  ********************************************************/
 

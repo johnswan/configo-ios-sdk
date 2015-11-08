@@ -40,10 +40,10 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 
 
 @interface CFGConfigoDataController ()
-@property (nonatomic, strong) CFGConfigoData *configoData;
-@property (nonatomic, strong) NSDictionary *currentDeviceDetails;
 @property (nonatomic) BOOL userContextChanged;
 @property (nonatomic) BOOL customUserIdChanged;
+@property (nonatomic, strong) CFGConfigoData *configoData;
+@property (nonatomic, strong) NSDictionary *currentDeviceDetails;
 @end
 
 @implementation CFGConfigoDataController
@@ -91,6 +91,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     _currentDeviceDetails = [self deviceDetails];
     NSString *udid = [UIDevice udidFromKeychain: nil];
     
+    /** Added code to server side that deep compares the sent params and the ones in the databases. */
     /** This is disabled we decided not to pre-optimize */
     /*
     BOOL udidChanged = ![udid isEqualToString: _configoData.udid];
@@ -142,6 +143,14 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     return _configoData.userContext;
 }
 
+- (BOOL)detailsChanged {
+    _currentDeviceDetails = [self deviceDetails];
+    BOOL deviceDetailsChanged = ![_currentDeviceDetails isEqualToDictionary: _configoData.deviceDetails];
+    
+    return deviceDetailsChanged || _customUserIdChanged || _userContextChanged;
+}
+
+
 #pragma mark - Setters
 
 - (BOOL)setCustomUserId:(NSString *)customUserId {
@@ -157,7 +166,9 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 }
 
 - (BOOL)setUserContext:(NSDictionary *)userContext {
-    id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
+    //Test is done at caller level for now. (We want to keep it simple and not filter the NSDictionary)
+    //id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
+    id validContext = userContext;
     
     if(!validContext && !_configoData.userContext) {
         return NO;
@@ -171,22 +182,26 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 }
 
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
+    if(!value && !key) {
+        return NO;
+    }
+    
     BOOL retval = NO;
     id original = [_configoData.userContext objectForKey: key];
     
-    if(!value || !key) {
-        //retval = NO;
-    } else if(original) {
-        if(![original isEqual: value]) {
-            [_configoData setUserContextValue: value forKey: key];
-            retval = YES;
-        }
-    } else {
-        [_configoData setUserContextValue: value forKey: key];
+    //Determining if the context changed.
+    if(!original && !value) {
+        //If no original value and no new value
+        retval = NO;
+    } else if(![original isEqual: value]) {
+        //At least one - original or new value exist, but are not equal.
+        //ConfigoData method handles it.
         retval = YES;
     }
     
+    //Because the context might've changed before but not this time.
     if(retval) {
+        [_configoData setUserContextValue: value forKey: key];
         _userContextChanged = retval;
     }
     
@@ -199,13 +214,8 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     NSMutableDictionary *details = [NSMutableDictionary dictionary];
     
     NSString *deviceName = [[UIDevice currentDevice] name];
-    NSString *deviceModel = nil;
-    if([UIDevice isDeviceSimulator]) {
-        deviceModel = @"SIMULATOR";
-    } else {
-        deviceModel = [[UIDevice currentDevice] model];
-    }
-    NSString *os = @"iOS";
+    NSString *deviceModel = [UIDevice machineModel];
+    NSString *os = @"iOS"; //[[UIDevice currentDevice] systemName]; //Return iPhone OS (legacy)
     NSString *osVersion = [[UIDevice currentDevice] systemVersion];
     CTCarrier *carrier = [[CTCarrier alloc] init];
     NSString *carrierName = [carrier carrierName] ? : @"NA"; //Not always available, e.g. iPad

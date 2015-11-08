@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C1B62EB1B8EE779000CCD9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C1B62ED1B8EE779000CCD9D /* Localizable.strings */; };
+		5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */; };
 		5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
 		5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB01B806F900074D62A /* AppDelegate.m */; };
@@ -17,6 +18,16 @@
 		5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEBA1B806F900074D62A /* LaunchScreen.xib */; };
 		5CAAD80A1BDC23A000C562F2 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAAD8091BDC23A000C562F2 /* ConfigoSDK.framework */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C1E804E1BEF880400D55CB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C93DEA01B806F900074D62A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C93DEA71B806F900074D62A;
+			remoteInfo = ConfigoExample;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5CEF7BA11BD9020C00C084F3 /* Embed Frameworks */ = {
@@ -33,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		5C1B62EC1B8EE779000CCD9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C1E80491BEF880400D55CB7 /* ConfigoExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigoExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoExampleTests.m; sourceTree = "<group>"; };
+		5C1E804D1BEF880400D55CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2ADBF11B89A837005A9254 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5C93DEA81B806F900074D62A /* ConfigoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfigoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +65,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5C1E80461BEF880400D55CB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C93DEA51B806F900074D62A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,6 +94,15 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5C1E804A1BEF880400D55CB7 /* ConfigoExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */,
+				5C1E804D1BEF880400D55CB7 /* Info.plist */,
+			);
+			path = ConfigoExampleTests;
+			sourceTree = "<group>";
+		};
 		5C2ADBF01B89A837005A9254 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +118,7 @@
 				5CAAD8091BDC23A000C562F2 /* ConfigoSDK.framework */,
 				5C93DEAA1B806F900074D62A /* ConfigoExample */,
 				5C93DEC41B806F900074D62A /* ConfigoExampleTests */,
+				5C1E804A1BEF880400D55CB7 /* ConfigoExampleTests */,
 				5C93DEA91B806F900074D62A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				5C93DEA81B806F900074D62A /* ConfigoExample.app */,
+				5C1E80491BEF880400D55CB7 /* ConfigoExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +175,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5C1E80481BEF880400D55CB7 /* ConfigoExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C1E80521BEF880400D55CB7 /* Build configuration list for PBXNativeTarget "ConfigoExampleTests" */;
+			buildPhases = (
+				5C1E80451BEF880400D55CB7 /* Sources */,
+				5C1E80461BEF880400D55CB7 /* Frameworks */,
+				5C1E80471BEF880400D55CB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C1E804F1BEF880400D55CB7 /* PBXTargetDependency */,
+			);
+			name = ConfigoExampleTests;
+			productName = ConfigoExampleTests;
+			productReference = 5C1E80491BEF880400D55CB7 /* ConfigoExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5C93DEA71B806F900074D62A /* ConfigoExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C93DECB1B806F900074D62A /* Build configuration list for PBXNativeTarget "ConfigoExample" */;
@@ -171,6 +221,10 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Turrisio;
 				TargetAttributes = {
+					5C1E80481BEF880400D55CB7 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 5C93DEA71B806F900074D62A;
+					};
 					5C93DEA71B806F900074D62A = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = QR3EF439CY;
@@ -196,11 +250,19 @@
 			projectRoot = "";
 			targets = (
 				5C93DEA71B806F900074D62A /* ConfigoExample */,
+				5C1E80481BEF880400D55CB7 /* ConfigoExampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5C1E80471BEF880400D55CB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C93DEA61B806F900074D62A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,6 +293,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5C1E80451BEF880400D55CB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C93DEA41B806F900074D62A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,6 +313,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C1E804F1BEF880400D55CB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C93DEA71B806F900074D62A /* ConfigoExample */;
+			targetProxy = 5C1E804E1BEF880400D55CB7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5C1B62ED1B8EE779000CCD9D /* Localizable.strings */ = {
@@ -275,6 +353,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5C1E80501BEF880400D55CB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = ConfigoExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.ConfigoExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfigoExample.app/ConfigoExample";
+			};
+			name = Debug;
+		};
+		5C1E80511BEF880400D55CB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ConfigoExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.ConfigoExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConfigoExample.app/ConfigoExample";
+			};
+			name = Release;
+		};
 		5C93DEC91B806F900074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -406,6 +511,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5C1E80521BEF880400D55CB7 /* Build configuration list for PBXNativeTarget "ConfigoExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C1E80501BEF880400D55CB7 /* Debug */,
+				5C1E80511BEF880400D55CB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5C93DEA31B806F900074D62A /* Build configuration list for PBXProject "ConfigoExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

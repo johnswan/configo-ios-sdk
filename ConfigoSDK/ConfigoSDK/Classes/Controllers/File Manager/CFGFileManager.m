@@ -50,7 +50,7 @@
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
     NSDictionary *json = [self loadAndDecryptDataFromFile: filePath error: err];
     retval = [[CFGResponse alloc] initWithDictionary: json];
-    return nil;
+    return retval;
 }
 
 #pragma mark - Configo Data
