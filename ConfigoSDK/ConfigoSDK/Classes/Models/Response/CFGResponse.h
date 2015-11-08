@@ -13,6 +13,8 @@
 
 @interface CFGResponse : NNJSONObject
 
+/** @brief The time when this response was recieved (UTC) */
+@property (nonatomic, readonly) NSTimeInterval timestamp;
 @property (nonatomic, readonly) CFGResponseHeader *responseHeader;
 @property (nonatomic, readonly) NSDictionary *config;
 @property (nonatomic, readonly) NSArray *features;

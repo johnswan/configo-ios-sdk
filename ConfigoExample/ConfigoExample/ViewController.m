@@ -37,40 +37,40 @@
                                                       });
                                                   }];
     
-    [[Configo sharedConfigo] setCallback: ^(NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] setCallback: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
         NSLog(@"Configo callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
     }];
 }
 
 - (IBAction)pullConfig:(id)sender {
-    [[Configo sharedConfigo] pullConfig: ^(NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
         NSLog(@"pullConfig temp callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
     }];
 }
 
 - (IBAction)simplePullConfig:(id)sender {
-    [[Configo sharedConfigo] pullConfig];
+    [[Configo sharedInstance] pullConfig];
 }
 
 - (IBAction)changeParams:(id)sender {
     NSInteger random = 1 + arc4random() % 100;
-    [[Configo sharedConfigo] setCustomUserId: [NSString stringWithFormat: @"Nat%li", (long)random]];
+    [[Configo sharedInstance] setCustomUserId: [NSString stringWithFormat: @"Nat%li", (long)random]];
 }
 
 - (IBAction)drill:(id)sender {
-    id value = [[Configo sharedConfigo] configValueForKeyPath: _drillField.text];
+    id value = [[Configo sharedInstance] configValueForKeyPath: _drillField.text];
     [_configView setText: value ? [NSString stringWithFormat: @"(%@): \n%@", NSStringFromClass([value class]), value] : @"Value not found"];
 }
 
 - (IBAction)searchFeature:(id)sender {
     NSString *featureKey = _drillField.text;
-    BOOL feature = [[Configo sharedConfigo] featureFlagForKey: featureKey];
+    BOOL feature = [[Configo sharedInstance] featureFlagForKey: featureKey];
     [_configView setText: [NSString stringWithFormat: @"%@: %@", featureKey, feature ? @"On" : @"Off"]];
 }
 
 - (IBAction)clear:(id)sender {
     _drillField.text = nil;
-    [_configView setText: [NSString stringWithFormat: @"%@", [[Configo sharedConfigo] rawConfig]]];
+    [_configView setText: [NSString stringWithFormat: @"%@", [[Configo sharedInstance] rawConfig]]];
 }
 
 - (void)didReceiveMemoryWarning {

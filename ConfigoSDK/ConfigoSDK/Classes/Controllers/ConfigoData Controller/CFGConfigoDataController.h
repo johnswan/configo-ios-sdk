@@ -12,6 +12,8 @@
 
 @interface CFGConfigoDataController : NSObject
 
+- (BOOL)detailsChanged;
+
 - (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 - (instancetype)initWithConfigoData:(CFGConfigoData *)configoData;
 

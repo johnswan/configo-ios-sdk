@@ -24,6 +24,8 @@ NSString *const CFGBaseProductionPath = @"https://api.configo.io";
 NSString *const CFGCurrentVersionPath = @"/v1";
 NSString *const CFGGetConfigPath = @"/user/getConfig";
 
+NSInteger const kPullConfigTimerDelay = 10;
+
 
 #pragma mark - Private Constants
 

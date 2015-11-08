@@ -69,7 +69,7 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
 }
 
 - (void)setUserContextValue:(id)value forKey:(NSString *)key {
-    if(!key || !value) {
+    if(!key) {
         return;
     }
     
@@ -77,7 +77,11 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
         _mutableUserContext = [NSMutableDictionary dictionary];
     }
     
-    [_mutableUserContext nnSafeSetObject: [NNJSONUtilities makeValidJSONObject: value] forKey: key];
+    if(!value) {
+        [_mutableUserContext removeObjectForKey: key];
+    } else {
+        [_mutableUserContext nnSafeSetObject: value forKey: key];
+    }
 }
 
 @end
