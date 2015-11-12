@@ -279,6 +279,7 @@ static id _shared = nil;
     //If it's a 'pullConfig' that awaits a callback
     return (!_activeConfigoResponse ||
             _state == CFGConfigLoadedFromStorage ||
+            _state == CFGConfigLoadingInProgress ||
             _dynamicallyRefreshValues ||
             _tempListenerCallback);
 }
