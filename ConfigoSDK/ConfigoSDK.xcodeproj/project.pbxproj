@@ -27,7 +27,6 @@
 		5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB081B8CA84500D85791 /* CFGConfigoData.m */; };
 		5C33AB0E1B8CAD6400D85791 /* CFGFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB0C1B8CAD6400D85791 /* CFGFileManager.h */; };
 		5C33AB0F1B8CAD6400D85791 /* CFGFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB0D1B8CAD6400D85791 /* CFGFileManager.m */; };
-		5C371A881BD8F03700B492E0 /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C371A851BD8EEB200B492E0 /* NNLibraries.a */; };
 		5C37E9E91B821AAD001B80D6 /* CFGResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C37E9E71B821AAD001B80D6 /* CFGResponse.h */; };
 		5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9E81B821AAD001B80D6 /* CFGResponse.m */; };
 		5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C54701D1B84B55700C026D8 /* CFGInternalError.h */; };
@@ -44,26 +43,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5C371A841BD8EEB200B492E0 /* PBXContainerItemProxy */ = {
+		5CAFF8771BF25750004DAEB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
+			containerPortal = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5C0157BC1A4BF3B200F6ECAF;
 			remoteInfo = NNLibraries;
 		};
-		5C371A861BD8EEB200B492E0 /* PBXContainerItemProxy */ = {
+		5CAFF8791BF25750004DAEB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
+			containerPortal = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5C1A7BCA1B80996F00BAA12F;
 			remoteInfo = NNLibrariesTests;
-		};
-		5C371A891BD8F03C00B492E0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C0157BB1A4BF3B200F6ECAF;
-			remoteInfo = NNLibraries;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -75,7 +67,6 @@
 		5C33AB0C1B8CAD6400D85791 /* CFGFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGFileManager.h; sourceTree = "<group>"; };
 		5C33AB0D1B8CAD6400D85791 /* CFGFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGFileManager.m; sourceTree = "<group>"; };
 		5C33AB121B8CB58E00D85791 /* CFGErrorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGErrorConstants.h; path = Constants/CFGErrorConstants.h; sourceTree = "<group>"; };
-		5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNLibraries.xcodeproj; path = ../../../NNLibraries/NNLibraries.xcodeproj; sourceTree = "<group>"; };
 		5C37E9E71B821AAD001B80D6 /* CFGResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponse.h; path = Classes/Models/Response/CFGResponse.h; sourceTree = "<group>"; };
 		5C37E9E81B821AAD001B80D6 /* CFGResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponse.m; path = Classes/Models/Response/CFGResponse.m; sourceTree = "<group>"; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; };
@@ -91,6 +82,7 @@
 		5CACCDB71B81E546009E343C /* CFGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGConstants.m; path = Constants/CFGConstants/CFGConstants.m; sourceTree = "<group>"; };
 		5CACCDC21B821120009E343C /* CFGResponseHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponseHeader.h; path = "Classes/Models/Response Header/CFGResponseHeader.h"; sourceTree = "<group>"; };
 		5CACCDC31B821120009E343C /* CFGResponseHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponseHeader.m; path = "Classes/Models/Response Header/CFGResponseHeader.m"; sourceTree = "<group>"; };
+		5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NNLibraries.xcodeproj; path = ../../../NNLibraries/iOS/NNLibraries.xcodeproj; sourceTree = "<group>"; };
 		5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGConfigoDataController.h; sourceTree = "<group>"; };
 		5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGConfigoDataController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +92,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C371A881BD8F03700B492E0 /* NNLibraries.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,15 +144,6 @@
 			name = CFGConstants;
 			sourceTree = "<group>";
 		};
-		5C371A801BD8EEB200B492E0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5C371A851BD8EEB200B492E0 /* NNLibraries.a */,
-				5C371A871BD8EEB200B492E0 /* NNLibrariesTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5C37E9E31B821A36001B80D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +176,7 @@
 		5C93DE731B806E150074D62A = {
 			isa = PBXGroup;
 			children = (
-				5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */,
+				5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */,
 				5C93DE7F1B806E150074D62A /* ConfigoSDK */,
 				5C93DE8C1B806E150074D62A /* ConfigoSDKTests */,
 				5C93DE7E1B806E150074D62A /* Products */,
@@ -264,6 +246,15 @@
 			name = CFGResponseHeader;
 			sourceTree = "<group>";
 		};
+		5CAFF8731BF25750004DAEB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CAFF8781BF25750004DAEB2 /* NNLibraries.a */,
+				5CAFF87A1BF25750004DAEB2 /* NNLibrariesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5CEA82E31B8DA0A8008F6D3B /* Configo */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,7 +320,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5C371A8A1BD8F03C00B492E0 /* PBXTargetDependency */,
 			);
 			name = ConfigoSDK;
 			productName = ConfigoSDK;
@@ -366,8 +356,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5C371A801BD8EEB200B492E0 /* Products */;
-					ProjectRef = 5C371A7F1BD8EEB200B492E0 /* NNLibraries.xcodeproj */;
+					ProductGroup = 5CAFF8731BF25750004DAEB2 /* Products */;
+					ProjectRef = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -379,18 +369,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5C371A851BD8EEB200B492E0 /* NNLibraries.a */ = {
+		5CAFF8781BF25750004DAEB2 /* NNLibraries.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = NNLibraries.a;
-			remoteRef = 5C371A841BD8EEB200B492E0 /* PBXContainerItemProxy */;
+			remoteRef = 5CAFF8771BF25750004DAEB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5C371A871BD8EEB200B492E0 /* NNLibrariesTests.xctest */ = {
+		5CAFF87A1BF25750004DAEB2 /* NNLibrariesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = NNLibrariesTests.xctest;
-			remoteRef = 5C371A861BD8EEB200B492E0 /* PBXContainerItemProxy */;
+			remoteRef = 5CAFF8791BF25750004DAEB2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -431,7 +421,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\nif [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi";
+			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${PROJECT_DIR}/build-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\nif [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/ \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -453,14 +443,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5C371A8A1BD8F03C00B492E0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NNLibraries;
-			targetProxy = 5C371A891BD8F03C00B492E0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5C8CBE0D1BDE26A4006465D2 /* Debug */ = {

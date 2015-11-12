@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
     CFGConfigLoadingInProgress,
     ///The config is has being loaded from the server and is ready for use. Might not be active if <i>dynamicallyRefreshValues</i> is false.
     CFGConfigLoadedFromServer,
-    ///An error was encountered when loading the config from the server (Possibly no config is available).
+    ///An error was encountered when loading the config from the server (possibly no config is available).
     CFGConfigFailedLoadingFromServer,
 };
 
@@ -85,7 +85,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 + (void)initWithDevKey:(NSString *)devKey appId:(NSString *)appId callback:(CFGCallback)callback;
 
 /**
- *	@brief  The singleton accessor. Can only be accessed after instantiated with one of the <code>initWithDevKey:appId:</code> initialize methods.
+ *	@brief The singleton accessor. Can only be accessed after instantiated with one of the <code>initWithDevKey:appId:</code> initialize methods.
  *	@return <code>Configo</code> instance
  */
 + (instancetype)sharedInstance;
