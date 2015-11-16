@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5C1186251BF9D4970048CBAA /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAFF8781BF25750004DAEB2 /* NNLibraries.a */; };
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
 		5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB071B8CA84500D85791 /* CFGConfigoData.h */; };
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C1186251BF9D4970048CBAA /* NNLibraries.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

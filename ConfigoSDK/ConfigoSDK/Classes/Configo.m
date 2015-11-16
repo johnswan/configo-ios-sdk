@@ -37,6 +37,7 @@ NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 @property (nonatomic, copy) NSString *devKey;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
+@property (nonatomic, strong) CFGNetworkController *networkController;
 
 @property (nonatomic, strong) CFGResponse *activeConfigoResponse;
 @property (nonatomic, strong) CFGResponse *latestConfigoResponse;
@@ -86,6 +87,7 @@ static id _shared = nil;
         self.devKey = devKey;
         self.appId = appId;
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
+        _networkController = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
         
         _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
         _activeConfigoResponse = _latestConfigoResponse;
@@ -98,29 +100,42 @@ static id _shared = nil;
         self.listenerCallback = callback;
         
         [self pullConfig];
-        [self setupPullConfigTimer];
+        [self setupPollingTimer];
     }
     return self;
 }
 
-+ (NSString *)sdkVersionString {
-    return [CFGConstants sdkVersionString];
++ (NSString *)VersionString {
+    return ConfigoSDKVersion;
 }
 
 #pragma mark - Config Handling
 
-- (void)setupPullConfigTimer {
-    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: kPullConfigTimerDelay target: self selector: @selector(checkNeedsPullConfig) userInfo: nil repeats: YES];
+- (void)setupPollingTimer {
+    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: kPullConfigTimerDelay target: self selector: @selector(checkPolling) userInfo: nil repeats: YES];
 }
 
-- (void)checkNeedsPullConfig {
+- (void)checkPolling {
     NNLogDebug(@"TICK - Checking if pullConfig required", nil);
     //If the user's details changed (Device, context, custom id)
     //No loading progress currently
-    if([_configoDataController detailsChanged] &&
-       _state != CFGConfigLoadingInProgress) {
+    if([_configoDataController detailsChanged]) {
+        NNLogDebug(@"TICK - details changed pullConfig required", nil);
         [self pullConfig];
+    } else {
+        [self pollStatus];
     }
+}
+
+- (void)pollStatus {
+    [_networkController pollStatusWithUdid: [_configoDataController udid] callback: ^(BOOL shouldUpdate, NSError *error) {
+        if(!error && shouldUpdate) {
+            NNLogDebug(@"TICK - shouldUpdate true", nil);
+            [self pullConfig];
+        } else {
+            NNLogDebug(@"TICK - shouldUpdate false", nil);
+        }
+    }];
 }
 
 - (void)forceRefreshValues {
@@ -130,10 +145,14 @@ static id _shared = nil;
 }
 
 - (void)pullConfig {
-    [self pullConfig: nil];
+    [self pullConfig: _tempListenerCallback];
 }
 
 - (void)pullConfig:(CFGCallback)callback {
+    if(_state == CFGConfigLoadingInProgress) {
+        return;
+    }
+    
     NNLogDebug(@"Loading Config: start", nil);
     
     self.tempListenerCallback = callback;
@@ -144,7 +163,7 @@ static id _shared = nil;
     }
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
-    [CFGNetworkController requestConfigWithDevKey: _devKey appId: _appId configoData: configoData callback: ^(CFGResponse *response, NSError *error) {
+    [_networkController requestConfigWithConfigoData: configoData callback: ^(CFGResponse *response, NSError *error) {
         if(response && !error) {
             _latestConfigoResponse = response;
             
@@ -336,7 +355,7 @@ static id _shared = nil;
             break;
         }
         case CFGEnvironmentProduction: {
-            retval = @"9976714e67d629a9b80199e4be40f60e";
+            retval = @"YOUR_APP_ID";
             break;
         }
         default:

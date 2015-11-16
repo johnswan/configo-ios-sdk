@@ -12,6 +12,8 @@
 /********************************************************
  String Constants
  ********************************************************/
+FOUNDATION_EXPORT NSString *const ConfigoSDKVersion;
+
 FOUNDATION_EXPORT NSString *const CFGFileNamePrefix;
 FOUNDATION_EXPORT NSString *const CFGCryptoKey;
 
@@ -33,9 +35,8 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 
 @interface CFGConstants : NSObject
 
-+ (NSString *)sdkVersionString;
-
 + (NSURL *)getConfigURL;
++ (NSURL *)statusPollURL;
 + (NSString *)baseURLString;
 + (CFGEnvironment)currentEnvironment;
 

@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 @property (nonatomic) BOOL dynamicallyRefreshValues;
 
 /** The SDK's version string. */
-+ (NSString *)sdkVersionString;
++ (NSString *)VersionString;
 
 /**
  *	@brief The initialize call. Must be called first before using any of the SDK's functions.

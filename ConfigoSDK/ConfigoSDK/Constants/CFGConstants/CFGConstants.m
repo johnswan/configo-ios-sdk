@@ -11,6 +11,7 @@
 #import <NNLibraries/UIDevice+NNAdditions.h>
 
 #pragma mark - Global Constants
+NSString *const ConfigoSDKVersion = @"0.3.4";
 
 NSString *const CFGFileNamePrefix = @"configo";
 NSString *const CFGCryptoKey = @"14504D2A42F6C2F08B9E8A1B2309A5BA";
@@ -23,8 +24,9 @@ NSString *const CFGBaseProductionPath = @"https://api.configo.io";
 
 NSString *const CFGCurrentVersionPath = @"/v1";
 NSString *const CFGGetConfigPath = @"/user/getConfig";
+NSString *const CFGStatusPollPath = @"/user/status";
 
-NSInteger const kPullConfigTimerDelay = 10;
+NSInteger const kPullConfigTimerDelay = 25;
 
 
 #pragma mark - Private Constants
@@ -35,13 +37,14 @@ NSString *const CFGAppIdKey = @"app_id";
 
 @implementation CFGConstants
 
-+ (NSString *)sdkVersionString {
-    return @"0.1";
-}
-
 + (NSURL *)getConfigURL {
     NSString *urlString = [self baseURLStringWithPath: CFGGetConfigPath];
     return [NSURL URLWithString: urlString];
+}
+
++ (NSURL *)statusPollURL {
+    NSString *urlStr = [self baseURLStringWithPath: CFGStatusPollPath];
+    return [NSURL URLWithString: urlStr];
 }
 
 + (NSString *)baseURLStringWithPath:(NSString *)path {

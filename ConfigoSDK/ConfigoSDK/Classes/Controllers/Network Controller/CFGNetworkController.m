@@ -20,20 +20,38 @@ static NSString *const kHTTPHeaderKey_authHeader = @"x-configo-auth";
 static NSString *const kHTTPHeaderKey_devKey = @"x-configo-devKey";
 static NSString *const kHTTPHeaderKey_appId = @"x-configo-appId";
 
+//HTTP GET key constants
+static NSString *const kGETKey_deviceId = @"deviceId";
+
 //HTTP JSON Response key consants
 static NSString *const kResponseKey_header = @"header";
 static NSString *const kResponseKey_response = @"response";
+static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
+
+
+@interface CFGNetworkController ()
+@property (nonatomic, copy) NSString *devKey;
+@property (nonatomic, copy) NSString *appId;
+@property (nonatomic) BOOL pollingStatus;
+@end
+
 
 @implementation CFGNetworkController
 
-+ (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
+- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    if(self = [super init]) {
+        self.devKey = devKey;
+        self.appId = appId;
+    }
+    return self;
+}
+
+- (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
     
-    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
+    NSDictionary *headers = [self headersWithDevKey: _devKey appId: _appId];
     
-    NSDictionary *headers = @{kHTTPHeaderKey_authHeader : @"natanavra",
-                              kHTTPHeaderKey_devKey : devKey,
-                              kHTTPHeaderKey_appId : appId};
+    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
     [connectionMgr setHttpHeaders: headers];
     connectionMgr.requestSerializer = [NNJSONRequestSerializer serializer];
     connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
@@ -69,5 +87,56 @@ static NSString *const kResponseKey_response = @"response";
         }
     }];
 }
+
+
+- (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback {
+    if(_pollingStatus) {
+        return;
+    }
+    
+    NNLogDebug(@"Polling status: start", nil);
+    
+    _pollingStatus = YES;
+    
+    NSDictionary *headers = [self headersWithDevKey: _devKey appId: _appId];
+    
+    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
+    [connectionMgr setHttpHeaders: headers];
+    connectionMgr.requestSerializer = [NNHTTPRequestSerializer serializer];
+    connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
+    
+    NSURL *pollURL = [CFGConstants statusPollURL];
+    NSDictionary *params = @{kGETKey_deviceId : udid};
+    
+    [connectionMgr GET: pollURL parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        _pollingStatus = NO;
+        
+        NNLogDebug(@"Polling Status: HTTPResponse", response);
+        NNLogDebug(@"Polling status: Response data", responseObject);
+        
+        NSError *retError = error;
+        BOOL shouldUpdate = false;
+        if(!error && [responseObject isKindOfClass: [NSDictionary class]]) {
+            NSDictionary *json = (NSDictionary *)responseObject;
+            NSDictionary *headerObj = [NNJSONUtilities validObjectFromObject: json[kResponseKey_header]];
+            CFGResponseHeader *header = [[CFGResponseHeader alloc] initWithDictionary: headerObj];
+            retError = [header.internalError error];
+            
+            NSDictionary *responseJson = [NNJSONUtilities validObjectFromObject: json[kResponseKey_response]];
+            shouldUpdate = [NNJSONUtilities validBooleanFromObject: responseJson[kResponseKey_shouldUpdate]];
+        }
+        
+        callback(shouldUpdate, retError);
+    }];
+}
+
+#pragma mark - Helpers
+
+- (NSDictionary *)headersWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    return @{kHTTPHeaderKey_authHeader : @"natanavra",
+             kHTTPHeaderKey_devKey : devKey,
+             kHTTPHeaderKey_appId : appId};
+}
+
 
 @end
