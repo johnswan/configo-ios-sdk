@@ -13,6 +13,7 @@
 @interface CFGConfigoDataController : NSObject
 
 - (BOOL)detailsChanged;
+- (NSString *)udid;
 
 - (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 - (instancetype)initWithConfigoData:(CFGConfigoData *)configoData;

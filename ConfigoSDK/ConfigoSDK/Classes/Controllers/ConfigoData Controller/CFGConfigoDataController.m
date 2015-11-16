@@ -131,7 +131,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     _customUserIdChanged = NO;
     _userContextChanged = NO;
     _configoData.deviceDetails = _currentDeviceDetails;
-    _configoData.udid = [UIDevice udidFromKeychain: nil];
+    _configoData.udid = [self udid];
     BOOL success = [[CFGFileManager sharedManager] saveConfigoData: _configoData withDevKey: devKey appId: appId error: err];
     NNLogDebug(success ? @"ConfigoData save success" : @"ConfigoData save failed" , err ? *err : nil);
     return success;
@@ -209,6 +209,10 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 }
 
 #pragma mark - Helpers
+
+- (NSString *)udid {
+    return [UIDevice udidFromKeychain: nil];
+}
 
 - (NSDictionary *)deviceDetails {
     NSMutableDictionary *details = [NSMutableDictionary dictionary];

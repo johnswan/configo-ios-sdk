@@ -11,10 +11,15 @@
 @class CFGResponse;
 @class CFGConfigoData;
 
-typedef void(^CFGConfigLoadCallback)(CFGResponse *, NSError *);
+typedef void(^CFGConfigLoadCallback)(CFGResponse *response, NSError *error);
+typedef void(^CFGStatusPollCallback)(BOOL shouldUpdate, NSError *error);
 
 @interface CFGNetworkController : NSObject
 
-+ (void)requestConfigWithDevKey:(NSString *)devKey appId:(NSString *)appId configoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback;
+- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
+
+- (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback;
+- (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback;
+
 
 @end
