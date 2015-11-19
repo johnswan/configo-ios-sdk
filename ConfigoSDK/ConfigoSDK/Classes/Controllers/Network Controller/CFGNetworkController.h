@@ -22,4 +22,5 @@ typedef void(^CFGStatusPollCallback)(BOOL shouldUpdate, NSError *error);
 - (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback;
 
 
+
 @end
