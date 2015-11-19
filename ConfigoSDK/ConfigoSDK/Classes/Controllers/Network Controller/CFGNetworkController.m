@@ -49,7 +49,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
 - (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
     
-    NSDictionary *headers = [self headersWithDevKey: _devKey appId: _appId];
+    NSDictionary *headers = [self requestHeaders];
     
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
     [connectionMgr setHttpHeaders: headers];
@@ -91,6 +91,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
 
 - (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback {
     if(_pollingStatus) {
+        NNLogDebug(@"Already Polling status", nil);
         return;
     }
     
@@ -98,7 +99,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
     
     _pollingStatus = YES;
     
-    NSDictionary *headers = [self headersWithDevKey: _devKey appId: _appId];
+    NSDictionary *headers = [self requestHeaders];
     
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
     [connectionMgr setHttpHeaders: headers];
@@ -132,10 +133,10 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
 
 #pragma mark - Helpers
 
-- (NSDictionary *)headersWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+- (NSDictionary *)requestHeaders {
     return @{kHTTPHeaderKey_authHeader : @"natanavra",
-             kHTTPHeaderKey_devKey : devKey,
-             kHTTPHeaderKey_appId : appId};
+             kHTTPHeaderKey_devKey : _devKey,
+             kHTTPHeaderKey_appId : _appId};
 }
 
 

@@ -22,6 +22,8 @@
 
 /* Begin PBXBuildFile section */
 		5C1186251BF9D4970048CBAA /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAFF8781BF25750004DAEB2 /* NNLibraries.a */; };
+		5C1186291BFA103A0048CBAA /* CFGPrivateConfigService.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */; settings = {ASSET_TAGS = (); }; };
+		5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */; settings = {ASSET_TAGS = (); }; };
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
 		5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB071B8CA84500D85791 /* CFGConfigoData.h */; };
@@ -61,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGPrivateConfigService.h; path = "Classes/Controllers/Private Config Controller/CFGPrivateConfigService.h"; sourceTree = "<group>"; };
+		5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGPrivateConfigService.m; path = "Classes/Controllers/Private Config Controller/CFGPrivateConfigService.m"; sourceTree = "<group>"; };
 		5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGNetworkController.h; path = "Classes/Controllers/Network Controller/CFGNetworkController.h"; sourceTree = "<group>"; };
 		5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGNetworkController.m; path = "Classes/Controllers/Network Controller/CFGNetworkController.m"; sourceTree = "<group>"; };
 		5C33AB071B8CA84500D85791 /* CFGConfigoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConfigoData.h; path = "Classes/Models/Configo Data/CFGConfigoData.h"; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C1186261BFA0F4F0048CBAA /* Inner Config Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */,
+				5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */,
+			);
+			name = "Inner Config Manager";
+			sourceTree = "<group>";
+		};
 		5C1B63211B8F459E000CCD9D /* Network Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +282,7 @@
 		5CEA82ED1B8DF95A008F6D3B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C1186261BFA0F4F0048CBAA /* Inner Config Manager */,
 				5C33AB111B8CB30000D85791 /* File Manager */,
 				5C1B63211B8F459E000CCD9D /* Network Controller */,
 				5CEA82F41B8DFC5A008F6D3B /* Data Controller */,
@@ -303,6 +317,7 @@
 				5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */,
 				5C37E9E91B821AAD001B80D6 /* CFGResponse.h in Headers */,
 				5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */,
+				5C1186291BFA103A0048CBAA /* CFGPrivateConfigService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +455,7 @@
 				5CACCDB91B81E546009E343C /* CFGConstants.m in Sources */,
 				5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */,
 				5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */,
+				5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */,
 				5C33AB0F1B8CAD6400D85791 /* CFGFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

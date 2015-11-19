@@ -253,7 +253,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     NSInteger hoursFromGMT = [NSDate hoursFromSeconds: secondsFromGMT];
     NSNumber *timezoneOffset = [NSNumber numberWithInteger: hoursFromGMT];
     
-    details[kPOSTKey_deviceDetails_sdkVersion] = [CFGConstants sdkVersionString];
+    details[kPOSTKey_deviceDetails_sdkVersion] = ConfigoSDKVersion;
     details[kPOSTKey_deviceDetails_deviceName] = deviceName;
     details[kPOSTKey_deviceDetails_carrierName] = carrierName;
     details[kPOSTKey_deviceDetails_deviceModel] = deviceModel;

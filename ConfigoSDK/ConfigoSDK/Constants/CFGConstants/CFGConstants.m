@@ -11,7 +11,7 @@
 #import <NNLibraries/UIDevice+NNAdditions.h>
 
 #pragma mark - Global Constants
-NSString *const ConfigoSDKVersion = @"0.3.4";
+NSString *const ConfigoSDKVersion = @"0.3.5";
 
 NSString *const CFGFileNamePrefix = @"configo";
 NSString *const CFGCryptoKey = @"14504D2A42F6C2F08B9E8A1B2309A5BA";
@@ -26,7 +26,7 @@ NSString *const CFGCurrentVersionPath = @"/v1";
 NSString *const CFGGetConfigPath = @"/user/getConfig";
 NSString *const CFGStatusPollPath = @"/user/status";
 
-NSInteger const kPullConfigTimerDelay = 25;
+NSInteger const CFGDefaultPollingInterval = 25;
 
 
 #pragma mark - Private Constants

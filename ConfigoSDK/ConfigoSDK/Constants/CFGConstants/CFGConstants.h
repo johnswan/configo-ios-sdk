@@ -22,7 +22,7 @@ FOUNDATION_EXPORT NSString *const CFGErrorDomain;
 /********************************************************
  Other Constants
  ********************************************************/
-FOUNDATION_EXPORT NSInteger const kPullConfigTimerDelay;
+FOUNDATION_EXPORT NSInteger const CFGDefaultPollingInterval;
 
 /********************************************************
  Interface Declaration

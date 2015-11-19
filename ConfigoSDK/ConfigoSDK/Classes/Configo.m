@@ -10,6 +10,7 @@
 #import "CFGFileManager.h"
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
+#import "CFGPrivateConfigService.h"
 
 #import "CFGConstants.h"
 #import "CFGResponse.h"
@@ -84,6 +85,9 @@ static id _shared = nil;
         NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
         [NNReachabilityManager sharedManager];
         
+        //Init private config
+        [CFGPrivateConfigService sharedConfigService];
+        
         self.devKey = devKey;
         self.appId = appId;
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
@@ -112,7 +116,10 @@ static id _shared = nil;
 #pragma mark - Config Handling
 
 - (void)setupPollingTimer {
-    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: kPullConfigTimerDelay target: self selector: @selector(checkPolling) userInfo: nil repeats: YES];
+    NSInteger pollingInterval = PrivateConfigInteger(@"pollingInterval.ios");
+    NNLogDebug(@"Setting up polling timer", [NSNumber numberWithInteger: pollingInterval]);
+    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval target: self selector: @selector(checkPolling)
+                                                      userInfo: nil repeats: NO];
 }
 
 - (void)checkPolling {
@@ -125,6 +132,9 @@ static id _shared = nil;
     } else {
         [self pollStatus];
     }
+    //This is done to enable pulling polling interval every time.
+    //Also to avoid 'invalidate', etc
+    [self setupPollingTimer];
 }
 
 - (void)pollStatus {
