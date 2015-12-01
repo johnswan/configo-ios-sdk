@@ -29,10 +29,6 @@ NSString *const CFGStatusPollPath = @"/user/status";
 NSInteger const CFGDefaultPollingInterval = 25;
 
 
-#pragma mark - Private Constants
-
-NSString *const CFGAppIdKey = @"app_id";
-
 #pragma mark - Implementation
 
 @implementation CFGConstants
@@ -69,6 +65,7 @@ NSString *const CFGAppIdKey = @"app_id";
 }
 
 + (CFGEnvironment)currentEnvironment {
+#warning Always Production
     if(false && ([NNUtilities isDebugMode] && [UIDevice isDeviceSimulator])) {
         return CFGEnvironmentDevelopment;
     } else {

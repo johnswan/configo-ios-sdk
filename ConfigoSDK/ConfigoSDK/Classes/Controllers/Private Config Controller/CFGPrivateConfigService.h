@@ -16,6 +16,8 @@
 //TODO: Save the config to file
 //TODO: Think about how to save the fallback (initial) config (Object/File/Inline JSON)
 
+FOUNDATION_EXPORT NSString *const CFGPrivateConfigLoadedNotification;
+
 @interface CFGPrivateConfigService : NSObject
 
 + (instancetype)sharedConfigService;

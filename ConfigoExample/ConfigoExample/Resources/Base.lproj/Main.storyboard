@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kH3-6V-vpc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -132,7 +133,122 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="336" y="414"/>
+            <point key="canvasLocation" x="432" y="222"/>
+        </scene>
+        <!--Demo View Controller-->
+        <scene sceneID="EFh-1w-wao">
+            <objects>
+                <viewController id="kH3-6V-vpc" customClass="DemoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pDS-RM-Kj0"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZUp-Dd-AF1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xdd-oD-Tku">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKK-fD-BQ0">
+                                <rect key="frame" x="140" y="185" width="96" height="30"/>
+                                <state key="normal" title="Crazy Feature"/>
+                                <connections>
+                                    <action selector="crazyFeature:" destination="kH3-6V-vpc" eventType="touchUpInside" id="nDP-bE-cFl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, this is a demo application to show Configo's abilities" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJr-Lr-lvh">
+                                <rect key="frame" x="8" y="136" width="359" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="configo_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Vnx-n2-sme">
+                                <rect key="frame" x="138" y="28" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vnx-n2-sme" secondAttribute="height" multiplier="1:1" id="8xL-wl-OGb"/>
+                                    <constraint firstAttribute="height" constant="100" id="rzH-FC-xrW"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Animate Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHu-hn-mBg">
+                                <rect key="frame" x="145" y="220" width="91" height="21"/>
+                                <color key="backgroundColor" red="0.6623594142" green="0.51645040740000003" blue="0.69446417299999996" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1bD-SQ-tax">
+                                <rect key="frame" x="20" y="265" width="335" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rzd-QB-wBj">
+                                <rect key="frame" x="20" y="303" width="335" height="29"/>
+                                <segments>
+                                    <segment title="CEO"/>
+                                    <segment title="Manager"/>
+                                    <segment title="Employee"/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5o-ok-PEH">
+                                <rect key="frame" x="20" y="339" width="335" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="login:" destination="kH3-6V-vpc" eventType="touchUpInside" id="auw-jf-Skp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faX-cl-sO3">
+                                <rect key="frame" x="238" y="227" width="117" height="30"/>
+                                <state key="normal" title="Manager Feature"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1F-u6-0VK">
+                                <rect key="frame" x="20" y="227" width="123" height="30"/>
+                                <state key="normal" title="Employee Feature"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PJr-Lr-lvh" firstAttribute="top" secondItem="Vnx-n2-sme" secondAttribute="bottom" constant="8" id="0Xc-cI-kWI"/>
+                            <constraint firstItem="BKK-fD-BQ0" firstAttribute="centerX" secondItem="PJr-Lr-lvh" secondAttribute="centerX" id="2R0-N4-zQG"/>
+                            <constraint firstItem="I5o-ok-PEH" firstAttribute="top" secondItem="Rzd-QB-wBj" secondAttribute="bottom" constant="8" id="2RI-Oh-seU"/>
+                            <constraint firstItem="1bD-SQ-tax" firstAttribute="leading" secondItem="Xdd-oD-Tku" secondAttribute="leading" constant="20" id="5FH-Xt-Ige"/>
+                            <constraint firstItem="Rzd-QB-wBj" firstAttribute="centerX" secondItem="1bD-SQ-tax" secondAttribute="centerX" id="Azr-4a-CFI"/>
+                            <constraint firstItem="rHu-hn-mBg" firstAttribute="top" secondItem="pDS-RM-Kj0" secondAttribute="bottom" constant="200" id="D9y-bL-MLg"/>
+                            <constraint firstItem="PJr-Lr-lvh" firstAttribute="centerX" secondItem="Vnx-n2-sme" secondAttribute="centerX" id="GZW-OR-N3V"/>
+                            <constraint firstItem="Vnx-n2-sme" firstAttribute="top" secondItem="pDS-RM-Kj0" secondAttribute="bottom" constant="8" id="aSH-As-QWM"/>
+                            <constraint firstItem="faX-cl-sO3" firstAttribute="trailing" secondItem="1bD-SQ-tax" secondAttribute="trailing" id="cIo-Nf-wXh"/>
+                            <constraint firstItem="Vnx-n2-sme" firstAttribute="centerX" secondItem="Xdd-oD-Tku" secondAttribute="centerX" id="gxJ-ts-VQf"/>
+                            <constraint firstItem="Rzd-QB-wBj" firstAttribute="leading" secondItem="1bD-SQ-tax" secondAttribute="leading" id="hsQ-sK-USa"/>
+                            <constraint firstItem="BKK-fD-BQ0" firstAttribute="top" secondItem="PJr-Lr-lvh" secondAttribute="bottom" constant="8" id="hva-Tl-tCe"/>
+                            <constraint firstItem="1bD-SQ-tax" firstAttribute="top" secondItem="faX-cl-sO3" secondAttribute="bottom" constant="8" id="iY0-y6-lUw"/>
+                            <constraint firstItem="1bD-SQ-tax" firstAttribute="centerX" secondItem="Xdd-oD-Tku" secondAttribute="centerX" id="mxv-yd-KGz"/>
+                            <constraint firstItem="rHu-hn-mBg" firstAttribute="leading" secondItem="Xdd-oD-Tku" secondAttribute="leading" constant="145" id="nLQ-FN-kVB"/>
+                            <constraint firstItem="1bD-SQ-tax" firstAttribute="top" secondItem="BKK-fD-BQ0" secondAttribute="bottom" constant="50" id="qyE-wk-4es"/>
+                            <constraint firstItem="K1F-u6-0VK" firstAttribute="leading" secondItem="1bD-SQ-tax" secondAttribute="leading" id="tY4-JX-BjU"/>
+                            <constraint firstItem="PJr-Lr-lvh" firstAttribute="leading" secondItem="Xdd-oD-Tku" secondAttribute="leading" constant="8" id="tfM-YZ-cfX"/>
+                            <constraint firstItem="I5o-ok-PEH" firstAttribute="leading" secondItem="Rzd-QB-wBj" secondAttribute="leading" id="vas-Ps-8Xz"/>
+                            <constraint firstItem="1bD-SQ-tax" firstAttribute="top" secondItem="K1F-u6-0VK" secondAttribute="bottom" constant="8" id="viO-bm-j3f"/>
+                            <constraint firstItem="I5o-ok-PEH" firstAttribute="centerX" secondItem="Rzd-QB-wBj" secondAttribute="centerX" id="wbv-eC-v3H"/>
+                            <constraint firstItem="Rzd-QB-wBj" firstAttribute="top" secondItem="1bD-SQ-tax" secondAttribute="bottom" constant="8" id="zch-Tp-2C4"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="animatedLabel" destination="rHu-hn-mBg" id="7jW-7y-7KP"/>
+                        <outlet property="employeeFeatureBtn" destination="K1F-u6-0VK" id="SMT-fM-GzB"/>
+                        <outlet property="featureButton" destination="BKK-fD-BQ0" id="wdx-TR-lv6"/>
+                        <outlet property="leftConstraint" destination="nLQ-FN-kVB" id="Qxg-QK-4IP"/>
+                        <outlet property="loginBtn" destination="I5o-ok-PEH" id="b31-aj-rXB"/>
+                        <outlet property="logoImgView" destination="Vnx-n2-sme" id="Rwm-lQ-sPG"/>
+                        <outlet property="managerFeatureBtn" destination="faX-cl-sO3" id="Qb8-pe-1oC"/>
+                        <outlet property="titleSegment" destination="Rzd-QB-wBj" id="hJz-vx-dhU"/>
+                        <outlet property="topContraint" destination="D9y-bL-MLg" id="nLU-PO-1eV"/>
+                        <outlet property="usernameField" destination="1bD-SQ-tax" id="e3C-ls-vhL"/>
+                        <outlet property="welcomeLabel" destination="PJr-Lr-lvh" id="wsy-dF-EHV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jl0-Mz-Z2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904" y="222"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="configo_login_logo" width="170" height="164"/>
+    </resources>
 </document>

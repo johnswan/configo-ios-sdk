@@ -62,7 +62,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
     NNLogDebug(@"Loading Config: POST", (@{@"URL" : baseConfigURL, @"Headers" : headers, @"Params" : params}));
     
     [connectionMgr POST: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
-        NNLogDebug(@"Loading Config: HTTPResponse", response);
+        //NNLogDebug(@"Loading Config: HTTPResponse", response);
         NNLogDebug(@"Loading Config: Response Data", object);
         NSError *retError = error;
         
@@ -112,8 +112,8 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
     [connectionMgr GET: pollURL parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         _pollingStatus = NO;
         
-        NNLogDebug(@"Polling Status: HTTPResponse", response);
-        NNLogDebug(@"Polling status: Response data", responseObject);
+//        NNLogDebug(@"Polling Status: HTTPResponse", response);
+//        NNLogDebug(@"Polling status: Response data", responseObject);
         
         NSError *retError = error;
         BOOL shouldUpdate = false;
