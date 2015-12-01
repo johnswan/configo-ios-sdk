@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "CFGLogLevel.h"
 
 /**
  *	@brief A block to be executed after the config is loaded from the remote source.
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 @property (nonatomic) BOOL dynamicallyRefreshValues;
 
 /** The SDK's version string. */
-+ (NSString *)VersionString;
++ (NSString *)sdkVersion;
 
 /**
  *	@brief The initialize call. Must be called first before using any of the SDK's functions.
@@ -89,6 +89,12 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  *	@return <code>Configo</code> instance
  */
 + (instancetype)sharedInstance;
+
+/**
+ *	@brief  Set the logging level.
+ *	@param level The level of the logs produced by the ConfigoSDK.
+ */
+- (void)setLoggingLevel:(CFGLogLevel)level;
 
 /**
  *	@brief The callback that will be called once the config loading process is complete.

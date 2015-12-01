@@ -11,6 +11,7 @@
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
 #import "CFGPrivateConfigService.h"
+#import "CFGLogger.h"
 
 #import "CFGConstants.h"
 #import "CFGResponse.h"
@@ -46,7 +47,7 @@ NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 @property (nonatomic, copy) CFGCallback listenerCallback;
 @property (nonatomic, copy) CFGCallback tempListenerCallback;
 
-@property (nonatomic, copy) NSTimer *pullConfigTimer;
+@property (nonatomic, copy) NSTimer *pollingTimer;
 @end
 
 #pragma mark - Implementation
@@ -82,10 +83,14 @@ static id _shared = nil;
     }
     
     if(self = [super init]) {
+        //Decide if Logging happens or not.
+        [self determineShouldLog];
+        
         NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
         [NNReachabilityManager sharedManager];
         
         //Init private config
+        [self observePrivateConfig];
         [CFGPrivateConfigService sharedConfigService];
         
         self.devKey = devKey;
@@ -104,21 +109,36 @@ static id _shared = nil;
         self.listenerCallback = callback;
         
         [self pullConfig];
-        [self setupPollingTimer];
     }
     return self;
 }
 
-+ (NSString *)VersionString {
++ (NSString *)sdkVersion {
     return ConfigoSDKVersion;
 }
 
-#pragma mark - Config Handling
+#pragma mark - Internal Config
+
+- (void)observePrivateConfig {
+    [[NSNotificationCenter defaultCenter] addObserverForName: CFGPrivateConfigLoadedNotification
+                                                      object: nil queue: [NSOperationQueue mainQueue]
+                                                  usingBlock: ^(NSNotification *note) {
+                                                      NNLogDebug(@"New private config, rebooting poll timer", nil);
+                                                      [_pollingTimer invalidate];
+                                                      //If the config is already loaded, and we only got the internal config, we should start poll.
+                                                      //Otherwise, the pullConfig completion will setup the poll timer.
+                                                      if(_state == CFGConfigLoadedFromServer) {
+                                                          [self setupPollingTimer];
+                                                      }
+                                                  }];
+}
+
+#pragma mark - Polling
 
 - (void)setupPollingTimer {
     NSInteger pollingInterval = PrivateConfigInteger(@"pollingInterval.ios");
     NNLogDebug(@"Setting up polling timer", [NSNumber numberWithInteger: pollingInterval]);
-    _pullConfigTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval target: self selector: @selector(checkPolling)
+    _pollingTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval target: self selector: @selector(checkPolling)
                                                       userInfo: nil repeats: NO];
 }
 
@@ -148,6 +168,8 @@ static id _shared = nil;
     }];
 }
 
+#pragma mark - Config Handling
+
 - (void)forceRefreshValues {
     if(_activeConfigoResponse != _latestConfigoResponse) {
         _activeConfigoResponse = _latestConfigoResponse;
@@ -162,6 +184,10 @@ static id _shared = nil;
     if(_state == CFGConfigLoadingInProgress) {
         return;
     }
+    
+    //Stop the polling timer
+    [_pollingTimer invalidate];
+    _pollingTimer = nil;
     
     NNLogDebug(@"Loading Config: start", nil);
     
@@ -197,6 +223,8 @@ static id _shared = nil;
             [self sendNotificationWithError: error];
             [self invokeListenersCallbacksWithError: error];
         }
+        //Start polling
+        [self setupPollingTimer];
     }];
 }
 
@@ -205,10 +233,8 @@ static id _shared = nil;
 - (void)setCallback:(CFGCallback)callback {
     BOOL shouldInvokeCallback = NO;
     
-    if(!self.listenerCallback) {
-        if(_state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
-            shouldInvokeCallback = YES;
-        }
+    if(!self.listenerCallback && _state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
+        shouldInvokeCallback = YES;
     }
     
     self.listenerCallback = callback;
@@ -225,19 +251,11 @@ static id _shared = nil;
 - (BOOL)setUserContext:(NSDictionary *)context {
     //Incorrect, will trigger changing the customUserId
     //[self setCustomUserId: nil userContext: context];
-    if([NNJSONUtilities isValidJSONObject: context]) {
-        [_configoDataController setUserContext: context];
-        return YES;
-    }
-    return NO;
+    return [_configoDataController setUserContext: context];
 }
 
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
-    if([NNJSONUtilities isValidJSONObject: value]) {
-        [_configoDataController setUserContextValue: value forKey: key];
-        return YES;
-    }
-    return NO;
+    return [_configoDataController setUserContextValue: value forKey: key];
     /*if(contextChanged) {
      //If user calls this method consecutively - this will be triggered every time.
      //[self pullConfig];
@@ -301,6 +319,11 @@ static id _shared = nil;
 
 #pragma mark - Helpers
 
+- (void)determineShouldLog {
+    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    [NNLogger setLogging: [bundleId isEqualToString: @"io.configo.example"]];
+}
+
 - (BOOL)shouldUpdateActiveConfig {
     //If there's no currently active config (first time load)
     //If the currently active config is loaded from storage.
@@ -337,8 +360,12 @@ static id _shared = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName: notificationName object: self userInfo: userInfo];
 }
 
-#pragma mark - DEBUG only code
+- (void)setLoggingLevel:(CFGLogLevel)level {
+    [CFGLogger setLoggingLevel: level];
+}
+
 #ifdef DEBUG
+#pragma mark - DEBUG only code
 
 + (NSString *)developmentDevKey {
     NSString *retval = nil;

@@ -14,6 +14,9 @@
 #import <NNLibraries/NNJSONUtilities.h>
 #import <NNLibraries/NNUtilities.h>
 #import <NNLibraries/NNLogger.h>
+#import "CFGLogger.h"
+
+NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.done";
 
 @interface CFGPrivateConfigService ()
 @property (nonatomic, strong) CFGNetworkController *restClient;
@@ -51,6 +54,9 @@
         if(!error && response) {
             _configResponse = response;
             [self alertSDKVersion];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName: CFGPrivateConfigLoadedNotification
+                                                                object: self userInfo: @{@"response": response}];
         }
         _restClient = nil;
     }];
@@ -128,17 +134,28 @@
 
 - (NSDictionary *)sdkData {
     NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    return @{@"udid": bundleId};
+    NSString *appName = [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleNameKey];
+    if(!appName) {
+        appName = @"";
+    }
+    return @{@"udid": bundleId ,
+             @"userContext": @{
+                     @"applicationId": bundleId,
+                     @"applicationName": appName,
+                     @"SDKVersion": ConfigoSDKVersion
+                     }
+             };
 }
 
 - (void)alertSDKVersion {
     NSString *remoteVersion = [self stringForKeyPath: @"SDKVersion.ios"];
     NSComparisonResult result = [NNUtilities compareVersionString: ConfigoSDKVersion toVersionString: remoteVersion];
     if(result == NSOrderedAscending) {
-        NNLogDebug(@"Please update Configo to the laatest version", remoteVersion);
+        [CFGLogger log: @"Please update the ConfigoSDK to the latest version (%@)", remoteVersion];
     } else if(result == NSOrderedSame) {
-        NNLogDebug(@"Configo is up-to-date.", nil);
+        [CFGLogger log: @"ConfigoSDK is up-to-date"];
     } else {
+        [CFGLogger log: @"Your ConfigoSDK version seems to be corrupt, please reinstall the SDK."];
         NNLogDebug(@"Configo local version is ahead of remote?! O_o", ConfigoSDKVersion);
     }
 }

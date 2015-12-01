@@ -18,11 +18,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [Configo initWithDevKey: [Configo developmentDevKey] appId: [Configo developmentAppId] callback: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
-        NSLog(@"UIApplicationDelegate, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
-    }];
-    [[Configo sharedInstance] setDynamicallyRefreshValues: YES];
-    //Changed again
     return YES;
 }
 

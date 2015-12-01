@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C1B62EB1B8EE779000CCD9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C1B62ED1B8EE779000CCD9D /* Localizable.strings */; };
 		5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */; };
+		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
 		5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB01B806F900074D62A /* AppDelegate.m */; };
@@ -16,7 +17,7 @@
 		5C93DEB71B806F900074D62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB51B806F900074D62A /* Main.storyboard */; };
 		5C93DEB91B806F900074D62A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB81B806F900074D62A /* Images.xcassets */; };
 		5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEBA1B806F900074D62A /* LaunchScreen.xib */; };
-		5CAAD80A1BDC23A000C562F2 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAAD8091BDC23A000C562F2 /* ConfigoSDK.framework */; settings = {ASSET_TAGS = (); }; };
+		5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,24 +30,13 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		5CEF7BA11BD9020C00C084F3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		5C1B62EC1B8EE779000CCD9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5C1E80491BEF880400D55CB7 /* ConfigoExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigoExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoExampleTests.m; sourceTree = "<group>"; };
 		5C1E804D1BEF880400D55CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C219EA51C0AEBC5003CF89E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		5C219EA61C0AEBC5003CF89E /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		5C2ADBF11B89A837005A9254 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5C93DEA81B806F900074D62A /* ConfigoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfigoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +51,7 @@
 		5C93DEBB1B806F900074D62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5C93DEC61B806F900074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DEC71B806F900074D62A /* ConfigoExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoExampleTests.m; sourceTree = "<group>"; };
-		5CAAD8091BDC23A000C562F2 /* ConfigoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ConfigoSDK.framework; sourceTree = "<group>"; };
+		5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConfigoSDK.framework; path = "../ConfigoSDK/build/Debug-iphoneos/ConfigoSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CAAD80A1BDC23A000C562F2 /* ConfigoSDK.framework in Frameworks */,
+				5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +105,7 @@
 		5C93DE9F1B806F900074D62A = {
 			isa = PBXGroup;
 			children = (
-				5CAAD8091BDC23A000C562F2 /* ConfigoSDK.framework */,
+				5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */,
 				5C93DEAA1B806F900074D62A /* ConfigoExample */,
 				5C93DEC41B806F900074D62A /* ConfigoExampleTests */,
 				5C1E804A1BEF880400D55CB7 /* ConfigoExampleTests */,
@@ -140,6 +130,8 @@
 				5C93DEB01B806F900074D62A /* AppDelegate.m */,
 				5C93DEB21B806F900074D62A /* ViewController.h */,
 				5C93DEB31B806F900074D62A /* ViewController.m */,
+				5C219EA51C0AEBC5003CF89E /* DemoViewController.h */,
+				5C219EA61C0AEBC5003CF89E /* DemoViewController.m */,
 				5C1B62EE1B8EE7B1000CCD9D /* Resources */,
 				5C93DEAB1B806F900074D62A /* Supporting Files */,
 			);
@@ -200,7 +192,6 @@
 				5C93DEA41B806F900074D62A /* Sources */,
 				5C93DEA51B806F900074D62A /* Frameworks */,
 				5C93DEA61B806F900074D62A /* Resources */,
-				5CEF7BA11BD9020C00C084F3 /* Embed Frameworks */,
 				5CAAD80B1BDC255800C562F2 /* ShellScript */,
 			);
 			buildRules = (
@@ -308,6 +299,7 @@
 				5C93DEB41B806F900074D62A /* ViewController.m in Sources */,
 				5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */,
 				5C93DEAE1B806F900074D62A /* main.m in Sources */,
+				5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */,
 				5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -474,13 +467,14 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ConfigoExample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -490,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -497,12 +492,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/ConfigoExample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -518,6 +514,7 @@
 				5C1E80511BEF880400D55CB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5C93DEA31B806F900074D62A /* Build configuration list for PBXProject "ConfigoExample" */ = {
 			isa = XCConfigurationList;

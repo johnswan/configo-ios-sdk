@@ -168,6 +168,10 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 - (BOOL)setUserContext:(NSDictionary *)userContext {
     //Test is done at caller level for now. (We want to keep it simple and not filter the NSDictionary)
     //id validContext = [NNJSONUtilities makeValidJSONObject: userContext];
+    if(![NNJSONUtilities isValidJSONObject: userContext]) {
+        return NO;
+    }
+    
     id validContext = userContext;
     
     if(!validContext && !_configoData.userContext) {
@@ -182,7 +186,13 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 }
 
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
+    //If the value is nil but the key is not, we remove the object for key.
+    
+    //If no value and no key, we do nothing.
     if(!value && !key) {
+        return NO;
+    } //If there's a value (not nil) but it's NOT a json type - we don't set it.
+    else if(value && ![NNJSONUtilities isJSONTypeObject: value]) {
         return NO;
     }
     
