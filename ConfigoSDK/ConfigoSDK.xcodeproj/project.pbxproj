@@ -21,9 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5C1186251BF9D4970048CBAA /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAFF8781BF25750004DAEB2 /* NNLibraries.a */; };
-		5C1186291BFA103A0048CBAA /* CFGPrivateConfigService.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */; settings = {ASSET_TAGS = (); }; };
-		5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */; settings = {ASSET_TAGS = (); }; };
+		5C1186291BFA103A0048CBAA /* CFGPrivateConfigService.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */; };
+		5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */; };
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
 		5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB071B8CA84500D85791 /* CFGConfigoData.h */; };
@@ -34,6 +33,7 @@
 		5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9E81B821AAD001B80D6 /* CFGResponse.m */; };
 		5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C54701D1B84B55700C026D8 /* CFGInternalError.h */; };
 		5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C54701E1B84B55700C026D8 /* CFGInternalError.m */; };
+		5C7890821C15982A00E1979A /* NNLibraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C7890811C15982700E1979A /* NNLibraries.a */; };
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE51B80744D0074D62A /* Configo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEE31B80744D0074D62A /* Configo.m */; };
@@ -41,14 +41,28 @@
 		5CACCDB91B81E546009E343C /* CFGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDB71B81E546009E343C /* CFGConstants.m */; };
 		5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACCDC21B821120009E343C /* CFGResponseHeader.h */; };
 		5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDC31B821120009E343C /* CFGResponseHeader.m */; };
-		5CB451DD1BFE10A100BB0E97 /* CFGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */; settings = {ASSET_TAGS = (); }; };
-		5CB451DE1BFE10A100BB0E97 /* CFGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */; settings = {ASSET_TAGS = (); }; };
+		5CB451DD1BFE10A100BB0E97 /* CFGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */; };
+		5CB451DE1BFE10A100BB0E97 /* CFGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */; };
 		5CB451E01BFE127200BB0E97 /* CFGLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */; };
 		5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5C7890801C15982700E1979A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5C78907C1C15961C00E1979A;
+			remoteInfo = "NNLibraries Configo";
+		};
+		5C7890831C15983C00E1979A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C788FEF1C15961C00E1979A;
+			remoteInfo = "NNLibraries Configo";
+		};
 		5CAFF8771BF25750004DAEB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */;
@@ -103,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C1186251BF9D4970048CBAA /* NNLibraries.a in Frameworks */,
+				5C7890821C15982A00E1979A /* NNLibraries.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,12 +209,20 @@
 			name = CFGInternalError;
 			sourceTree = "<group>";
 		};
+		5C8F53251C185FE40057CCFC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5C93DE731B806E150074D62A = {
 			isa = PBXGroup;
 			children = (
 				5CAFF8721BF25750004DAEB2 /* NNLibraries.xcodeproj */,
 				5C93DE7F1B806E150074D62A /* ConfigoSDK */,
 				5C93DE8C1B806E150074D62A /* ConfigoSDKTests */,
+				5C8F53251C185FE40057CCFC /* Frameworks */,
 				5C93DE7E1B806E150074D62A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -273,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAFF8781BF25750004DAEB2 /* NNLibraries.a */,
+				5C7890811C15982700E1979A /* NNLibraries.a */,
 				5CAFF87A1BF25750004DAEB2 /* NNLibrariesTests.xctest */,
 			);
 			name = Products;
@@ -356,6 +379,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5C7890841C15983C00E1979A /* PBXTargetDependency */,
 			);
 			name = ConfigoSDK;
 			productName = ConfigoSDK;
@@ -368,7 +392,7 @@
 		5C93DE741B806E150074D62A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Turrisio;
 				TargetAttributes = {
 					5C8CBE0C1BDE26A4006465D2 = {
@@ -405,6 +429,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		5C7890811C15982700E1979A /* NNLibraries.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = NNLibraries.a;
+			remoteRef = 5C7890801C15982700E1979A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5CAFF8781BF25750004DAEB2 /* NNLibraries.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -482,6 +513,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5C7890841C15983C00E1979A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NNLibraries Configo";
+			targetProxy = 5C7890831C15983C00E1979A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		5C8CBE0D1BDE26A4006465D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -519,6 +558,7 @@
 				CURRENT_PROJECT_VERSION = 187;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -588,10 +628,12 @@
 		5C93DE941B806E150074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 187;
@@ -609,6 +651,7 @@
 					"-all_load",
 					"-ObjC",
 				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -621,10 +664,12 @@
 		5C93DE951B806E150074D62A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 187;
@@ -640,6 +685,7 @@
 					"-all_load",
 					"-ObjC",
 				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

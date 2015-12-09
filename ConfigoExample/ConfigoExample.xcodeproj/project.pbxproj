@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C1B62EB1B8EE779000CCD9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C1B62ED1B8EE779000CCD9D /* Localizable.strings */; };
 		5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */; };
-		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; };
 		5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
 		5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB01B806F900074D62A /* AppDelegate.m */; };
@@ -18,6 +18,8 @@
 		5C93DEB91B806F900074D62A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB81B806F900074D62A /* Images.xcassets */; };
 		5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEBA1B806F900074D62A /* LaunchScreen.xib */; };
 		5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */; };
+		5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C11C18620F00CEF97D /* CoreTelephony.framework */; };
+		5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C31C18621500CEF97D /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		5C93DEC61B806F900074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DEC71B806F900074D62A /* ConfigoExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoExampleTests.m; sourceTree = "<group>"; };
 		5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConfigoSDK.framework; path = "../ConfigoSDK/build/Debug-iphoneos/ConfigoSDK.framework"; sourceTree = "<group>"; };
+		5CC924C11C18620F00CEF97D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		5CC924C31C18621500CEF97D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */,
+				5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */,
 				5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,7 +111,7 @@
 		5C93DE9F1B806F900074D62A = {
 			isa = PBXGroup;
 			children = (
-				5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */,
+				5CC924C51C18637F00CEF97D /* Frameworks */,
 				5C93DEAA1B806F900074D62A /* ConfigoExample */,
 				5C93DEC41B806F900074D62A /* ConfigoExampleTests */,
 				5C1E804A1BEF880400D55CB7 /* ConfigoExampleTests */,
@@ -162,6 +168,16 @@
 				5C93DEC61B806F900074D62A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CC924C51C18637F00CEF97D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CC924C31C18621500CEF97D /* SystemConfiguration.framework */,
+				5CC924C11C18620F00CEF97D /* CoreTelephony.framework */,
+				5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +478,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"${BUILT_PRODUCTS_DIR}",
 					"$(PROJECT_DIR)",
@@ -487,6 +504,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"${BUILT_PRODUCTS_DIR}",
 					"$(PROJECT_DIR)",
