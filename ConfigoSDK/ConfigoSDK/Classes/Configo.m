@@ -18,10 +18,6 @@
 
 #import <NNLibraries/NNLibrariesEssentials.h>
 #import <NNLibraries/NNReachabilityManager.h>
-#import <NNLibraries/UIColor+NNAdditions.h>
-#import <NNLibraries/NNTimer.h>
-
-@import CoreTelephony;
 
 #pragma mark - Constants
 
@@ -83,6 +79,8 @@ static id _shared = nil;
     }
     
     if(self = [super init]) {
+        NNLogDebug(@"Process Info", [[NSProcessInfo processInfo] environment]);
+        
         //Decide if Logging happens or not.
         [self determineShouldLog];
         
@@ -136,7 +134,7 @@ static id _shared = nil;
 #pragma mark - Polling
 
 - (void)setupPollingTimer {
-    NSInteger pollingInterval = PrivateConfigInteger(@"pollingInterval.ios");
+    NSInteger pollingInterval = CFGPrivateConfigInteger(@"pollingInterval.ios");
     NNLogDebug(@"Setting up polling timer", [NSNumber numberWithInteger: pollingInterval]);
     _pollingTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval target: self selector: @selector(checkPolling)
                                                       userInfo: nil repeats: NO];

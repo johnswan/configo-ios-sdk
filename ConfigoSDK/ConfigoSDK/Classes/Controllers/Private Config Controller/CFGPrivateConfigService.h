@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "CFGResponse.h"
 
-#define PrivateConfigValue(key)     [[CFGPrivateConfigService sharedConfigService] valueForKeyPath: key]
-#define PrivateConfigString(key)    [[CFGPrivateConfigService sharedConfigService] stringForKeyPath: key]
-#define PrivateConfigInteger(key)   [[CFGPrivateConfigService sharedConfigService] integerForKeyPath: key]
+#define CFGPrivateConfigValue(key)     [[CFGPrivateConfigService sharedConfigService] valueForKeyPath: key]
+#define CFGPrivateConfigString(key)    [[CFGPrivateConfigService sharedConfigService] stringForKeyPath: key]
+#define CFGPrivateConfigInteger(key)   [[CFGPrivateConfigService sharedConfigService] integerForKeyPath: key]
 
 //TODO: Save the config to file
 //TODO: Think about how to save the fallback (initial) config (Object/File/Inline JSON)

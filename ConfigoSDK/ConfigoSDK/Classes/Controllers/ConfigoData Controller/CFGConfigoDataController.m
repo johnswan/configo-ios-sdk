@@ -10,13 +10,14 @@
 #import "CFGFileManager.h"
 #import "CFGConstants.h"
 
-#import <CoreTelephony/CTCarrier.h>
-
 #import <NNLibraries/NNLibrariesEssentials.h>
 #import <NNLibraries/UIDevice+NNAdditions.h>
 #import <NNLibraries/NNReachabilityManager.h>
 #import <NNLibraries/NSDictionary+NNAdditions.h>
 #import <NNLibraries/NSDate+NNAdditions.h>
+
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 static NSString *const kPOSTKey_deviceDetails = @"deviceDetails";
 static NSString *const kPOSTKey_userContext = @"userContext";
@@ -231,7 +232,8 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     NSString *deviceModel = [UIDevice machineModel];
     NSString *os = @"iOS"; //[[UIDevice currentDevice] systemName]; //Return iPhone OS (legacy)
     NSString *osVersion = [[UIDevice currentDevice] systemVersion];
-    CTCarrier *carrier = [[CTCarrier alloc] init];
+    CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = telephonyInfo.subscriberCellularProvider;
     NSString *carrierName = [carrier carrierName] ? : @"NA"; //Not always available, e.g. iPad
     
     NSString *language = @"en";

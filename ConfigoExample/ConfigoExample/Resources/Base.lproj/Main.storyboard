@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kH3-6V-vpc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kH3-6V-vpc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -235,6 +235,7 @@
                         <outlet property="featureButton" destination="BKK-fD-BQ0" id="wdx-TR-lv6"/>
                         <outlet property="leftConstraint" destination="nLQ-FN-kVB" id="Qxg-QK-4IP"/>
                         <outlet property="loginBtn" destination="I5o-ok-PEH" id="b31-aj-rXB"/>
+                        <outlet property="logoImage" destination="Vnx-n2-sme" id="HZu-S9-c6v"/>
                         <outlet property="logoImgView" destination="Vnx-n2-sme" id="Rwm-lQ-sPG"/>
                         <outlet property="managerFeatureBtn" destination="faX-cl-sO3" id="Qb8-pe-1oC"/>
                         <outlet property="titleSegment" destination="Rzd-QB-wBj" id="hJz-vx-dhU"/>

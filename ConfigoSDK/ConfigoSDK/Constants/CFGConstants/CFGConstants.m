@@ -11,7 +11,7 @@
 #import <NNLibraries/UIDevice+NNAdditions.h>
 
 #pragma mark - Global Constants
-NSString *const ConfigoSDKVersion = @"0.3.5";
+NSString *const ConfigoSDKVersion = @"0.3.7";
 
 NSString *const CFGFileNamePrefix = @"configo";
 NSString *const CFGCryptoKey = @"14504D2A42F6C2F08B9E8A1B2309A5BA";

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton       *employeeFeatureBtn;
 @property (weak, nonatomic) IBOutlet UIButton       *managerFeatureBtn;
 @property (weak, nonatomic) IBOutlet UILabel        *animatedLabel;
+@property (weak, nonatomic) IBOutlet UIImageView    *logoImage;
 
 @property (weak, nonatomic) IBOutlet UITextField        *usernameField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *titleSegment;
@@ -58,6 +59,12 @@
 
 
 - (void)refreshView {
+    NSString *imgName = [[Configo sharedInstance] configValueForKeyPath: @"image"];
+    UIImage *img = [UIImage imageNamed: imgName];
+    if(img) {
+        _logoImage.image = img;
+    }
+    
     NSDictionary *rgb = [[Configo sharedInstance] configValueForKeyPath: @"bgcolor"];
     self.view.backgroundColor = [self colorFromDictionary: rgb];
     
