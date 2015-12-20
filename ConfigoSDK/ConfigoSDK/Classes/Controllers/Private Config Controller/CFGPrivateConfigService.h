@@ -3,7 +3,7 @@
 //  ConfigoSDK
 //
 //  Created by Natan Abramov on 11/16/15.
-//  Copyright © 2015 Turrisio. All rights reserved.
+//  Copyright © 2015 Configo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
