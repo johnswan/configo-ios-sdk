@@ -10,11 +10,11 @@
 #import "CFGFileManager.h"
 #import "CFGConstants.h"
 
-#import <NNLibraries/NNLibrariesEssentials.h>
-#import <NNLibraries/UIDevice+NNAdditions.h>
-#import <NNLibraries/NNReachabilityManager.h>
-#import <NNLibraries/NSDictionary+NNAdditions.h>
-#import <NNLibraries/NSDate+NNAdditions.h>
+#import "NNLibrariesEssentials.h"
+#import "UIDevice+NNAdditions.h"
+#import "NNReachabilityManager.h"
+#import "NSDictionary+NNAdditions.h"
+#import "NSDate+NNAdditions.h"
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>

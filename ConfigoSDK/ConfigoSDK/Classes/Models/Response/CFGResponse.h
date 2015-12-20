@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <NNLibraries/NNJSONObject.h>
+#import "NNJSONObject.h"
 
 @class CFGResponseHeader;
 

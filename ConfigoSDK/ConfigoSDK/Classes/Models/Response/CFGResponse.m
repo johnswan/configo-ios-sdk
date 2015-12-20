@@ -9,8 +9,8 @@
 #import "CFGResponse.h"
 #import "CFGResponseHeader.h"
 
-#import <NNLibraries/NNJSONUtilities.h>
-#import <NNLibraries/NSDictionary+NNAdditions.h>
+#import "NNJSONUtilities.h"
+#import "NSDictionary+NNAdditions.h"
 
 #pragma mark - Constants
 static NSString *const kHeaderKey = @"header";

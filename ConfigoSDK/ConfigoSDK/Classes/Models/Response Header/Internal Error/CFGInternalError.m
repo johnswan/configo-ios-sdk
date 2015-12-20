@@ -9,8 +9,8 @@
 #import "CFGInternalError.h"
 #import "CFGConstants.h"
 
-#import <NNLibraries/NNJSONUtilities.h>
-#import <NNLibraries/NSDictionary+NNAdditions.h>
+#import "NNJSONUtilities.h"
+#import "NSDictionary+NNAdditions.h"
 
 static NSString *const kStatusCodeKey = @"statusCode";
 static NSString *const kDescriptionKey = @"description";

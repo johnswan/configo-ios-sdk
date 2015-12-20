@@ -11,10 +11,10 @@
 #import "CFGResponse.h"
 #import "CFGConstants.h"
 
-#import <NNLibraries/NNUtilities.h>
-#import <NNLibraries/NNJSONUtilities.h>
-#import <NNLibraries/NNSecurity.h>
-#import <NNLibraries/NNJSONObject.h>
+#import "NNUtilities.h"
+#import "NNJSONUtilities.h"
+#import "NNSecurity.h"
+#import "NNJSONObject.h"
 
 @implementation CFGFileManager
 
@@ -41,14 +41,16 @@
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId error:(NSError **)err{
     BOOL success = NO;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
-    success = [self saveAndEncryptObject: response toFile: filePath error: err];
+    NSString *key = [self cryptoKeyWithDevKey: devKey appId: appId];
+    success = [self saveAndEncryptObject: response withKey: key toFile: filePath error: err];
     return success;
 }
 
 - (CFGResponse *)loadLastResponseForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGResponse *retval = nil;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoResponse"];
-    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath error: err];
+    NSString *key = [self cryptoKeyWithDevKey: devKey appId: appId];
+    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath withKey: key error: err];
     retval = [[CFGResponse alloc] initWithDictionary: json];
     return retval;
 }
@@ -58,7 +60,8 @@
 - (CFGConfigoData *)loadConfigoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGConfigoData *retval = nil;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoData"];
-    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath error: err];
+    NSString *key = [self cryptoKeyWithDevKey: devKey appId: appId];
+    NSDictionary *json = [self loadAndDecryptDataFromFile: filePath withKey: key error: err];
     retval = [[CFGConfigoData alloc] initWithDictionary: json];
     return retval;
 }
@@ -66,13 +69,14 @@
 - (BOOL)saveConfigoData:(CFGConfigoData *)configoData withDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     BOOL success = NO;
     NSString *filePath = [self filePathWithDevKey: devKey appId: appId suffix: @"configoData"];
-    success = [self saveAndEncryptObject: configoData toFile: filePath error: err];
+    NSString *key = [self cryptoKeyWithDevKey: devKey appId: appId];
+    success = [self saveAndEncryptObject: configoData withKey: key toFile: filePath error: err];
     return success;
 }
 
 #pragma mark - Generic Data Saving & Loading
 
-- (BOOL)saveAndEncryptObject:(id)object toFile:(NSString *)filePath error:(NSError **)err {
+- (BOOL)saveAndEncryptObject:(id)object withKey:(NSString *)key toFile:(NSString *)filePath error:(NSError **)err {
     if(!object || !filePath) {
         return NO;
     }
@@ -90,7 +94,6 @@
     }
         
     if(data) {
-        NSString *key = [self cryptoKeyFromKey: CFGCryptoKey];
         NSData *encrypted = [NNSecurity encryptData: data withKey: key error: err];
         if(encrypted) {
             success = [encrypted writeToFile: filePath atomically: YES];
@@ -99,14 +102,13 @@
     return success;
 }
 
-- (id)loadAndDecryptDataFromFile:(NSString *)filePath error:(NSError **)err {
+- (id)loadAndDecryptDataFromFile:(NSString *)filePath withKey:(NSString *)key error:(NSError **)err {
     if(!filePath) {
         return nil;
     }
     id retval = nil;
     NSData *fileData = [NSData dataWithContentsOfFile: filePath];
     if(fileData) {
-        NSString *key = [self cryptoKeyFromKey: CFGCryptoKey];
         NSData *data = [NNSecurity decrypt: fileData withKey: key error: err];
         id json = [NNJSONUtilities JSONObjectFromData: data error: err];
         retval = json ? : data;
@@ -137,22 +139,9 @@
     return fileName;
 }
 
-- (NSString *)cryptoKeyFromKey:(NSString *)key {
-    NSUInteger length = key.length;
-    unichar buffer[length + 1];
-    [key getCharacters: buffer];
-    
-    for(NSUInteger i = 0 ; i < length ; i ++) {
-        unichar current = buffer[i];
-        if(current == 'A') {
-            buffer[i] = 'B';
-        } else if(current == 'B') {
-            buffer[i] = 'C';
-        } else if(current == '1') {
-            buffer[i] = '3';
-        }
-    }
-    return [NSString stringWithCharacters: buffer length: length];
+- (NSString *)cryptoKeyWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    NSString *cryptoKey = [devKey stringByAppendingString: appId];
+    return cryptoKey;
 }
 
 @end

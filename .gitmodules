@@ -1,0 +1,4 @@
+[submodule "ConfigoSDK/ConfigoSDK/Classes/NNLibraries"]
+	path = ConfigoSDK/ConfigoSDK/Classes/NNLibraries
+	url = https://github.com/natanavra/NNLibraries-iOS.git
+	branch = Configo

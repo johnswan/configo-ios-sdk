@@ -201,6 +201,13 @@
                                 <rect key="frame" x="20" y="227" width="123" height="30"/>
                                 <state key="normal" title="Employee Feature"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZ8-iz-y8f">
+                                <rect key="frame" x="20" y="41" width="92" height="30"/>
+                                <state key="normal" title="Start Configo"/>
+                                <connections>
+                                    <action selector="startConfigo:" destination="kH3-6V-vpc" eventType="touchUpInside" id="3y4-YK-cAN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

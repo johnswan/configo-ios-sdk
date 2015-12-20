@@ -41,12 +41,12 @@
     _loginBtn.layer.cornerRadius = 5.0f;
     _loginBtn.layer.borderColor = _loginBtn.titleLabel.textColor.CGColor;
     
-    [self registerConfigoCallback];
+    [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
     [self refreshView];
 }
 
 - (void)registerConfigoCallback {
-    [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
+    //Make the configurations dynamically refresh in runtime (Don't wait for next launch/start)
     [[Configo sharedInstance] setDynamicallyRefreshValues: YES];
     [[Configo sharedInstance] setCallback: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
         if(error) {
@@ -83,6 +83,12 @@
 }
 
 #pragma mark - IBActions
+
+- (IBAction)startConfigo:(id)sender {
+    [self registerConfigoCallback];
+    UIButton *btn = (UIButton *)sender;
+    btn.hidden = YES;
+}
 
 - (IBAction)crazyFeature:(id)sender {
     [self animateLabel];

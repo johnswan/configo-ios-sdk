@@ -15,7 +15,6 @@
 FOUNDATION_EXPORT NSString *const ConfigoSDKVersion;
 
 FOUNDATION_EXPORT NSString *const CFGFileNamePrefix;
-FOUNDATION_EXPORT NSString *const CFGCryptoKey;
 
 FOUNDATION_EXPORT NSString *const CFGErrorDomain;
 

@@ -16,8 +16,8 @@
 #import "CFGConstants.h"
 #import "CFGResponse.h"
 
-#import <NNLibraries/NNLibrariesEssentials.h>
-#import <NNLibraries/NNReachabilityManager.h>
+#import "NNLibrariesEssentials.h"
+#import "NNReachabilityManager.h"
 
 #pragma mark - Constants
 
@@ -79,8 +79,6 @@ static id _shared = nil;
     }
     
     if(self = [super init]) {
-        NNLogDebug(@"Process Info", [[NSProcessInfo processInfo] environment]);
-        
         //Decide if Logging happens or not.
         [self determineShouldLog];
         
@@ -229,8 +227,8 @@ static id _shared = nil;
 #pragma mark - Setters
 
 - (void)setCallback:(CFGCallback)callback {
+    //Checking wether we should ivoke the callback immediately after set
     BOOL shouldInvokeCallback = NO;
-    
     if(!self.listenerCallback && _state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
         shouldInvokeCallback = YES;
     }
@@ -361,44 +359,5 @@ static id _shared = nil;
 - (void)setLoggingLevel:(CFGLogLevel)level {
     [CFGLogger setLoggingLevel: level];
 }
-
-
-#pragma mark - DEBUG only code
-
-+ (NSString *)developmentDevKey {
-    NSString *retval = nil;
-    switch ([CFGConstants currentEnvironment]) {
-        case CFGEnvironmentDevelopment: {
-            retval = @"YOUR_DEV_KEY";
-            break;
-        }
-        case CFGEnvironmentProduction: {
-            retval = @"YOUR_DEV_KEY";
-            break;
-        }
-        default:
-            break;
-    }
-    return retval;
-}
-
-+ (NSString *)developmentAppId {
-    NSString *retval = nil;
-    switch ([CFGConstants currentEnvironment]) {
-        case CFGEnvironmentDevelopment: {
-            retval = @"YOUR_APP_ID";
-            break;
-        }
-        case CFGEnvironmentProduction: {
-            retval = @"YOUR_APP_ID";
-            break;
-        }
-        default:
-            break;
-    }
-    return retval;
-}
-
-#endif
 
 @end
