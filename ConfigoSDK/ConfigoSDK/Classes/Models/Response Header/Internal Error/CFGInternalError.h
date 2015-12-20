@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <NNLibraries/NNJSONObject.h>
+#import "NNJSONObject.h"
 
 @interface CFGInternalError : NNJSONObject
 @property (nonatomic, readonly) NSInteger statusCode;

@@ -182,10 +182,5 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  */
 - (BOOL)featureFlagForKey:(NSString *)key fallback:(BOOL)fallbackFlag;
 
-#ifdef DEBUG
-/*---------- FOR TESTING PURPOSES --------------*/
-+ (NSString *)developmentDevKey;
-+ (NSString *)developmentAppId;
-#endif
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Turrisio. All rights reserved.
 //
 
-#import <NNLibraries/NNJSONObject.h>
+#import "NNJSONObject.h"
 
 @interface CFGConfigoData : NNJSONObject <NSCopying>
 

@@ -10,7 +10,6 @@
 		5C1B62EB1B8EE779000CCD9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C1B62ED1B8EE779000CCD9D /* Localizable.strings */; };
 		5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */; };
 		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; };
-		5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
 		5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB01B806F900074D62A /* AppDelegate.m */; };
 		5C93DEB41B806F900074D62A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB31B806F900074D62A /* ViewController.m */; };
@@ -39,8 +38,6 @@
 		5C1E804D1BEF880400D55CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C219EA51C0AEBC5003CF89E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		5C219EA61C0AEBC5003CF89E /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
-		5C2ADBF11B89A837005A9254 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5C93DEA81B806F900074D62A /* ConfigoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfigoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DEAC1B806F900074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		5C93DEAD1B806F900074D62A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,15 +96,6 @@
 			path = ConfigoExampleTests;
 			sourceTree = "<group>";
 		};
-		5C2ADBF01B89A837005A9254 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				5C2ADBF11B89A837005A9254 /* MBProgressHUD.h */,
-				5C2ADBF21B89A837005A9254 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
 		5C93DE9F1B806F900074D62A = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +119,6 @@
 		5C93DEAA1B806F900074D62A /* ConfigoExample */ = {
 			isa = PBXGroup;
 			children = (
-				5C2ADBF01B89A837005A9254 /* MBProgressHUD */,
 				5C93DEAF1B806F900074D62A /* AppDelegate.h */,
 				5C93DEB01B806F900074D62A /* AppDelegate.m */,
 				5C93DEB21B806F900074D62A /* ViewController.h */,
@@ -316,7 +303,6 @@
 				5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */,
 				5C93DEAE1B806F900074D62A /* main.m in Sources */,
 				5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */,
-				5C2ADBF31B89A837005A9254 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

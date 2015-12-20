@@ -11,9 +11,9 @@
 
 #import "CFGConstants.h"
 
-#import <NNLibraries/NNJSONUtilities.h>
-#import <NNLibraries/NNUtilities.h>
-#import <NNLibraries/NNLogger.h>
+#import "NNJSONUtilities.h"
+#import "NNUtilities.h"
+#import "NNLogger.h"
 #import "CFGLogger.h"
 
 NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.done";

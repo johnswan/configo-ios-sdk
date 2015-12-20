@@ -9,8 +9,8 @@
 #import "CFGResponseHeader.h"
 #import "CFGInternalError.h"
 
-#import <NNLibraries/NNJSONUtilities.h>
-#import <NNLibraries/NSDictionary+NNAdditions.h>
+#import "NNJSONUtilities.h"
+#import "NSDictionary+NNAdditions.h"
 
 #pragma mark - Constants
 

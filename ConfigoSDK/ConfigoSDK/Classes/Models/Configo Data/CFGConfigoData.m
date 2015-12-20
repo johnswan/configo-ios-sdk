@@ -8,8 +8,8 @@
 
 #import "CFGConfigoData.h"
 
-#import <NNLibraries/NSDictionary+NNAdditions.h>
-#import <NNLibraries/NNJSONUtilities.h>
+#import "NSDictionary+NNAdditions.h"
+#import "NNJSONUtilities.h"
 
 static NSString *const kUdidKey = @"udid";
 static NSString *const kCustomUserIdKey = @"customUserId";

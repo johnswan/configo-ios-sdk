@@ -12,8 +12,8 @@
 #import "CFGResponseHeader.h"
 #import "CFGInternalError.h"
 
-#import <NNLibraries/NNLibrariesEssentials.h>
-#import <NNLibraries/NNURLConnectionManager.h>
+#import "NNLibrariesEssentials.h"
+#import "NNURLConnectionManager.h"
 
 //HTTP header keys constants
 static NSString *const kHTTPHeaderKey_authHeader = @"x-configo-auth";
