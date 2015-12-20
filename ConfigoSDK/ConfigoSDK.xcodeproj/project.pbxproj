@@ -43,7 +43,6 @@
 		5CB451DD1BFE10A100BB0E97 /* CFGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */; };
 		5CB451DE1BFE10A100BB0E97 /* CFGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */; };
 		5CB451E01BFE127200BB0E97 /* CFGLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CC924CB1C21BF8100CEF97D /* keys in Resources */ = {isa = PBXBuildFile; fileRef = 5CC924CA1C21BF8100CEF97D /* keys */; };
 		5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */; };
 		5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */; };
 		5CF08C1F1C26FBAD00A85493 /* NNJSONObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF08BC61C26FBAD00A85493 /* NNJSONObject.h */; };
@@ -128,7 +127,6 @@
 		5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGLogger.h; path = Classes/Toolbox/CFGLogger.h; sourceTree = "<group>"; };
 		5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGLogger.m; path = Classes/Toolbox/CFGLogger.m; sourceTree = "<group>"; };
 		5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGLogLevel.h; path = Constants/CFGLogLevel.h; sourceTree = "<group>"; };
-		5CC924CA1C21BF8100CEF97D /* keys */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = keys; path = Constants/keys; sourceTree = "<group>"; };
 		5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGConfigoDataController.h; sourceTree = "<group>"; };
 		5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CFGConfigoDataController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5CF08BC61C26FBAD00A85493 /* NNJSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNJSONObject.h; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 		5C93DE7F1B806E150074D62A /* ConfigoSDK */ = {
 			isa = PBXGroup;
 			children = (
-				5CC924CA1C21BF8100CEF97D /* keys */,
 				5C93DE821B806E150074D62A /* ConfigoSDK.h */,
 				5C33AB131B8CB59100D85791 /* Constants */,
 				5C93DEE61B8074530074D62A /* Classes */,
@@ -832,7 +829,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CC924CB1C21BF8100CEF97D /* keys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
