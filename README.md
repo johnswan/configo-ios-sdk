@@ -112,7 +112,6 @@ In a JSON of the form:
   "object": {
     "array": [1,2,3]
   }
-  ...
 }
 ```
 
@@ -145,7 +144,7 @@ Sometimes a manual refresh of the configurations is required (with an optional `
 
 ```objective-c
 [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *config, NSArray *features) {
-      ...
+      //Code for handling feature list/configuration update
 }];
 ```
 
