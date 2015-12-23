@@ -6,29 +6,33 @@
   4. CocoaPods `pod etc/etc`
   5. Add the ConfigoSDK.xcodeproj as a subproject in your Xcode workspace.
 2. Configo has the following built-in framework dependencies (Project Settings -> General Tab -> Linked Frameworks and Libraries -> +):
-  1. SystemConfiguration.framework
-  2. CoreTelephony.framework
+  ```
+  SystemConfiguration.framework
+  CoreTelephony.framework
+  ```
 3. Added the following Linker flags (found in Project Settings -> "Build Settings" tab -> "Other Linker Flags")
-  1. -ObjC
-  2. -all_load
+  ```
+  -ObjC
+  -all_load
+  ```
 4. In your app delegate, add the following import:
-```
-#import <ConfigoSDK/ConfigoSDK.h>
-```
+  ```objective-c
+  #import <ConfigoSDK/ConfigoSDK.h>
+  ```
 5. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
-```
-[Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
-```
+  ```objective-c
+  [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
+  ```
 Optionally a block of code (i.e. `callback`) can be passed upon initialization, the block will be executed once the the loading process is complete:
-```
-[Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID" callback: ^(NSError *err, NSDictionary *config, NSArray *features) {
-  if(err) {
-    NSLog(@"Failed to load config");
-  } else {
-    NSLog(@"The config was loaded: %@, features list: %@", config, features);
-  }
-}];
-```
+  ```objective-c
+  [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID" callback: ^(NSError *err, NSDictionary *config, NSArray *features) {
+    if(err) {
+      NSLog(@"Failed to load config");
+    } else {
+      NSLog(@"The config was loaded: %@, features list: %@", config, features);
+    }
+  }];
+  ```
 ```
 NOTE: The initialization should be called only once in the lifetime of the app. It has no effect on any consecutive calls.
 ```
@@ -54,16 +58,16 @@ Anonymous users can be segmented by their device attributes:
 Identifying and segmenting users for targeted configurations can be done with the following:
 
 * Passing a user identifier such as an email or a username (We advise using a unique value):
-```
+```objective-c
 [[Configo sharedInstance] setCustomUserId: @"email@example.com"];
 ```
 * Passing user context that can give more specific details about the user and targeting the user more precisely, using either of two ways:
   Passing an `NSDictionary`:
-  ```
+  ```objective-c
   [[Configo sharedInstance] setUserContext: @{@"key1" : @"value1", @"key2": @"value2"}];
   ```
   Setting every attribute individually (in different classes through out the app):
-  ```
+  ```objective-c
   [[Configo sharedInstance] setUserContextValue: @"value1" forKey: @"key1"];
   [[Configo sharedInstance] setUserContextValue: @"value2" forKey: @"key2"];
   ```
@@ -77,7 +81,7 @@ All values set in the `userContext` must be JSON compatible ((Apple Docs)[https:
 ##Access Configurations
 Configurations are the core of Configo.io and retrieving it is easy:
 
-```
+```objective-c
 [[Configo sharedInstance] configValueForKeyPath: @"configKey" fallbackValue: @"fallbackString"];
 ```
 ```
@@ -88,7 +92,7 @@ The configuration is stored in a JSON document form and retrieved by the SDK as 
 Accessing the configuration value can be done using dot notation and brackets, e.g.:
 ```
 In a JSON of the form:
-
+```JSON
 {
   "object": {
     "array": [1,2,3]
@@ -97,67 +101,82 @@ In a JSON of the form:
 }
 ```
 The second value in the array can be accessed like so:
-```
+```objective-c
 [[Configo sharedInstance] configValueForKeyPath: @"object.array[1]"];
 ```
 Alternatively, the configuration `NSDictionary` can be accessed directly by calling `rawConfig`.
 
-Feature Flags
+##Feature Flags
 Feature flags can be checked like so:
 
+```objective-c
 [[Configo sharedInstance] featureFlagForKey: @"cool_feature" fallback: YES];
+```
+```
 NOTE: The fallback BOOL will be returned if an error occurred or the feature was not found.
-The full list of the current user's active features can be retrieved using featuresList
+```
+The full list of the current user's active features can be retrieved using `featuresList`.
 
-Trigger Refresh
+##Trigger Refresh
 Configo constantly synchronizes with the dashboard upon app launch and by using the push mechanism. Configo looks out for any local changes that need to be synchronized and updates accordingly.
 
-Sometimes a manual refresh of the configurations is required (with an optional callback):
+Sometimes a manual refresh of the configurations is required (with an optional `callback`):
 
+```objective-c
 [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *config, NSArray *features) {
       ...
 }];
-NOTE: The callback set here will only be executed once, when that specific call was made. It will have no effect on the callback set using the setCallback: method.
-Dynamic Configuration Refresh
+```
+```
+NOTE: The callback set here will only be executed once, when that specific call was made. It will have no effect on the callback set using the `setCallback:` method.
+```
+
+## Dynamic Configuration Refresh
 The configuration is updated and loaded every time the app opens, to avoid inconsistency at runtime. The configuration will be updated at runtime in the following scenarios:
 
-Calling pullConfig: with a valid callback.
-Setting dynamicallyRefreshValues to YES.
-Calling forceRefreshValues
-SDK Events
+1. Calling `pullConfig:` with a valid `callback`.
+2. Setting `dynamicallyRefreshValues` to `YES`.
+3. Calling `forceRefreshValues`.
+
+## SDK Events
 Configo's operational state can be retrieved using several methods:
 
-NSNotification
-callbacks
-Polling for state
+1. NSNotification
+2. callbacks
+3. Polling for state
 
 
-Notifications
+##### Notifications
 
-Every time a configuration is updated an NSNotification is triggered.
+Every time a configuration is updated an `NSNotification` is triggered.
 
-If the update was successful an ConfigoConfigurationLoadCompleteNotification will be broadcast with a userInfo containing values under the keys ConfigoNotificationUserInfoRawConfigKey and ConfigoNotificationUserInfoFeaturesListKey with the config and features list respectively.
-If an error occurred an ConfigoConfigurationLoadErrorNotification will be broadcast with a userInfo containing the error under the key ConfigoNotificationUserInfoErrorKey.
+* If the update was successful an `ConfigoConfigurationLoadCompleteNotification` will be broadcast with a `userInfo` containing values under the keys `ConfigoNotificationUserInfoRawConfigKey` and `ConfigoNotificationUserInfoFeaturesListKey` with the config and features list respectively.
+* If an error occurred an `ConfigoConfigurationLoadErrorNotification` will be broadcast with a `userInfo` containing the error under the key `ConfigoNotificationUserInfoErrorKey`.
 
 
-Callbacks
+##### Callbacks
 
-Using a ObjC blocks is a convenient way to execute code in response to events. Configo expects all blocks to be of the CFGCallback type with the following definition:
+Using a Objective-C `blocks` is a convenient way to execute code in response to events. Configo expects all blocks to be of the `CFGCallback` type with the following definition:
 
+```objective-c
 typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSArray *featuresList);
-a callback can be set upon initialization: + initWithDevKey:appId:callback:
+```
+a callback can be set upon initialization: `+ initWithDevKey:appId:callback:`
 
-Or any time later using the setCallback: method. This will replace the callback set upon initialization.
+Or any time later using the `setCallback:` method. This will replace the callback set upon initialization.
 
-If a manual configuration refresh is triggered an optional callback can be set as well pullConfig:. This will set a "temporary" callback that will only be called once when the manual refresh is complete. This will not affect the "main" callbacks set upon initialization or by setCallback:.
+If a manual configuration refresh is triggered an optional callback can be set as well `pullConfig:`. This will set a "temporary" callback that will only be called once when the manual refresh is complete. This will not affect the "main" callbacks set upon initialization or by `setCallback:`.
 
+```
 NOTE: the "main" callback will be executed as well (if set).
+```
 
 
-Configo State
+##### Configo State
 
 Configo also holds a property named state that can hold either of the following values:
 
+```
 //There is no config available.
 CFGConfigNotAvailable
 //The config was loaded from local storage (possibly outdated).
@@ -168,3 +187,4 @@ CFGConfigLoadingInProgress
 CFGConfigLoadedFromServer
 //An error was encountered when loading the config from the server (Possibly no config is available).
 CFGConfigFailedLoadingFromServer
+```
