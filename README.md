@@ -85,7 +85,7 @@ Identifying and segmenting users for targeted configurations can be done with th
   [[Configo sharedInstance] setUserContextValue: @"value2" forKey: @"key2"];
   ```
   
-All values set in the `userContext` must be JSON compatible ([Apple Docs][https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/]):
+All values set in the `userContext` must be JSON compatible ([Apple Docs](https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/)):
 * `NSDictionary` or `NSArray` (All objects must be JSON compatible as well)
 * `NSString`
 * `NSNumber` (non NaN or infinity)
