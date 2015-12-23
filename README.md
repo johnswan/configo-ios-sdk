@@ -1,4 +1,4 @@
-##Getting Started
+## Getting Started
 1. Three options to get the SDK:
   1. Download the SDK from [here](https://s3.eu-central-1.amazonaws.com/configo.io/Framework/ConfigoSDK-0.3.7-framework.zip).
   2. Get the compiled version from the [repo](https://github.com/configo-io/configo-ios-sdk/tree/master/ConfigoSDK/Compiled%20Framework).
@@ -6,24 +6,33 @@
   4. CocoaPods `pod etc/etc`
   5. Add the ConfigoSDK.xcodeproj as a subproject in your Xcode workspace.
 2. Configo has the following built-in framework dependencies (Project Settings -> General Tab -> Linked Frameworks and Libraries -> +):
+3. 
   ```
   SystemConfiguration.framework
   CoreTelephony.framework
   ```
+  
 3. Added the following Linker flags (found in Project Settings -> "Build Settings" tab -> "Other Linker Flags")
+  
   ```
   -ObjC
   -all_load
   ```
+  
 4. In your app delegate, add the following import:
+5. 
   ```objective-c
   #import <ConfigoSDK/ConfigoSDK.h>
   ```
+  
 5. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
+
   ```objective-c
   [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
   ```
+  
 Optionally a block of code (i.e. `callback`) can be passed upon initialization, the block will be executed once the the loading process is complete:
+
   ```objective-c
   [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID" callback: ^(NSError *err, NSDictionary *config, NSArray *features) {
     if(err) {
@@ -33,11 +42,12 @@ Optionally a block of code (i.e. `callback`) can be passed upon initialization, 
     }
   }];
   ```
+  
 ```
-NOTE: The initialization should be called only once in the lifetime of the app. It has no effect on any consecutive calls.
+*NOTE:* The initialization should be called only once in the lifetime of the app. It has no effect on any consecutive calls.
 ```
 
-##Target Users
+## Target Users
 All users will be tracked as anonymous users unless a custom id and attributes are set.
 
 Anonymous users can be segmented by their device attributes:
@@ -72,27 +82,31 @@ Identifying and segmenting users for targeted configurations can be done with th
   [[Configo sharedInstance] setUserContextValue: @"value2" forKey: @"key2"];
   ```
   
-All values set in the `userContext` must be JSON compatible ((Apple Docs)[https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/]):
+All values set in the `userContext` must be JSON compatible ([Apple Docs][https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class/]):
 * `NSDictionary` or `NSArray` (All objects must be JSON compatible as well)
 * `NSString`
 * `NSNumber` (non NaN or infinity)
 * `NSNull`
 
-##Access Configurations
+## Access Configurations
 Configurations are the core of Configo.io and retrieving it is easy:
 
 ```objective-c
 [[Configo sharedInstance] configValueForKeyPath: @"configKey" fallbackValue: @"fallbackString"];
 ```
+
 ```
 NOTE: The fallback value will be returned if an error was encountered or the configuration was not found.
 ```
+
 The configuration is stored in a JSON document form and retrieved by the SDK as an `NSDictionary` collection.
 
 Accessing the configuration value can be done using dot notation and brackets, e.g.:
 ```
+
 In a JSON of the form:
-```JSON
+
+```json
 {
   "object": {
     "array": [1,2,3]
@@ -100,7 +114,9 @@ In a JSON of the form:
   ...
 }
 ```
+
 The second value in the array can be accessed like so:
+
 ```objective-c
 [[Configo sharedInstance] configValueForKeyPath: @"object.array[1]"];
 ```
@@ -112,9 +128,11 @@ Feature flags can be checked like so:
 ```objective-c
 [[Configo sharedInstance] featureFlagForKey: @"cool_feature" fallback: YES];
 ```
+
 ```
 NOTE: The fallback BOOL will be returned if an error occurred or the feature was not found.
 ```
+
 The full list of the current user's active features can be retrieved using `featuresList`.
 
 ##Trigger Refresh
@@ -127,6 +145,7 @@ Sometimes a manual refresh of the configurations is required (with an optional `
       ...
 }];
 ```
+
 ```
 NOTE: The callback set here will only be executed once, when that specific call was made. It will have no effect on the callback set using the `setCallback:` method.
 ```
@@ -161,6 +180,7 @@ Using a Objective-C `blocks` is a convenient way to execute code in response to 
 ```objective-c
 typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSArray *featuresList);
 ```
+
 a callback can be set upon initialization: `+ initWithDevKey:appId:callback:`
 
 Or any time later using the `setCallback:` method. This will replace the callback set upon initialization.
@@ -178,9 +198,9 @@ Configo also holds a property named state that can hold either of the following 
 
 ```
 //There is no config available.
-CFGConfigNotAvailable
+*CFGConfigNotAvailable*
 //The config was loaded from local storage (possibly outdated).
-CFGConfigLoadedFromStorage
+*CFGConfigLoadedFromStorage*
 //The config is being loaded from the server. If there is an old, local config - it is still avaiable to use.
 CFGConfigLoadingInProgress
 //The config is has being loaded from the server and is ready for use. Might not be active if dynamicallyRefreshValues is false.
