@@ -11,7 +11,7 @@
   CoreTelephony.framework
   ```
   
-3. Added the following Linker flags (found in Project Settings -> "Build Settings" tab -> "Other Linker Flags")
+3. Add the following Linker flags (found in Project Settings -> "Build Settings" tab -> "Other Linker Flags")
   
   ```
   -ObjC
