@@ -1,6 +1,0 @@
-framework module ConfigoSDK {
-  umbrella header "ConfigoSDK.h"
-
-  export *
-  module * { export * }
-}
