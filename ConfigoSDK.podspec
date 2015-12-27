@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ConfigoSDK"
-  s.version      = "0.3.8"
+  s.version      = "0.3.9"
   s.summary      = "The official Configo.io SDK, providing mobile apps with a continuous delivery and configuration platform."
   s.homepage     = "https://configo.io"
   s.license      = "Apache License, Version 2.0"
