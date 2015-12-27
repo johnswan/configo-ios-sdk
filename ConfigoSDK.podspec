@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ConfigoSDK/ConfigoSDK/**/*.{h,m}"
+  s.source_files  = "ConfigoSDK/ConfigoSDK/**/*.{h,m}", "ConfigoSDK/ConfigoSDK/Classes/NNLibraries/**/*.{h,m}"
 
   s.public_header_files = "ConfigoSDK/ConfigoSDK/ConfigoSDK.h", "ConfigoSDK/ConfigoSDK/Classes/Configo.h", "ConfigoSDK/ConfigoSDK/Constants/CFGLogLevel.h"
 
