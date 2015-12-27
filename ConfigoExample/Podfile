@@ -1,3 +1,4 @@
 platform :ios, '7.0'
 
-pod 'ConfigoSDK', :path => '../'
+#pod 'ConfigoSDK', :path => '../'
+pod 'ConfigoSDK', :git => 'https://github.com/configo-io/configo-ios-sdk.git', :submodules => true
