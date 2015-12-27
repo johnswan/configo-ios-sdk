@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import <ConfigoSDK/Configo.h>
+#import <ConfigoSDK/ConfigoSDK.h>
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *drillField;

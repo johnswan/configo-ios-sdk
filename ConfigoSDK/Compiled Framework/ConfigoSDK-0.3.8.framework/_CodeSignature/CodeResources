@@ -6,50 +6,42 @@
 	<dict>
 		<key>Headers/CFGLogLevel.h</key>
 		<data>
-		McE16Ic/OMGIW9xkBQQg4mnQ6ns=
+		PDDNUY9f0dTuvphKI0Xym+x1nmc=
 		</data>
 		<key>Headers/Configo.h</key>
 		<data>
-		hsoEoKMILoFg5GqDpNKJtf5eRtA=
+		iIaXILsCw/sEMOQrvPRZUvyx8Is=
 		</data>
 		<key>Headers/ConfigoSDK.h</key>
 		<data>
-		ZsUjHcCtgR445rB2JgpFL3YcDRM=
+		t2W4WsvduJJZqC2bGFSXUEcn8U8=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		FqXIM3YJ1tvgT56GGmIIcXnbOPU=
+		N9vIAH3qEvlTOV6Z5A39bgD5Mvg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		14BrMRsF3GtkS1BOlBjYP9mg3GM=
-		</data>
-		<key>keys</key>
-		<data>
-		qWEPVUhqEfa2pinsZVy8IJL8Mmc=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/CFGLogLevel.h</key>
 		<data>
-		McE16Ic/OMGIW9xkBQQg4mnQ6ns=
+		PDDNUY9f0dTuvphKI0Xym+x1nmc=
 		</data>
 		<key>Headers/Configo.h</key>
 		<data>
-		hsoEoKMILoFg5GqDpNKJtf5eRtA=
+		iIaXILsCw/sEMOQrvPRZUvyx8Is=
 		</data>
 		<key>Headers/ConfigoSDK.h</key>
 		<data>
-		ZsUjHcCtgR445rB2JgpFL3YcDRM=
+		t2W4WsvduJJZqC2bGFSXUEcn8U8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		14BrMRsF3GtkS1BOlBjYP9mg3GM=
-		</data>
-		<key>keys</key>
-		<data>
-		qWEPVUhqEfa2pinsZVy8IJL8Mmc=
 		</data>
 	</dict>
 	<key>rules</key>
