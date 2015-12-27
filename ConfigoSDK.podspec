@@ -85,10 +85,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ConfigoSDK/ConfigoSDK.h"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "ConfigoSDK/ConfigoSDK/**/*.{h,m}"
 
-  s.public_header_files = "ConfigoSDK/ConfigoSDK.h"
+  s.public_header_files = "ConfigoSDK/ConfigoSDK/ConfigoSDK.h", "ConfigoSDK/ConfigoSDK/Classes/Configo.h", "ConfigoSDK/ConfigoSDK/Constants/CFGLogLevel.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -111,6 +110,7 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
+  s.framework  = 'SystemConfiguration', 'CoreTelephony'
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		535696450EB136BB4276D8C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C2B64F298476804CE2D44B /* libPods.a */; };
 		5C1B62EB1B8EE779000CCD9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C1B62ED1B8EE779000CCD9D /* Localizable.strings */; };
 		5C1E804C1BEF880400D55CB7 /* ConfigoExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1E804B1BEF880400D55CB7 /* ConfigoExampleTests.m */; };
 		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; };
@@ -16,7 +17,6 @@
 		5C93DEB71B806F900074D62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB51B806F900074D62A /* Main.storyboard */; };
 		5C93DEB91B806F900074D62A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB81B806F900074D62A /* Images.xcassets */; };
 		5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEBA1B806F900074D62A /* LaunchScreen.xib */; };
-		5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */; };
 		5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C11C18620F00CEF97D /* CoreTelephony.framework */; };
 		5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C31C18621500CEF97D /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
@@ -50,9 +50,11 @@
 		5C93DEBB1B806F900074D62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5C93DEC61B806F900074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DEC71B806F900074D62A /* ConfigoExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoExampleTests.m; sourceTree = "<group>"; };
-		5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConfigoSDK.framework; path = "../ConfigoSDK/build/Debug-iphoneos/ConfigoSDK.framework"; sourceTree = "<group>"; };
 		5CC924C11C18620F00CEF97D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5CC924C31C18621500CEF97D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A1465D71694488F264261229 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AA9405262543206646078334 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D0C2B64F298476804CE2D44B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,7 @@
 			files = (
 				5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */,
 				5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */,
-				5C9B83951C0217FF00C1B375 /* ConfigoSDK.framework in Frameworks */,
+				535696450EB136BB4276D8C4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 				5C93DEC41B806F900074D62A /* ConfigoExampleTests */,
 				5C1E804A1BEF880400D55CB7 /* ConfigoExampleTests */,
 				5C93DEA91B806F900074D62A /* Products */,
+				BD0D725E7BC32C8FA84A1044 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,9 +165,18 @@
 			children = (
 				5CC924C31C18621500CEF97D /* SystemConfiguration.framework */,
 				5CC924C11C18620F00CEF97D /* CoreTelephony.framework */,
-				5C9B83941C0217FF00C1B375 /* ConfigoSDK.framework */,
+				D0C2B64F298476804CE2D44B /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD0D725E7BC32C8FA84A1044 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1465D71694488F264261229 /* Pods.debug.xcconfig */,
+				AA9405262543206646078334 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,10 +204,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C93DECB1B806F900074D62A /* Build configuration list for PBXNativeTarget "ConfigoExample" */;
 			buildPhases = (
+				562F11314567254974C1B962 /* Check Pods Manifest.lock */,
 				5C93DEA41B806F900074D62A /* Sources */,
 				5C93DEA51B806F900074D62A /* Frameworks */,
 				5C93DEA61B806F900074D62A /* Resources */,
 				5CAAD80B1BDC255800C562F2 /* ShellScript */,
+				265ABF181205935342C18236 /* Embed Pods Frameworks */,
+				1E2BB4BC326C82150494A029 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,6 +286,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1E2BB4BC326C82150494A029 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		265ABF181205935342C18236 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		562F11314567254974C1B962 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		5CAAD80B1BDC255800C562F2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2";
+			shellScript = "#./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -459,6 +519,7 @@
 		};
 		5C93DECC1B806F900074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1465D71694488F264261229 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
@@ -472,11 +533,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ConfigoExample/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -485,6 +543,7 @@
 		};
 		5C93DECD1B806F900074D62A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA9405262543206646078334 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
@@ -498,10 +557,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ConfigoExample/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

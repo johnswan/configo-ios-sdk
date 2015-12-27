@@ -36,10 +36,10 @@
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE51B80744D0074D62A /* Configo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEE31B80744D0074D62A /* Configo.m */; };
-		5CACCDB81B81E546009E343C /* CFGConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACCDB61B81E546009E343C /* CFGConstants.h */; };
-		5CACCDB91B81E546009E343C /* CFGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDB71B81E546009E343C /* CFGConstants.m */; };
 		5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACCDC21B821120009E343C /* CFGResponseHeader.h */; };
 		5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACCDC31B821120009E343C /* CFGResponseHeader.m */; };
+		5CACEF811C2FE665005E6111 /* CFGConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CACEF7F1C2FE665005E6111 /* CFGConstants.h */; };
+		5CACEF821C2FE665005E6111 /* CFGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CACEF801C2FE665005E6111 /* CFGConstants.m */; };
 		5CB451DD1BFE10A100BB0E97 /* CFGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */; };
 		5CB451DE1BFE10A100BB0E97 /* CFGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */; };
 		5CB451E01BFE127200BB0E97 /* CFGLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -120,10 +120,10 @@
 		5C93DE8F1B806E150074D62A /* ConfigoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoTests.m; sourceTree = "<group>"; };
 		5C93DEE21B80744D0074D62A /* Configo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Configo.h; path = Classes/Configo.h; sourceTree = "<group>"; };
 		5C93DEE31B80744D0074D62A /* Configo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Configo.m; path = Classes/Configo.m; sourceTree = "<group>"; };
-		5CACCDB61B81E546009E343C /* CFGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConstants.h; path = Constants/CFGConstants/CFGConstants.h; sourceTree = "<group>"; };
-		5CACCDB71B81E546009E343C /* CFGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGConstants.m; path = Constants/CFGConstants/CFGConstants.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5CACCDC21B821120009E343C /* CFGResponseHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGResponseHeader.h; path = "Classes/Models/Response Header/CFGResponseHeader.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5CACCDC31B821120009E343C /* CFGResponseHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGResponseHeader.m; path = "Classes/Models/Response Header/CFGResponseHeader.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5CACEF7F1C2FE665005E6111 /* CFGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConstants.h; path = Constants/CFGConstants.h; sourceTree = "<group>"; };
+		5CACEF801C2FE665005E6111 /* CFGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGConstants.m; path = Constants/CFGConstants.m; sourceTree = "<group>"; };
 		5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGLogger.h; path = Classes/Toolbox/CFGLogger.h; sourceTree = "<group>"; };
 		5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGLogger.m; path = Classes/Toolbox/CFGLogger.m; sourceTree = "<group>"; };
 		5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGLogLevel.h; path = Constants/CFGLogLevel.h; sourceTree = "<group>"; };
@@ -234,20 +234,12 @@
 		5C33AB131B8CB59100D85791 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				5CACEF7F1C2FE665005E6111 /* CFGConstants.h */,
+				5CACEF801C2FE665005E6111 /* CFGConstants.m */,
 				5C33AB121B8CB58E00D85791 /* CFGErrorConstants.h */,
 				5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */,
-				5C33AB141B8CB59D00D85791 /* CFGConstants */,
 			);
 			name = Constants;
-			sourceTree = "<group>";
-		};
-		5C33AB141B8CB59D00D85791 /* CFGConstants */ = {
-			isa = PBXGroup;
-			children = (
-				5CACCDB61B81E546009E343C /* CFGConstants.h */,
-				5CACCDB71B81E546009E343C /* CFGConstants.m */,
-			);
-			name = CFGConstants;
 			sourceTree = "<group>";
 		};
 		5C37E9E31B821A36001B80D6 /* Models */ = {
@@ -724,13 +716,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CF08C451C26FBAD00A85493 /* NNSelectable.h in Headers */,
+				5CACEF811C2FE665005E6111 /* CFGConstants.h in Headers */,
 				5CF08C391C26FBAD00A85493 /* NSDate+NNAdditions.h in Headers */,
 				5CF08C311C26FBAD00A85493 /* NNURLResponseSerializer.h in Headers */,
 				5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */,
 				5CF08C3D1C26FBAD00A85493 /* NSError+NNAdditions.h in Headers */,
 				5C33AB0E1B8CAD6400D85791 /* CFGFileManager.h in Headers */,
 				5CF08C2F1C26FBAD00A85493 /* NNURLRequestSerializer.h in Headers */,
-				5CACCDB81B81E546009E343C /* CFGConstants.h in Headers */,
 				5CF08C521C26FBAD00A85493 /* NNLibrariesEssentials.h in Headers */,
 				5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */,
 				5CF08C251C26FBAD00A85493 /* NNSecurity.h in Headers */,
@@ -879,6 +871,7 @@
 				5CF08C201C26FBAD00A85493 /* NNJSONObject.m in Sources */,
 				5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */,
 				5CF08C4B1C26FBAD00A85493 /* NNJSONUtilities.m in Sources */,
+				5CACEF821C2FE665005E6111 /* CFGConstants.m in Sources */,
 				5CF08C441C26FBAD00A85493 /* NSURL+NNAddtions.m in Sources */,
 				5CF08C4D1C26FBAD00A85493 /* NNLogger.m in Sources */,
 				5CF08C321C26FBAD00A85493 /* NNURLResponseSerializer.m in Sources */,
@@ -891,7 +884,6 @@
 				5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */,
 				5CF08C421C26FBAD00A85493 /* NSString+NNAdditions.m in Sources */,
 				5CF08C361C26FBAD00A85493 /* NSData+NNAdditions.m in Sources */,
-				5CACCDB91B81E546009E343C /* CFGConstants.m in Sources */,
 				5CF08C2A1C26FBAD00A85493 /* NNURLConstants.m in Sources */,
 				5CF08C2C1C26FBAD00A85493 /* NNURLConnection.m in Sources */,
 				5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */,
