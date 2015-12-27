@@ -5,10 +5,10 @@ Pod::Spec.new do |s|
   s.homepage     = "https://configo.io"
   s.license      = "Apache License, Version 2.0"
 
-  s.author             = { "natanavra" => "natan@configo.io" }
+  s.author       = { "natanavra" => "natan@configo.io" }
   s.platform     = :ios, "7.0"
  
-  s.source       = { :git => "https://github.com/configo-io/configo-ios-sdk.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/configo-io/configo-ios-sdk.git", :tag => s.version, :submodules => true }
 
   s.source_files  = "ConfigoSDK/ConfigoSDK/**/*.{h,m}", "ConfigoSDK/ConfigoSDK/Classes/NNLibraries/**/*.{h,m}"
   s.public_header_files = "ConfigoSDK/ConfigoSDK/ConfigoSDK.h", "ConfigoSDK/ConfigoSDK/Classes/Configo.h", "ConfigoSDK/ConfigoSDK/Constants/CFGLogLevel.h"
