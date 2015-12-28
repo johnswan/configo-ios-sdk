@@ -1,9 +1,9 @@
 ## Getting Started
-1. If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
+*. If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
 ```ruby
 pod "ConfigoSDK", "~> 0.3"
 ```
-2. Alternatively, ConfigoSDK can be added manually to your Xcode project.
+*. Alternatively, ConfigoSDK can be added manually to your Xcode project.
   1. Head over to the [releases tab](https://github.com/configo-io/configo-ios-sdk/releases).
   2. Download the latest release zipped framework.
   3. Unzip the file and drag the *ConfigoSDK.framework* directory to the "Frameworks" folder in your Xcode project.
