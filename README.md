@@ -1,29 +1,31 @@
 ## Getting Started
-1. Three options to get the SDK:
-  1. Download the SDK from [here](https://s3.eu-central-1.amazonaws.com/configo.io/Framework/ConfigoSDK-0.3.7-framework.zip).
-  2. Get the compiled version from the [repo](https://github.com/configo-io/configo-ios-sdk/tree/master/ConfigoSDK/Compiled%20Framework).
-  3. Clone the repo and compile a version yourself using the `Configo-Universal` target.
-  4. CocoaPods `pod etc/etc`
-  5. Add the ConfigoSDK.xcodeproj as a subproject in your Xcode workspace.
-2. Configo has the following built-in framework dependencies (Project Settings -> General Tab -> Linked Frameworks and Libraries -> +):
+1. If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
+```ruby
+pod "ConfigoSDK", "~> 0.3"
+```
+2. Alternatively, ConfigoSDK can be added manually to your Xcode project.
+  1. Head over to the [releases tab](https://github.com/configo-io/configo-ios-sdk/releases).
+  2. Download the latest release zipped framework.
+  3. Unzip the file and drag the *ConfigoSDK.framework* directory to the "Frameworks" folder in your Xcode project.
+  4. Add the following frameworks to your projects dependencies. This can be easily done in Xcode from the your target's "General" configuration tab, under "Linked Frameworks and Libraries".
   ```
   SystemConfiguration.framework
   CoreTelephony.framework
   ```
-  
-3. Add the following Linker flags (found in Project Settings -> "Build Settings" tab -> "Other Linker Flags")
-  
+  5. To have the ConfigoSDK code load fully and correctly, 
+  Add the following "Other Linker Flags" in the target's "Build Settings" tab:
   ```
   -ObjC
   -all_load
   ```
-  
-4. In your app delegate, add the following import: 
+ 
+## Initialize 
+1. In your app delegate, add the following import: 
   
   ```objective-c
   #import <ConfigoSDK/ConfigoSDK.h>
   ```
-5. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
+2. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
 
   ```objective-c
   [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
