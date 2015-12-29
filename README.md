@@ -1,35 +1,41 @@
 ## Getting Started
-*. If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
-```ruby
-pod "ConfigoSDK", "~> 0.3"
-```
-*. Alternatively, ConfigoSDK can be added manually to your Xcode project.
+* If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
+
+  ```ruby
+  pod "ConfigoSDK", "~> 0.3"
+  ```
+
+* Alternatively, ConfigoSDK can be added manually to your Xcode project.
   1. Head over to the [releases tab](https://github.com/configo-io/configo-ios-sdk/releases).
   2. Download the latest release zipped framework.
   3. Unzip the file and drag the *ConfigoSDK.framework* directory to the "Frameworks" folder in your Xcode project.
   4. Add the following frameworks to your projects dependencies. This can be easily done in Xcode from the your target's "General" configuration tab, under "Linked Frameworks and Libraries".
-  ```
-  SystemConfiguration.framework
-  CoreTelephony.framework
-  ```
+  
+    ```
+    SystemConfiguration.framework
+    CoreTelephony.framework
+    ```
+    
   5. To have the ConfigoSDK code load fully and correctly, 
   Add the following "Other Linker Flags" in the target's "Build Settings" tab:
-  ```
-  -ObjC
-  -all_load
-  ```
+  
+    ```
+    -ObjC
+    -all_load
+    ```
  
 ## Initialize 
 1. In your app delegate, add the following import: 
   
-  ```objective-c
-  #import <ConfigoSDK/ConfigoSDK.h>
-  ```
+    ```objective-c
+    #import <ConfigoSDK/ConfigoSDK.h>
+    ```
+  
 2. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
 
-  ```objective-c
-  [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
-  ```
+    ```objective-c
+    [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
+    ```
   
 Optionally a block of code (i.e. `callback`) can be passed upon initialization, the block will be executed once the the loading process is complete:
 
@@ -69,9 +75,9 @@ Identifying and segmenting users for targeted configurations can be done with th
 
 * Passing a user identifier such as an email or a username (We advise using a unique value):
 
-```objective-c
-[[Configo sharedInstance] setCustomUserId: @"email@example.com"];
-```
+  ```objective-c
+  [[Configo sharedInstance] setCustomUserId: @"email@example.com"];
+  ```
 
 * Passing user context that can give more specific details about the user and targeting the user more precisely, using either of two ways:
   Passing an `NSDictionary`:
