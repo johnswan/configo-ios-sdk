@@ -113,6 +113,7 @@
 		5C37E9E81B821AAD001B80D6 /* CFGResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGResponse.m; path = Classes/Models/Response/CFGResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5C54701E1B84B55700C026D8 /* CFGInternalError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGInternalError.m; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5C7BAB2B1C3C2A3B00889570 /* ConfigoSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = ConfigoSDK.podspec; path = ../../ConfigoSDK.podspec; sourceTree = "<group>"; };
 		5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConfigoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DE811B806E150074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DE821B806E150074D62A /* ConfigoSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigoSDK.h; sourceTree = "<group>"; };
@@ -299,6 +300,7 @@
 		5C93DE7F1B806E150074D62A /* ConfigoSDK */ = {
 			isa = PBXGroup;
 			children = (
+				5C7BAB2B1C3C2A3B00889570 /* ConfigoSDK.podspec */,
 				5C93DE821B806E150074D62A /* ConfigoSDK.h */,
 				5C33AB131B8CB59100D85791 /* Constants */,
 				5C93DEE61B8074530074D62A /* Classes */,

@@ -11,7 +11,7 @@
 #import "UIDevice+NNAdditions.h"
 
 #pragma mark - Global Constants
-NSString *const ConfigoSDKVersion = @"0.3.9";
+NSString *const ConfigoSDKVersion = @"0.4.1";
 
 NSString *const CFGFileNamePrefix = @"configo";
 

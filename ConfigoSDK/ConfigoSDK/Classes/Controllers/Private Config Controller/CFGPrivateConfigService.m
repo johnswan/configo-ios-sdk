@@ -77,7 +77,7 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
                          @"config": @{
                                  @"SDKVersion": @{
                                          @"ios": ConfigoSDKVersion,
-                                         @"android": @"0.3.4"
+                                         @"android": @"0.4.1"
                                          },
                                  @"pollingInterval": @{
                                          @"ios" : @(CFGDefaultPollingInterval),
