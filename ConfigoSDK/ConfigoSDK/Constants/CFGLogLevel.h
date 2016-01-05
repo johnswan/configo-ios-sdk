@@ -11,9 +11,13 @@
  *	@brief  The ConfigoSDK logging level.
  */
 typedef NS_ENUM(NSUInteger, CFGLogLevel) {
-    ///No logs will be produced.
-    CFGLogLevelNone = 0,
-    ///All logs will be produced.
-    CFGLogLevelAll,
+    /** All logs will be produced. */
+    CFGLogLevelVerbose = 0,
+    /** Only warning will be logged. */
+    CFGLogLevelWarning,
+    /** Only errors will be logged. */
+    CFGLogLevelError,
+    /** No logs will be produced. */
+    CFGLogLevelNone,
 };
 
