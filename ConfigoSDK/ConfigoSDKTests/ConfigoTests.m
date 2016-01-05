@@ -29,7 +29,7 @@
 
 - (void)testValueForKeyPath {
     XCTestExpectation *expectation = [self expectationWithDescription: @"wait for config"];
-    [Configo initWithDevKey: @"123" appId: @"YOUR_APP_ID"];
+    [Configo initWithDevKey: @"123" appId: @"9cd20be9cc21d6115a57e2bcbc534fd4"];
     [[NSNotificationCenter defaultCenter] addObserverForName: ConfigoConfigurationLoadCompleteNotification object: nil queue: [NSOperationQueue mainQueue] usingBlock: ^(NSNotification *note) {
         [expectation fulfill];
     }];
