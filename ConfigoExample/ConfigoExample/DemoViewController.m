@@ -41,7 +41,6 @@
     _loginBtn.layer.cornerRadius = 5.0f;
     _loginBtn.layer.borderColor = _loginBtn.titleLabel.textColor.CGColor;
     
-    [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
     [self refreshView];
 }
 

@@ -151,11 +151,11 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
     NSString *remoteVersion = [self stringForKeyPath: @"SDKVersion.ios"];
     NSComparisonResult result = [NNUtilities compareVersionString: ConfigoSDKVersion toVersionString: remoteVersion];
     if(result == NSOrderedAscending) {
-        [CFGLogger log: @"Please update the ConfigoSDK to the latest version (%@)", remoteVersion];
+        [CFGLogger logLevel: CFGLogLevelWarning log: @"Please update the ConfigoSDK to the latest version (%@)", remoteVersion];
     } else if(result == NSOrderedSame) {
-        [CFGLogger log: @"ConfigoSDK is up-to-date"];
+        [CFGLogger logLevel: CFGLogLevelVerbose log: @"ConfigoSDK is up-to-date"];
     } else {
-        [CFGLogger log: @"Your ConfigoSDK version seems to be corrupt, please reinstall the SDK."];
+        [CFGLogger logLevel: CFGLogLevelError log: @"ConfigoSDK version is unknown, please reinstall the SDK."];
         NNLogDebug(@"Configo local version is ahead of remote?! O_o", ConfigoSDKVersion);
     }
 }

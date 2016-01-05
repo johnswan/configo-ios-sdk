@@ -78,7 +78,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
             } else if(configoResponse) {
                 NNLogDebug(@"Loading Config: Done", nil);
             } else {
-                retError = [NSError errorWithDomain: @"com.configo.config.badResponse" code: 41 userInfo: nil];
+                retError = [NSError errorWithDomain: @"io.configo.badResponse" code: 40 userInfo: nil];
             }
         }
         

@@ -194,13 +194,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C1186261BFA0F4F0048CBAA /* Inner Config Manager */ = {
+		5C1186261BFA0F4F0048CBAA /* Private Config Manager */ = {
 			isa = PBXGroup;
 			children = (
 				5C1186271BFA103A0048CBAA /* CFGPrivateConfigService.h */,
 				5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */,
 			);
-			name = "Inner Config Manager";
+			name = "Private Config Manager";
 			sourceTree = "<group>";
 		};
 		5C1B63211B8F459E000CCD9D /* Network Controller */ = {
@@ -374,7 +374,7 @@
 		5CEA82ED1B8DF95A008F6D3B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C1186261BFA0F4F0048CBAA /* Inner Config Manager */,
+				5C1186261BFA0F4F0048CBAA /* Private Config Manager */,
 				5C33AB111B8CB30000D85791 /* File Manager */,
 				5C1B63211B8F459E000CCD9D /* Network Controller */,
 				5CEA82F41B8DFC5A008F6D3B /* Data Controller */,
@@ -458,8 +458,8 @@
 		5CF08BD01C26FBAD00A85493 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5CF08BD11C26FBAD00A85493 /* NNAsyncRequest */,
 				5CF08BD41C26FBAD00A85493 /* NNRequestConstants */,
+				5CF08BD11C26FBAD00A85493 /* NNAsyncRequest */,
 				5CF08BD71C26FBAD00A85493 /* NNURLConnection */,
 				5CF08BDC1C26FBAD00A85493 /* NNURLRequestSerializer */,
 				5CF08BDF1C26FBAD00A85493 /* NNURLResponseSerializer */,

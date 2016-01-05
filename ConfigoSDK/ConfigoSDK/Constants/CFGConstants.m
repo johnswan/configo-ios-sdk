@@ -15,7 +15,7 @@ NSString *const ConfigoSDKVersion = @"0.3.9";
 
 NSString *const CFGFileNamePrefix = @"configo";
 
-NSString *const CFGErrorDomain = @"com.configo.error";
+NSString *const CFGErrorDomain = @"io.configo.error";
 
 //NSString *const CFGBaseLocalPath = @"http://local.configo.io:8001";
 NSString *const CFGBaseDevelopmentPath = @"http://local.configo.io:8001";

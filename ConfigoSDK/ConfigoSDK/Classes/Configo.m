@@ -22,8 +22,8 @@
 #pragma mark - Constants
 
 //NSNotification domains constants
-NSString *const ConfigoConfigurationLoadCompleteNotification = @"com.configo.config.loadFinished";
-NSString *const ConfigoConfigurationLoadErrorNotification = @"com.configo.config.loadError";
+NSString *const ConfigoConfigurationLoadCompleteNotification = @"io.configo.config.loadFinished";
+NSString *const ConfigoConfigurationLoadErrorNotification = @"io.configo.config.loadError";
 NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 NSString *const ConfigoNotificationUserInfoRawConfigKey = @"rawConfig";
 NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
@@ -83,6 +83,8 @@ static id _shared = nil;
         [self determineShouldLog];
         
         NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
+        [CFGLogger logLevel: CFGLogLevelVerbose log: @"Configo Initialized\n devKey: %@ \nappId: %@", devKey, appId];
+        
         [NNReachabilityManager sharedManager];
         
         //Init private config
@@ -95,9 +97,9 @@ static id _shared = nil;
         _networkController = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
         
         _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
-        _activeConfigoResponse = _latestConfigoResponse;
         if(_latestConfigoResponse) {
             _state = CFGConfigLoadedFromStorage;
+            _activeConfigoResponse = _latestConfigoResponse;
         } else {
             _state = CFGConfigNotAvailable;
         }
@@ -134,8 +136,11 @@ static id _shared = nil;
 - (void)setupPollingTimer {
     NSInteger pollingInterval = CFGPrivateConfigInteger(@"pollingInterval.ios");
     NNLogDebug(@"Setting up polling timer", [NSNumber numberWithInteger: pollingInterval]);
-    _pollingTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval target: self selector: @selector(checkPolling)
-                                                      userInfo: nil repeats: NO];
+    _pollingTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval
+                                                     target: self
+                                                   selector: @selector(checkPolling)
+                                                   userInfo: nil
+                                                    repeats: NO];
 }
 
 - (void)checkPolling {
@@ -192,6 +197,7 @@ static id _shared = nil;
     if([self shouldUpdateActiveConfig]) {
         //Change the current config state only if the user is expecting it. It's possible the user does not need to know about the update.
         _state = CFGConfigLoadingInProgress;
+        [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Start"];
     }
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
@@ -205,16 +211,20 @@ static id _shared = nil;
             if([self shouldUpdateActiveConfig]) {
                 _state = CFGConfigLoadedFromServer;
                 _activeConfigoResponse = _latestConfigoResponse;
+                
+                [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Complete"];
             }
         }
         //Declare an "error" state only if the config was supposed to be updated. So false states are not reported.
         else if([self shouldUpdateActiveConfig]) {
             _state = CFGConfigFailedLoadingFromServer;
             NNLogDebug(@"Loading Config: Error", error);
+            
+            [CFGLogger logLevel: CFGLogLevelError log: @"Loading Config Failed: %@", error];
         }
         
+        //Invoke only if the user was expecting an update to the config
         if([self shouldUpdateActiveConfig]) {
-            //Invoke only if the user was expecting an update to the config
             //Invoke callbacks and send notifications with either success or errors (depends on the error object passed).
             [self sendNotificationWithError: error];
             [self invokeListenersCallbacksWithError: error];
@@ -245,8 +255,7 @@ static id _shared = nil;
 }
 
 - (BOOL)setUserContext:(NSDictionary *)context {
-    //Incorrect, will trigger changing the customUserId
-    //[self setCustomUserId: nil userContext: context];
+    //[self setCustomUserId: nil userContext: context]; //Incorrect, will trigger changing the customUserId
     return [_configoDataController setUserContext: context];
 }
 
@@ -293,7 +302,7 @@ static id _shared = nil;
     BOOL retval = NO;
     NSArray *features = [self featuresList];
     retval = [features containsObject: key];
-    return retval ?: fallbackFlag;
+    return retval ?: fallbackFlag; //If the featuresList contains the key, return true. Otherwise, return the fallback.
 }
 
 #pragma mark - File Storage
@@ -323,11 +332,13 @@ static id _shared = nil;
 - (BOOL)shouldUpdateActiveConfig {
     //If there's no currently active config (first time load)
     //If the currently active config is loaded from storage.
+    //If the loading is in "failed" status (The status will be updated initially only if 'shouldUpdateActiveConfig' is true)
     //If the user set the 'dynamicalylRefreshValues' to YES.
     //If it's a 'pullConfig' that awaits a callback
     return (!_activeConfigoResponse ||
             _state == CFGConfigLoadedFromStorage ||
             _state == CFGConfigLoadingInProgress ||
+            _state == CFGConfigFailedLoadingFromServer ||
             _dynamicallyRefreshValues ||
             _tempListenerCallback);
 }

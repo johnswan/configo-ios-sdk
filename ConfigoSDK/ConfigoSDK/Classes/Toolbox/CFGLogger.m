@@ -11,23 +11,47 @@
 
 @implementation CFGLogger
 
-static CFGLogLevel logLevel = CFGLogLevelAll;
+static CFGLogLevel logLevel = CFGLogLevelVerbose;
 
 + (void)setLoggingLevel:(CFGLogLevel)level {
     logLevel = level;
 }
 
-+ (void)log:(NSString *)format, ... {
-    if(logLevel == CFGLogLevelAll) {
++ (void)logLevel:(CFGLogLevel)level log:(NSString *)format, ... {
+    if(logLevel >= level) {
         va_list args;
         va_start(args, format);
-        NSString *str = [[NSString alloc] initWithFormat: format arguments: args];
-        NSString *header = [NSString stringWithFormat: @"******************* ConfigoSDK (%@) *******************", ConfigoSDKVersion];
-        NSString *footer = [@"" stringByPaddingToLength: header.length withString: @"*" startingAtIndex: 0];
-        NSLog(@"%@", header);
-        NSLog(@"%@", str);
-        NSLog(@"%@", footer);
+        NSString *log = [[NSString alloc] initWithFormat: format arguments: args];
+        [self printLog: log withLogLevel: level];
     }
 }
+
++ (void)printLog:(NSString *)log withLogLevel:(CFGLogLevel)level {
+    NSString *header = [NSString stringWithFormat: @"******************* ConfigoSDK (%@) - %@ *******************", ConfigoSDKVersion, [self stringFromLogLevel: level]];
+    NSString *footer = [@"" stringByPaddingToLength: header.length withString: @"*" startingAtIndex: 0];
+    NSLog(@"%@", header);
+    NSLog(@"%@", log);
+    NSLog(@"%@", footer);
+}
+
++ (NSString *)stringFromLogLevel:(CFGLogLevel)logLevel {
+    NSString *retval = nil;
+    switch(logLevel) {
+        case CFGLogLevelVerbose:
+            retval = @"Verbose";
+            break;
+        case CFGLogLevelWarning:
+            retval = @"WARNING";
+            break;
+        case CFGLogLevelError:
+            retval = @"ERROR";
+            break;
+        case CFGLogLevelNone:
+        default:
+            break;
+    }
+    return retval;
+}
+
 
 @end

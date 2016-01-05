@@ -14,6 +14,6 @@
 
 + (void)setLoggingLevel:(CFGLogLevel)level;
 
-+ (void)log:(NSString *)format, ...;
++ (void)logLevel:(CFGLogLevel)level log:(NSString *)format, ...;
 
 @end
