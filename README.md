@@ -2,7 +2,7 @@
 * If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
 
   ```ruby
-  pod "ConfigoSDK", "~> 0.3"
+  pod "ConfigoSDK", "~> 0.4"
   ```
 
 * Alternatively, ConfigoSDK can be added manually to your Xcode project.
