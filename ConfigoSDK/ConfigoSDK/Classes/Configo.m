@@ -202,13 +202,14 @@ static id _shared = nil;
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [_networkController requestConfigWithConfigoData: configoData callback: ^(CFGResponse *response, NSError *error) {
+        BOOL shouldNotifyUser = [self shouldUpdateActiveConfig];
         if(response && !error) {
             _latestConfigoResponse = response;
             
             [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
             [self saveResponse: _latestConfigoResponse withDevKey: _devKey withAppId: _appId];
             
-            if([self shouldUpdateActiveConfig]) {
+            if(shouldNotifyUser) {
                 _state = CFGConfigLoadedFromServer;
                 _activeConfigoResponse = _latestConfigoResponse;
                 
@@ -216,7 +217,7 @@ static id _shared = nil;
             }
         }
         //Declare an "error" state only if the config was supposed to be updated. So false states are not reported.
-        else if([self shouldUpdateActiveConfig]) {
+        else if(shouldNotifyUser) {
             _state = CFGConfigFailedLoadingFromServer;
             NNLogDebug(@"Loading Config: Error", error);
             
@@ -224,7 +225,7 @@ static id _shared = nil;
         }
         
         //Invoke only if the user was expecting an update to the config
-        if([self shouldUpdateActiveConfig]) {
+        if(shouldNotifyUser) {
             //Invoke callbacks and send notifications with either success or errors (depends on the error object passed).
             [self sendNotificationWithError: error];
             [self invokeListenersCallbacksWithError: error];
@@ -299,9 +300,9 @@ static id _shared = nil;
         return NO;
     }
     
-    BOOL retval = NO;
+    
     NSArray *features = [self featuresList];
-    retval = [features containsObject: key];
+    BOOL retval = [features containsObject: key];
     return retval ?: fallbackFlag; //If the featuresList contains the key, return true. Otherwise, return the fallback.
 }
 

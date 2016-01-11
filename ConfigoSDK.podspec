@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ConfigoSDK"
-  s.version      = "0.4.1"
+  s.version      = "0.4.2"
   s.summary      = "The official Configo.io SDK, providing mobile apps with a continuous delivery and configuration platform."
   s.description  = <<-DESC
 			Configo is a cloud platform that directly connects to your end users and propagates changes instantly.
