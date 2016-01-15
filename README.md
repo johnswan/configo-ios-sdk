@@ -1,3 +1,8 @@
+## Overview
+Configo allows you to perform staged feature and configuration rollouts with granular control. You can choose which segments and percentage of users can see an update, then increase or decrease the number of affected users at any time.
+
+Configo gives the control back to mobile teams, enabling them to iterate quickly, maintain the user experience, and deploy with confidence. Many of the top mobile companies such as Facebook, Uber, Lyft, Dropbox, and others are already using these techniques to provide their users with a better experience. Will your team?
+
 ## Getting Started
 * If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
 
