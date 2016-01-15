@@ -1,3 +1,5 @@
+![alt tag](https://s3.eu-central-1.amazonaws.com/configo.io/dashboard.png)
+
 ## Overview
 Configo allows you to perform staged feature and configuration rollouts with granular control. You can choose which segments and percentage of users can see an update, then increase or decrease the number of affected users at any time.
 
