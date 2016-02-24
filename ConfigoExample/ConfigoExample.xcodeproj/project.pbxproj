@@ -409,6 +409,7 @@
 /* Begin XCBuildConfiguration section */
 		5C1E80501BEF880400D55CB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1465D71694488F264261229 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;

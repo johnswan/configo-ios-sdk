@@ -7,9 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <ConfigoSDK/ConfigoSDK.h>
 
-@interface ConfigoExampleTests : XCTestCase
-
+@interface ConfigoExampleTests : XCTestCase {
+    Configo *_configo;
+}
 @end
 
 @implementation ConfigoExampleTests
@@ -17,6 +19,10 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    NSString *devKey = @"***REMOVED***";
+    NSString *appId = @"***REMOVED***";
+    [Configo initWithDevKey: devKey appId: appId];
+    _configo = [Configo sharedInstance];
 }
 
 - (void)tearDown {
@@ -24,21 +30,42 @@
     [super tearDown];
 }
 
-/*- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testDynamicallyUpdateValues {
+    XCTestExpectation *callbackExpectation = [self expectationWithDescription: @"Configo Callback Expectation"];
+    
+    [_configo setDynamicallyRefreshValues: YES];
+    
+    __weak Configo *weakConfigo = _configo;
+    NSInteger __block numCalls = 0;
+    [_configo setCallback: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
+        numCalls ++;
+        NSLog(@"Callback called");
+        if(numCalls == 2) {
+            [callbackExpectation fulfill];
+        } else {
+            NSInteger random = arc4random() % 1000;
+            NSNumber *number = [NSNumber numberWithInteger: random];
+            [weakConfigo setUserContextValue: number forKey: @"key1"];
+            [weakConfigo pullConfig];
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout: 10.0 handler: ^(NSError *error) {
+        NSLog(@"Callbacks called twice");
+    }];
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+- (void)testTemporaryCallback {
+    XCTestExpectation *callbackExpectation = [self expectationWithDescription: @"Configo Temporary Callback"];
+    
+    [_configo pullConfig: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
+        NSLog(@"Temporary Callback");
+        [callbackExpectation fulfill];
     }];
-}*/
-
-- (void)testIsEqualWithNil {
-    id obj = nil;
-    NSLog(@"nil equals nil: %@", [obj isEqual: [NSObject new]] ? @"true" : @"false");
+    
+    [self waitForExpectationsWithTimeout: 10.0 handler: ^(NSError *error) {
+        NSLog(@"Expectation fulfilled");
+    }];
 }
 
 @end

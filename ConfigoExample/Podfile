@@ -1,4 +1,4 @@
 platform :ios, '7.0'
 
-#pod 'ConfigoSDK', :path => '../'
-pod 'ConfigoSDK', '~> 0.3'
+pod 'ConfigoSDK', :path => '../'
+#pod 'ConfigoSDK', '~> 0.4'
