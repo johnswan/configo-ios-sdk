@@ -7,5 +7,11 @@
 //
 // In this header, you should import all the public headers of your framework using statements like #import <ConfigoSDK/PublicHeader.h>
 //#import <ConfigoSDK/Configo.h>
+
+#ifndef CONFIGO_SDK_HEADER
+#define CONFIGO_SDK_HEADER
+
 #import "Configo.h"
 #import "CFGLogLevel.h"
+
+#endif

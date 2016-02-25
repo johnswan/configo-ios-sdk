@@ -8,6 +8,7 @@
 
 #import "CFGResponse.h"
 #import "CFGResponseHeader.h"
+#import "CFGConfig.h"
 
 #import "NNJSONUtilities.h"
 #import "NSDictionary+NNAdditions.h"
@@ -29,6 +30,7 @@ static NSString *const kTimestampKey = @"timestamp";
         NSDictionary *response = [NNJSONUtilities validObjectFromObject: dict[kResponseKey]];
         _config = [NNJSONUtilities validObjectFromObject: response[kConfigKey]];
         _features = [NNJSONUtilities validObjectFromObject: response[kFeaturesKey]];
+        _configObj = [[CFGConfig alloc] initWithConfig: _config features: _features];
         
         NSNumber *timestampNum = dict[kTimestampKey];
         if(timestampNum) {
@@ -52,6 +54,7 @@ static NSString *const kTimestampKey = @"timestamp";
     [response nnSafeSetObject: _config forKey: kConfigKey];
     [response nnSafeSetObject: _features forKey: kFeaturesKey];
     [dict nnSafeSetObject: response forKey: kResponseKey];
+    
     return dict;
 }
 

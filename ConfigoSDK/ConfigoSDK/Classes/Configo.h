@@ -145,14 +145,8 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  */
 - (NSDictionary *)rawConfig;
 
-/**
- *	@brief Find a value specific to a keypath in the currently loaded config.
- *
- *	@param keyPath The keypath to the config, see discussion for usage.
- *	@return The value found in the config or <code>nil</code> if not found. Use <code>configValueForKeyPath:fallbackValue:</code> 
- *  for optional fallback values if no config was loaded or the value was not found.
- */
-- (id)configValueForKeyPath:(NSString *)keyPath;
+
+- (id)configValueForKeyPath:(NSString *)keyPath DEPRECATED_MSG_ATTRIBUTE("Redundant, use 'configValueForKeyPath:fallbackValue:' instead");
 
 /**
  *	@brief  Find a value specific to a keypath in the currently loaded config.
@@ -172,7 +166,7 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  *  @param key The string that identifies the feature.
  *  @return The flag found in the config, false if not present.
  */
-- (BOOL)featureFlagForKey:(NSString *)key;
+- (BOOL)featureFlagForKey:(NSString *)key DEPRECATED_MSG_ATTRIBUTE("Redundant, use 'featureFlagForKey:fallback:' instead");
 
 /**
  *	@brief Feature flag for a given key.

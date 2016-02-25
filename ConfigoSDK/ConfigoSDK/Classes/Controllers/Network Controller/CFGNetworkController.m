@@ -64,21 +64,21 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
     [connectionMgr POST: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
         //NNLogDebug(@"Loading Config: HTTPResponse", response);
         NNLogDebug(@"Loading Config: Response Data", object);
-        NSError *retError = error;
-        
-        CFGResponse *configoResponse = nil;
-        if([object isKindOfClass: [NSDictionary class]]) {
-            configoResponse = [[CFGResponse alloc] initWithDictionary: object];
+        NSError *retError = nil;
+        CFGResponse *configoResponse = [[CFGResponse alloc] initWithDictionary: object];
+
+        if(!error && !configoResponse) {
+            retError = [NSError errorWithDomain: @"io.configo.badResponse" code: 40 userInfo: nil];
+        } else if(error) {
+            NNLogDebug(@"Loading Config: Error", error);
+            retError = error;
+        } else if(configoResponse) {
             CFGResponseHeader *responseHeader = [configoResponse responseHeader];
-            if(error) {
-                NNLogDebug(@"Loading Config: Error", error);
-            } else if(responseHeader.internalError) {
+            if(responseHeader.internalError) {
                 NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
                 retError = [responseHeader.internalError error];
-            } else if(configoResponse) {
-                NNLogDebug(@"Loading Config: Done", nil);
             } else {
-                retError = [NSError errorWithDomain: @"io.configo.badResponse" code: 40 userInfo: nil];
+                NNLogDebug(@"Loading Config: Done", nil);
             }
         }
         

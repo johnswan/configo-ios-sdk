@@ -8,6 +8,7 @@
 
 #import "CFGPrivateConfigService.h"
 #import "CFGNetworkController.h"
+#import "CFGConfigValueFetcher.h"
 
 #import "CFGConstants.h"
 
@@ -19,6 +20,7 @@
 NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.done";
 
 @interface CFGPrivateConfigService ()
+@property (nonatomic, strong) CFGConfigValueFetcher *configValueFetcher;
 @property (nonatomic, strong) CFGNetworkController *restClient;
 @property (nonatomic, strong) CFGResponse *fallbackConfig;
 @property (nonatomic, strong) CFGResponse *configResponse;
@@ -41,8 +43,11 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
 - (instancetype)init {
     if(self = [super init]) {
         _fallbackConfig = [[CFGResponse alloc] initWithDictionary: [self fallbackResponseDictionary]];
+        
         NSString *devKey = @"add8b2b55e697cf274532352e2ff43bc";
         NSString *appId = @"5649d686dec65e3f64106aab";
+        _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
+        _configValueFetcher.useFallbackConfig = YES;
         _restClient = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
         [self pullConfig];
     }
@@ -53,6 +58,8 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
     [_restClient requestConfigWithConfigoData: [self sdkData] callback: ^(CFGResponse *response, NSError *error) {
         if(!error && response) {
             _configResponse = response;
+            _configValueFetcher.fallbackConfig = _configValueFetcher.config;
+            _configValueFetcher.config = _configResponse.configObj;
             [self alertSDKVersion];
             
             [[NSNotificationCenter defaultCenter] postNotificationName: CFGPrivateConfigLoadedNotification
@@ -115,25 +122,18 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
 }
 
 - (id)valueForKeyPath:(NSString *)keyPath {
-    id retval = [NNJSONUtilities valueForKeyPath: keyPath inObject: _configResponse.config];
-    if(!retval) {
-        retval = [NNJSONUtilities valueForKeyPath: keyPath inObject: _fallbackConfig.config];
-    }
-    return retval;
+    return [_configValueFetcher configValueForKeyPath: keyPath fallbackValue: nil];
 }
 
 - (BOOL)featureFlagForKey:(NSString *)key {
-    BOOL retval = [_configResponse.features containsObject: key];
-    if(!retval) {
-        retval = [_fallbackConfig.features containsObject: key];
-    }
-    return retval;
+    return [_configValueFetcher featureFlagForKey: key fallback: NO];
 }
 
 #pragma mark - Helpers
 
 - (NSDictionary *)sdkData {
     NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    bundleId = bundleId ?: @"";
     NSString *appName = [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleNameKey];
     if(!appName) {
         appName = @"";

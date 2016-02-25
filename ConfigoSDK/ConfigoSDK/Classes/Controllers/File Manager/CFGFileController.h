@@ -11,10 +11,20 @@
 @class CFGConfigoData;
 @class CFGResponse;
 
-@interface CFGFileManager : NSObject
+@interface CFGFileController : NSObject
 
-+ (instancetype)sharedManager;
++ (instancetype)sharedManager DEPRECATED_MSG_ATTRIBUTE("No longer a singleton, use initWithDevKey:appId:");
 
+- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
+
+//NEW APIs
+- (BOOL)saveResponse:(CFGResponse *)response error:(NSError **)err;
+- (CFGResponse *)readResponse:(NSError **)err;
+
+- (BOOL)saveConfigoData:(CFGConfigoData *)configoData error:(NSError **)err;
+- (CFGConfigoData *)readConfigoData:(NSError **)err;
+
+//OLD APIs
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId error:(NSError **)err;
 - (CFGResponse *)loadLastResponseForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;
 

@@ -7,7 +7,7 @@
 //
 #import "CFGConfigoDataController.h"
 #import "CFGConfigoData.h"
-#import "CFGFileManager.h"
+#import "CFGFileController.h"
 #import "CFGConstants.h"
 
 #import "NNLibrariesEssentials.h"
@@ -41,6 +41,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 
 
 @interface CFGConfigoDataController ()
+@property (nonatomic, strong) CFGFileController *fileController;
 @property (nonatomic) BOOL userContextChanged;
 @property (nonatomic) BOOL customUserIdChanged;
 @property (nonatomic, strong) CFGConfigoData *configoData;
@@ -61,7 +62,8 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 - (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
     if(self = [super init]) {
         NSError *err = nil;
-        _configoData = [[CFGFileManager sharedManager] loadConfigoDataForDevKey: devKey appId: appId error: &err];
+        _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
+        _configoData = [_fileController readConfigoData: &err];
         
         if(!_configoData) {
             NNLogDebug(@"ConfigoData file not found", err);
@@ -133,7 +135,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     _userContextChanged = NO;
     _configoData.deviceDetails = _currentDeviceDetails;
     _configoData.udid = [self udid];
-    BOOL success = [[CFGFileManager sharedManager] saveConfigoData: _configoData withDevKey: devKey appId: appId error: err];
+    BOOL success = [_fileController saveConfigoData: _configoData error: err];
     NNLogDebug(success ? @"ConfigoData save success" : @"ConfigoData save failed" , err ? *err : nil);
     return success;
 }

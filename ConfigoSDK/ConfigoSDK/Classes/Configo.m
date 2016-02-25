@@ -7,14 +7,16 @@
 //
 
 #import "Configo.h"
-#import "CFGFileManager.h"
+#import "CFGFileController.h"
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
 #import "CFGPrivateConfigService.h"
+#import "CFGConfigValueFetcher.h"
 #import "CFGLogger.h"
 
 #import "CFGConstants.h"
 #import "CFGResponse.h"
+#import "CFGConfig.h"
 
 #import "NNLibrariesEssentials.h"
 #import "NNReachabilityManager.h"
@@ -35,7 +37,9 @@ NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 @property (nonatomic, copy) NSString *devKey;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
+@property (nonatomic, strong) CFGFileController *fileController;
 @property (nonatomic, strong) CFGNetworkController *networkController;
+@property (nonatomic, strong) CFGConfigValueFetcher *configValueFetcher;
 
 @property (nonatomic, strong) CFGResponse *activeConfigoResponse;
 @property (nonatomic, strong) CFGResponse *latestConfigoResponse;
@@ -94,17 +98,20 @@ static id _shared = nil;
         self.devKey = devKey;
         self.appId = appId;
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
+        _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
         _networkController = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
+        _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
         
         _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
         if(_latestConfigoResponse) {
             _state = CFGConfigLoadedFromStorage;
             _activeConfigoResponse = _latestConfigoResponse;
+            _configValueFetcher.config = _activeConfigoResponse.configObj;
         } else {
             _state = CFGConfigNotAvailable;
         }
         
-        self.listenerCallback = callback;
+        [self setCallback: callback];
         
         [self pullConfig];
     }
@@ -202,7 +209,9 @@ static id _shared = nil;
     
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [_networkController requestConfigWithConfigoData: configoData callback: ^(CFGResponse *response, NSError *error) {
+        //Check before hand (because it relies on statuses that change in this function)
         BOOL shouldNotifyUser = [self shouldUpdateActiveConfig];
+        
         if(response && !error) {
             _latestConfigoResponse = response;
             
@@ -212,6 +221,7 @@ static id _shared = nil;
             if(shouldNotifyUser) {
                 _state = CFGConfigLoadedFromServer;
                 _activeConfigoResponse = _latestConfigoResponse;
+                _configValueFetcher.config = _activeConfigoResponse.configObj;
                 
                 [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Complete"];
             }
@@ -238,9 +248,10 @@ static id _shared = nil;
 #pragma mark - Setters
 
 - (void)setCallback:(CFGCallback)callback {
-    //Checking wether we should ivoke the callback immediately after set
+    //Checking wether we should invoke the callback immediately after set
     BOOL shouldInvokeCallback = NO;
-    if(!self.listenerCallback && _state == CFGConfigLoadedFromServer && _activeConfigoResponse) {
+    
+    if(!self.listenerCallback && _activeConfigoResponse) {
         shouldInvokeCallback = YES;
     }
     
@@ -271,24 +282,21 @@ static id _shared = nil;
 #pragma mark - Config Getters
 
 - (NSDictionary *)rawConfig {
-    return _activeConfigoResponse.config;
+    return _activeConfigoResponse.configObj.configDictionary;
 }
 
 - (id)configValueForKeyPath:(NSString *)keyPath {
-    NSDictionary *config = [self rawConfig];
-    id value = [NNJSONUtilities valueForKeyPath: keyPath inObject: config];
-    return value;
+    return [self configValueForKeyPath: keyPath fallbackValue: nil];
 }
 
 - (id)configValueForKeyPath:(NSString *)keyPath fallbackValue:(id)fallbackValue {
-    id val = [self configValueForKeyPath: keyPath];
-    return val ?: fallbackValue;
+    return [_configValueFetcher configValueForKeyPath: keyPath fallbackValue: fallbackValue];
 }
 
 #pragma mark - Feature Getters
 
 - (NSArray *)featuresList {
-    return _activeConfigoResponse.features;
+    return _activeConfigoResponse.configObj.featuresArray;
 }
 
 - (BOOL)featureFlagForKey:(NSString *)key {
@@ -300,7 +308,6 @@ static id _shared = nil;
         return NO;
     }
     
-    
     NSArray *features = [self featuresList];
     BOOL retval = [features containsObject: key];
     return retval ?: fallbackFlag; //If the featuresList contains the key, return true. Otherwise, return the fallback.
@@ -310,7 +317,7 @@ static id _shared = nil;
 
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId {
     NSError *err = nil;
-    BOOL success = [[CFGFileManager sharedManager] saveResponse: response withDevKey: devKey withAppId: appId error: &err];
+    BOOL success = [_fileController saveResponse: response error: &err];
     NNLogDebug(([NSString stringWithFormat: @"Configo save response to file %@", success ? @"success" : @"failed"]), err);
     return success;
 }
@@ -318,7 +325,7 @@ static id _shared = nil;
 - (CFGResponse *)responseFromFileWithDevKey:(NSString *)devKey withAppId:(NSString *)appId {
     CFGResponse *retval = nil;
     NSError *err = nil;
-    retval = [[CFGFileManager sharedManager] loadLastResponseForDevKey: devKey appId: appId error: &err];
+    retval = [_fileController readResponse: &err];
     NNLogDebug(([NSString stringWithFormat: @"Configo load response from file %@", retval ? @"success" : @"failed"]), (retval ? nil : err));
     return retval;
 }
@@ -333,7 +340,6 @@ static id _shared = nil;
 - (BOOL)shouldUpdateActiveConfig {
     //If there's no currently active config (first time load)
     //If the currently active config is loaded from storage.
-    //If the loading is in "failed" status (The status will be updated initially only if 'shouldUpdateActiveConfig' is true)
     //If the user set the 'dynamicalylRefreshValues' to YES.
     //If it's a 'pullConfig' that awaits a callback
     return (!_activeConfigoResponse ||

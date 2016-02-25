@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Configo. All rights reserved.
 //
 
+#ifndef CFGNetwork_HEADER
+#define CFGNetwork_HEADER
+
 #import <Foundation/Foundation.h>
 
 @class CFGResponse;
@@ -24,3 +27,5 @@ typedef void(^CFGStatusPollCallback)(BOOL shouldUpdate, NSError *error);
 
 
 @end
+
+#endif

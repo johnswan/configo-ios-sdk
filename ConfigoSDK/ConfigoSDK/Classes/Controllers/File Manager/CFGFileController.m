@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Configo. All rights reserved.
 //
 
-#import "CFGFileManager.h"
+#import "CFGFileController.h"
 #import "CFGConfigoData.h"
 #import "CFGResponse.h"
 #import "CFGConstants.h"
@@ -16,7 +16,12 @@
 #import "NNSecurity.h"
 #import "NNJSONObject.h"
 
-@implementation CFGFileManager
+@interface CFGFileController ()
+@property (nonatomic, copy) NSString *devKey;
+@property (nonatomic, copy) NSString *appId;
+@end
+
+@implementation CFGFileController
 
 #pragma mark - Singleton
 
@@ -29,14 +34,31 @@
     return _shared;
 }
 
+- (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
+    NSParameterAssert(devKey);
+    NSParameterAssert(appId);
+    if(self = [super init]) {
+        self.devKey = devKey;
+        self.appId = appId;
+    }
+    return self;
+}
+
 - (instancetype)init {
     if(self = [super init]) {
-        
     }
     return self;
 }
 
 #pragma mark - Configo Response
+
+- (BOOL)saveResponse:(CFGResponse *)response error:(NSError **)err {
+    return [self saveResponse: response withDevKey: _devKey withAppId: _appId error: err];
+}
+
+- (CFGResponse *)readResponse:(NSError **)err {
+    return [self loadLastResponseForDevKey: _devKey appId: _appId error: err];
+}
 
 - (BOOL)saveResponse:(CFGResponse *)response withDevKey:(NSString *)devKey withAppId:(NSString *)appId error:(NSError **)err{
     BOOL success = NO;
@@ -56,6 +78,14 @@
 }
 
 #pragma mark - Configo Data
+
+- (BOOL)saveConfigoData:(CFGConfigoData *)configoData error:(NSError **)err {
+    return [self saveConfigoData: configoData withDevKey: _devKey appId: _appId error: err];
+}
+
+- (CFGConfigoData *)readConfigoData:(NSError **)err {
+    return [self loadConfigoDataForDevKey: _devKey appId: _appId error: err];
+}
 
 - (CFGConfigoData *)loadConfigoDataForDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err {
     CFGConfigoData *retval = nil;
@@ -80,16 +110,20 @@
     if(!object || !filePath) {
         return NO;
     }
+    
     BOOL success = NO;
     NSData *data = nil;
     if([object isKindOfClass: [NSData class]]) {
         data = object;
-    } else if([object isKindOfClass: [NNJSONObject class]] || [object conformsToProtocol: @protocol(NNJSONObject)]) {
+    }
+    else if([object isKindOfClass: [NNJSONObject class]] || [object conformsToProtocol: @protocol(NNJSONObject)]) {
         NSDictionary *json = [(NNJSONObject *)object dictionaryRepresentation];
         data = [NNJSONUtilities JSONDataFromObject: json error: err];
-    } else if([object isKindOfClass: [NSDictionary class]] || [object isKindOfClass: [NSArray class]]) {
+    }
+    else if([object isKindOfClass: [NSDictionary class]] || [object isKindOfClass: [NSArray class]]) {
         data = [NNJSONUtilities JSONDataFromObject: object error: err];
-    } else if([object conformsToProtocol: @protocol(NSCoding)]) {
+    }
+    else if([object conformsToProtocol: @protocol(NSCoding)]) {
         data = [NSKeyedArchiver archivedDataWithRootObject: object];
     }
         

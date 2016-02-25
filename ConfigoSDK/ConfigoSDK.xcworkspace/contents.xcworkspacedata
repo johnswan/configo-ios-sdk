@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ConfigoExample/ConfigoExample.xcodeproj">
+      location = "group:ConfigoSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ConfigoSDK/ConfigoSDK.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

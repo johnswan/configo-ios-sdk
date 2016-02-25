@@ -7,14 +7,14 @@
     "9F48CFE6400E5C55FC4AB0C355B501AD0EA9BE1A" : 0,
     "E2C7931C825E5EB210D873D1C51F30A77910C53F" : 0
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F2F3DD20-7D09-4793-9C02-C1E887301F35",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "532240FF-31BF-4A1B-B87C-B2781A6F97D9",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "9F48CFE6400E5C55FC4AB0C355B501AD0EA9BE1A" : "iOS\/",
-    "E2C7931C825E5EB210D873D1C51F30A77910C53F" : "..\/NNLibraries\/iOS"
+    "E2C7931C825E5EB210D873D1C51F30A77910C53F" : "iOS\/ConfigoSDK\/ConfigoSDK\/Classes\/NNLibraries\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ConfigoSDK",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ConfigoSDK.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ConfigoSDK\/ConfigoSDK.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/configo\/ios.git",
@@ -22,7 +22,7 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9F48CFE6400E5C55FC4AB0C355B501AD0EA9BE1A"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/natanavra\/nnlibraries.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/natanavra\/NNLibraries-iOS.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E2C7931C825E5EB210D873D1C51F30A77910C53F"
     }
