@@ -43,13 +43,17 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
 - (instancetype)init {
     if(self = [super init]) {
         _fallbackConfig = [[CFGResponse alloc] initWithDictionary: [self fallbackResponseDictionary]];
+        _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
+        _configValueFetcher.fallbackConfig = _fallbackConfig.configObj;
+        _configValueFetcher.useFallbackConfig = YES;
         
         NSString *devKey = @"add8b2b55e697cf274532352e2ff43bc";
         NSString *appId = @"5649d686dec65e3f64106aab";
-        _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
-        _configValueFetcher.useFallbackConfig = YES;
         _restClient = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
-        [self pullConfig];
+        
+        //To avoid dead-locking the 'dispatch_once' semaphore of the private config service singleton.
+        //It's called from within the network controller (feature flag regarding api version)
+        [NSTimer scheduledTimerWithTimeInterval: 0.1 target: self selector: @selector(pullConfig) userInfo: nil repeats: NO];
     }
     return self;
 }
@@ -91,7 +95,7 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
                                          @"android" : @25000
                                          }
                                  },
-                         @"features": @[],
+                         @"features": @[@"GET-CONFIG-V2"],
                          @"groups": @[]
                          }
                  };

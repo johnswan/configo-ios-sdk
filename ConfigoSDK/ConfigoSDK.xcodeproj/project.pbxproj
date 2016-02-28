@@ -29,6 +29,10 @@
 		5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */; };
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
+		5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27020B1C8272D900D7508E /* CFGFeature.h */; };
+		5C27020E1C8272D900D7508E /* CFGFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27020C1C8272D900D7508E /* CFGFeature.m */; };
+		5C2702121C82EBDA00D7508E /* CFGConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2702101C82EBDA00D7508E /* CFGConfigController.h */; };
+		5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2702111C82EBDA00D7508E /* CFGConfigController.m */; };
 		5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB071B8CA84500D85791 /* CFGConfigoData.h */; };
 		5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB081B8CA84500D85791 /* CFGConfigoData.m */; };
 		5C33AB0E1B8CAD6400D85791 /* CFGFileController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB0C1B8CAD6400D85791 /* CFGFileController.h */; };
@@ -44,8 +48,6 @@
 		5C88E3D41C4CE50C00527A25 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */; };
 		5C88E3DB1C4CEF3000527A25 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DA1C4CEF3000527A25 /* CoreTelephony.framework */; };
 		5C88E3DD1C4CEF3500527A25 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DC1C4CEF3500527A25 /* SystemConfiguration.framework */; };
-		5C88E3E11C4CF42600527A25 /* CFGConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C88E3DF1C4CF42600527A25 /* CFGConfigController.h */; };
-		5C88E3E21C4CF42600527A25 /* CFGConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3E01C4CF42600527A25 /* CFGConfigController.m */; };
 		5C88E3E41C4CF49500527A25 /* ConfigControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3E31C4CF49500527A25 /* ConfigControllerTests.m */; };
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -136,6 +138,10 @@
 		5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGPrivateConfigService.m; path = "Classes/Controllers/Private Config Controller/CFGPrivateConfigService.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGNetworkController.h; path = "Classes/Controllers/Network Controller/CFGNetworkController.h"; sourceTree = "<group>"; };
 		5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGNetworkController.m; path = "Classes/Controllers/Network Controller/CFGNetworkController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5C27020B1C8272D900D7508E /* CFGFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGFeature.h; path = Classes/Models/Config/CFGFeature.h; sourceTree = "<group>"; };
+		5C27020C1C8272D900D7508E /* CFGFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGFeature.m; path = Classes/Models/Config/CFGFeature.m; sourceTree = "<group>"; };
+		5C2702101C82EBDA00D7508E /* CFGConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGConfigController.h; sourceTree = "<group>"; };
+		5C2702111C82EBDA00D7508E /* CFGConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGConfigController.m; sourceTree = "<group>"; };
 		5C33AB071B8CA84500D85791 /* CFGConfigoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGConfigoData.h; path = "Classes/Models/Configo Data/CFGConfigoData.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5C33AB081B8CA84500D85791 /* CFGConfigoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGConfigoData.m; path = "Classes/Models/Configo Data/CFGConfigoData.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5C33AB0C1B8CAD6400D85791 /* CFGFileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGFileController.h; sourceTree = "<group>"; };
@@ -154,8 +160,6 @@
 		5C88E3D31C4CE50C00527A25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C88E3DA1C4CEF3000527A25 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5C88E3DC1C4CEF3500527A25 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5C88E3DF1C4CF42600527A25 /* CFGConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGConfigController.h; path = "Classes/Controllers/Fetch Controller/CFGConfigController.h"; sourceTree = "<group>"; };
-		5C88E3E01C4CF42600527A25 /* CFGConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGConfigController.m; path = "Classes/Controllers/Fetch Controller/CFGConfigController.m"; sourceTree = "<group>"; };
 		5C88E3E31C4CF49500527A25 /* ConfigControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigControllerTests.m; sourceTree = "<group>"; };
 		5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConfigoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DE811B806E150074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -288,6 +292,16 @@
 			name = "Network Controller";
 			sourceTree = "<group>";
 		};
+		5C27020F1C82EBDA00D7508E /* Config Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5C2702101C82EBDA00D7508E /* CFGConfigController.h */,
+				5C2702111C82EBDA00D7508E /* CFGConfigController.m */,
+			);
+			name = "Config Controller";
+			path = "Classes/Controllers/Config Controller";
+			sourceTree = "<group>";
+		};
 		5C33AB051B8CA64E00D85791 /* CFGConfigoData */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,15 +390,6 @@
 				5C88E3D31C4CE50C00527A25 /* Info.plist */,
 			);
 			path = ConfigoSDKTests;
-			sourceTree = "<group>";
-		};
-		5C88E3DE1C4CF3F700527A25 /* Config Controller */ = {
-			isa = PBXGroup;
-			children = (
-				5C88E3DF1C4CF42600527A25 /* CFGConfigController.h */,
-				5C88E3E01C4CF42600527A25 /* CFGConfigController.m */,
-			);
-			name = "Config Controller";
 			sourceTree = "<group>";
 		};
 		5C8F53251C185FE40057CCFC /* Frameworks */ = {
@@ -481,7 +486,7 @@
 		5CEA82ED1B8DF95A008F6D3B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C88E3DE1C4CF3F700527A25 /* Config Controller */,
+				5C27020F1C82EBDA00D7508E /* Config Controller */,
 				5C1186261BFA0F4F0048CBAA /* Private Config Manager */,
 				5C33AB111B8CB30000D85791 /* File Manager */,
 				5C1B63211B8F459E000CCD9D /* Network Controller */,
@@ -503,6 +508,8 @@
 		5CEE865F1C4D4DDE00D310C2 /* CFGConfig */ = {
 			isa = PBXGroup;
 			children = (
+				5C27020B1C8272D900D7508E /* CFGFeature.h */,
+				5C27020C1C8272D900D7508E /* CFGFeature.m */,
 				5CEE86601C4D4DF400D310C2 /* CFGConfig.h */,
 				5CEE86611C4D4DF400D310C2 /* CFGConfig.m */,
 			);
@@ -854,6 +861,7 @@
 				5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */,
 				5CF08C251C26FBAD00A85493 /* NNSecurity.h in Headers */,
 				5CF08C501C26FBAD00A85493 /* NNConstants.h in Headers */,
+				5C2702121C82EBDA00D7508E /* CFGConfigController.h in Headers */,
 				5CF08C371C26FBAD00A85493 /* NSData+NNSecurity.h in Headers */,
 				5C93DEE41B80744D0074D62A /* Configo.h in Headers */,
 				5CF08C4C1C26FBAD00A85493 /* NNLogger.h in Headers */,
@@ -862,7 +870,6 @@
 				5CF08C561C26FBAD00A85493 /* NNUICKeyChainStore.h in Headers */,
 				5CB451E01BFE127200BB0E97 /* CFGLogLevel.h in Headers */,
 				5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */,
-				5C88E3E11C4CF42600527A25 /* CFGConfigController.h in Headers */,
 				5CF08C4A1C26FBAD00A85493 /* NNJSONUtilities.h in Headers */,
 				5CF08C211C26FBAD00A85493 /* NNReachability.h in Headers */,
 				5CF08C411C26FBAD00A85493 /* NSString+NNAdditions.h in Headers */,
@@ -879,6 +886,7 @@
 				5CF08C461C26FBAD00A85493 /* UIDevice+NNAdditions.h in Headers */,
 				5CF08C431C26FBAD00A85493 /* NSURL+NNAddtions.h in Headers */,
 				5CF08C2D1C26FBAD00A85493 /* NNURLConnectionManager.h in Headers */,
+				5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */,
 				5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */,
 				5CF08C3B1C26FBAD00A85493 /* NSDictionary+NNAdditions.h in Headers */,
 				5CF08C2B1C26FBAD00A85493 /* NNURLConnection.h in Headers */,
@@ -1092,13 +1100,13 @@
 				5CACCDC51B821120009E343C /* CFGResponseHeader.m in Sources */,
 				5CF08C4B1C26FBAD00A85493 /* NNJSONUtilities.m in Sources */,
 				5CACEF821C2FE665005E6111 /* CFGConstants.m in Sources */,
-				5C88E3E21C4CF42600527A25 /* CFGConfigController.m in Sources */,
 				5CF08C441C26FBAD00A85493 /* NSURL+NNAddtions.m in Sources */,
 				5CF08C4D1C26FBAD00A85493 /* NNLogger.m in Sources */,
 				5CF08C321C26FBAD00A85493 /* NNURLResponseSerializer.m in Sources */,
 				5CF08C241C26FBAD00A85493 /* NNReachabilityManager.m in Sources */,
 				5CF08C471C26FBAD00A85493 /* UIDevice+NNAdditions.m in Sources */,
 				5CF08C3C1C26FBAD00A85493 /* NSDictionary+NNAdditions.m in Sources */,
+				5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */,
 				5CF08C401C26FBAD00A85493 /* NSObject+NNAdditions.m in Sources */,
 				5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */,
 				5CF08C4F1C26FBAD00A85493 /* NNUtilities.m in Sources */,
@@ -1107,6 +1115,7 @@
 				5CF08C361C26FBAD00A85493 /* NSData+NNAdditions.m in Sources */,
 				5CF08C2A1C26FBAD00A85493 /* NNURLConstants.m in Sources */,
 				5CF08C2C1C26FBAD00A85493 /* NNURLConnection.m in Sources */,
+				5C27020E1C8272D900D7508E /* CFGFeature.m in Sources */,
 				5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */,
 				5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */,
 				5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */,

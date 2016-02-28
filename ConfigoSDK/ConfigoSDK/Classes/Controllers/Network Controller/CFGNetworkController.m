@@ -58,10 +58,10 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
     
-    NSURL *baseConfigURL = [CFGConstants getConfigURL];
-    NNLogDebug(@"Loading Config: POST", (@{@"URL" : baseConfigURL, @"Headers" : headers, @"Params" : params}));
+    NSURL *configUrl = [CFGConstants getConfigURL];
+    NNLogDebug(@"Loading Config: POST", (@{@"URL" : configUrl, @"Headers" : headers, @"Params" : params}));
     
-    [connectionMgr POST: baseConfigURL parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
+    [connectionMgr POST: configUrl parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
         //NNLogDebug(@"Loading Config: HTTPResponse", response);
         NNLogDebug(@"Loading Config: Response Data", object);
         NSError *retError = nil;

@@ -367,8 +367,8 @@ static id _shared = nil;
         userInfo = @{ConfigoNotificationUserInfoErrorKey : err};
         notificationName = ConfigoConfigurationLoadErrorNotification;
     } else {
-        userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig],
-                     ConfigoNotificationUserInfoFeaturesListKey : [self featuresList]};
+        userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig] ?: [NSNull null],
+                     ConfigoNotificationUserInfoFeaturesListKey : [self featuresList] ?: [NSNull null]};
         notificationName = ConfigoConfigurationLoadCompleteNotification;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName: notificationName object: self userInfo: userInfo];

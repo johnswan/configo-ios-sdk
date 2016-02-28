@@ -9,3 +9,4 @@ This project follows the [Semantic Versioning](http://semver.org) style.
 
 ### Added
 - `CFGConfigValueFetcher` for handling all methods associated with configuration and fallbacks.
+- `getConfig` v2 feature flag. v2 includes a bug fix regarding feature flag details.

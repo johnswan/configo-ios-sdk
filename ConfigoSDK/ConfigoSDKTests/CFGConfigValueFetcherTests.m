@@ -79,6 +79,7 @@
 }
 
 - (void)testFallbackConfig {
+    _valueFetcher.useFallbackConfig = YES;
     id fallbackVal = [_valueFetcher configValueForKeyPath: @"fallback" fallbackValue: nil];
     XCTAssertEqualObjects(@"fallbackVal", fallbackVal);
 }
@@ -101,7 +102,34 @@
 }
 
 - (void)testFallbackFeature {
+    _valueFetcher.useFallbackConfig = YES;
     BOOL flag = [_valueFetcher featureFlagForKey: @"fallbackFeature" fallback: NO];
+    XCTAssertTrue(flag);
+}
+
+- (void)testDisabledFeature {
+    _valueFetcher.useFallbackConfig = YES;
+    BOOL flag = [_valueFetcher featureFlagForKey: @"disabledFeature" fallback: YES];
+    XCTAssertFalse(flag);
+}
+
+- (void)testMixedConfigs {
+    BOOL flag = [_valueFetcher featureFlagForKey: @"feature4" fallback: NO];
+    XCTAssertTrue(flag);
+}
+
+- (void)testMixedReverse {
+    _valueFetcher.fallbackConfig = [self mockConfig];
+    _valueFetcher.config = [self mockFallbackConfig];
+    BOOL flag = [_valueFetcher featureFlagForKey: @"disabledFeature" fallback: YES];
+    XCTAssertFalse(flag);
+}
+
+- (void)testMixedReverseFallbackEnabled {
+    _valueFetcher.fallbackConfig = [self mockConfig];
+    _valueFetcher.config = [self mockFallbackConfig];
+    _valueFetcher.useFallbackConfig = YES;
+    BOOL flag = [_valueFetcher featureFlagForKey: @"feature4" fallback: NO];
     XCTAssertTrue(flag);
 }
 
@@ -116,8 +144,8 @@
 - (CFGConfig *)mockFallbackConfig {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary: [self mockConfigDict]];
     dict[@"fallback"] = @"fallbackVal";
-    NSMutableArray *arr = [NSMutableArray arrayWithArray: [self mockFeaturesArray]];
-    arr[0] = @"fallbackFeature";
+    NSMutableArray *arr = [NSMutableArray arrayWithArray: [self mockFeaturesArrayV2]];
+    arr[0] = @{@"key" : @"fallbackFeature", @"enabled" : @YES};
     return [[CFGConfig alloc] initWithConfig: dict features: arr];
 }
 
@@ -142,7 +170,27 @@
 }
 
 - (NSArray *)mockFeaturesArray {
-    return @[@"feature1", @"feature2", @"feature3"];
+    return @[@"feature1", @"feature2", @"feature3", @"feature4"];
+}
+
+- (NSArray *)mockFeaturesArrayV2 {
+    return @[@{
+                 @"key" : @"feature1",
+                 @"enabled" : @YES
+                 },
+             @{
+                 @"key" : @"feature2",
+                 @"enabled" : @YES
+                 },
+             @{
+                 @"key" : @"feature3",
+                 @"enabled" : @YES
+                 },
+             @{
+                 @"key" : @"disabledFeature",
+                 @"enabled" : @NO
+                 }
+             ];
 }
 
 @end
