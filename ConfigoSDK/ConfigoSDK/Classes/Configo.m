@@ -103,9 +103,9 @@ static id _shared = nil;
         _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
         
         _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
+        _activeConfigoResponse = _latestConfigoResponse;
         if(_latestConfigoResponse) {
             _state = CFGConfigLoadedFromStorage;
-            _activeConfigoResponse = _latestConfigoResponse;
             _configValueFetcher.config = _activeConfigoResponse.configObj;
         } else {
             _state = CFGConfigNotAvailable;
@@ -304,13 +304,7 @@ static id _shared = nil;
 }
 
 - (BOOL)featureFlagForKey:(NSString *)key fallback:(BOOL)fallbackFlag {
-    if(!key) {
-        return NO;
-    }
-    
-    NSArray *features = [self featuresList];
-    BOOL retval = [features containsObject: key];
-    return retval ?: fallbackFlag; //If the featuresList contains the key, return true. Otherwise, return the fallback.
+    return [_configValueFetcher featureFlagForKey: key fallback: fallbackFlag];
 }
 
 #pragma mark - File Storage

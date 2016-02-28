@@ -58,15 +58,18 @@
         CFGFeature *featureFlag = [results firstObject];
         if(featureFlag) {
             retval = featureFlag.enabled;
+            
             if(found) {
                 *found = YES;
             }
         }
     } else {
         retval = [config.featuresArray containsObject: key];
+        
         if(found) {
             *found = retval;
         }
+        
         retval = retval ?: fallback;
     }
     return retval;

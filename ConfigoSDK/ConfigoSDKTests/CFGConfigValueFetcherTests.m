@@ -48,12 +48,35 @@
     XCTAssertEqualObjects(floatObj, expectedFloatObj);
 }
 
+- (void)testNilKey {
+    id value = [_valueFetcher configValueForKeyPath: nil fallbackValue: nil];
+    XCTAssertNil(value);
+    
+    _valueFetcher.useFallbackConfig = YES;
+    value = [_valueFetcher configValueForKeyPath: nil fallbackValue: nil];
+    XCTAssertNil(value);
+}
+
+- (void)testEmptyConfig {
+    _valueFetcher.config = nil;
+    _valueFetcher.fallbackConfig = nil;
+    id value = [_valueFetcher configValueForKeyPath: @"anyValue" fallbackValue: nil];
+    XCTAssertNil(value);
+    
+    _valueFetcher.useFallbackConfig = YES;
+    value = [_valueFetcher configValueForKeyPath: nil fallbackValue: nil];
+    XCTAssertNil(value);
+    
+    BOOL flag = [_valueFetcher featureFlagForKey: @"featureFlag" fallback: NO];
+    XCTAssertFalse(flag);
+    flag = [_valueFetcher featureFlagForKey: @"featureFlag" fallback: YES];
+    XCTAssertTrue(flag);
+}
+
 - (void)testNestedValues {
     id nestedValue = [_valueFetcher configValueForKeyPath: @"dict.key" fallbackValue: nil];
     XCTAssertEqual(@"value", nestedValue);
-}
-
-- (void)testTwiceNestedValue {
+    
     id twiceNestedValue = [_valueFetcher configValueForKeyPath: @"dict.dict.key" fallbackValue: nil];
     XCTAssertEqual(@"inner", twiceNestedValue);
 }
@@ -174,7 +197,8 @@
 }
 
 - (NSArray *)mockFeaturesArrayV2 {
-    return @[@{
+    return @[
+             @{
                  @"key" : @"feature1",
                  @"enabled" : @YES
                  },
