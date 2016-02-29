@@ -9,4 +9,5 @@ end
 
 target 'ConfigoSDKTests' do
 pod 'OCMock'
+pod 'OHHTTPStubs'
 end

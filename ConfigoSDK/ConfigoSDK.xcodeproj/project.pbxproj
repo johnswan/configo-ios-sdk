@@ -39,7 +39,7 @@
 		5C33AB0F1B8CAD6400D85791 /* CFGFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB0D1B8CAD6400D85791 /* CFGFileController.m */; };
 		5C37E9E91B821AAD001B80D6 /* CFGResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C37E9E71B821AAD001B80D6 /* CFGResponse.h */; };
 		5C37E9EA1B821AAD001B80D6 /* CFGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C37E9E81B821AAD001B80D6 /* CFGResponse.m */; };
-		5C4222781C50E40C00434178 /* FileControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4222771C50E40C00434178 /* FileControllerTests.m */; };
+		5C4222781C50E40C00434178 /* CFGFileControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4222771C50E40C00434178 /* CFGFileControllerTests.m */; };
 		5C42227D1C510F5200434178 /* CFGResponseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42227C1C510F5200434178 /* CFGResponseFactory.m */; };
 		5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C54701D1B84B55700C026D8 /* CFGInternalError.h */; };
 		5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C54701E1B84B55700C026D8 /* CFGInternalError.m */; };
@@ -48,7 +48,7 @@
 		5C88E3D41C4CE50C00527A25 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */; };
 		5C88E3DB1C4CEF3000527A25 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DA1C4CEF3000527A25 /* CoreTelephony.framework */; };
 		5C88E3DD1C4CEF3500527A25 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DC1C4CEF3500527A25 /* SystemConfiguration.framework */; };
-		5C88E3E41C4CF49500527A25 /* ConfigControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3E31C4CF49500527A25 /* ConfigControllerTests.m */; };
+		5C88E3E41C4CF49500527A25 /* CFGConfigControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */; };
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE51B80744D0074D62A /* Configo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEE31B80744D0074D62A /* Configo.m */; };
@@ -149,7 +149,7 @@
 		5C33AB121B8CB58E00D85791 /* CFGErrorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGErrorConstants.h; path = Constants/CFGErrorConstants.h; sourceTree = "<group>"; };
 		5C37E9E71B821AAD001B80D6 /* CFGResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGResponse.h; path = Classes/Models/Response/CFGResponse.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5C37E9E81B821AAD001B80D6 /* CFGResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGResponse.m; path = Classes/Models/Response/CFGResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		5C4222771C50E40C00434178 /* FileControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileControllerTests.m; sourceTree = "<group>"; };
+		5C4222771C50E40C00434178 /* CFGFileControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGFileControllerTests.m; sourceTree = "<group>"; };
 		5C42227B1C510F5200434178 /* CFGResponseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponseFactory.h; path = Factory/CFGResponse/CFGResponseFactory.h; sourceTree = "<group>"; };
 		5C42227C1C510F5200434178 /* CFGResponseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponseFactory.m; path = Factory/CFGResponse/CFGResponseFactory.m; sourceTree = "<group>"; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -160,7 +160,7 @@
 		5C88E3D31C4CE50C00527A25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C88E3DA1C4CEF3000527A25 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5C88E3DC1C4CEF3500527A25 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		5C88E3E31C4CF49500527A25 /* ConfigControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigControllerTests.m; sourceTree = "<group>"; };
+		5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGConfigControllerTests.m; sourceTree = "<group>"; };
 		5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConfigoSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DE811B806E150074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C93DE821B806E150074D62A /* ConfigoSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfigoSDK.h; sourceTree = "<group>"; };
@@ -384,8 +384,8 @@
 			children = (
 				5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */,
 				5C05AE5A1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m */,
-				5C88E3E31C4CF49500527A25 /* ConfigControllerTests.m */,
-				5C4222771C50E40C00434178 /* FileControllerTests.m */,
+				5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */,
+				5C4222771C50E40C00434178 /* CFGFileControllerTests.m */,
 				5C4222791C510F0E00434178 /* Factory */,
 				5C88E3D31C4CE50C00527A25 /* Info.plist */,
 			);
@@ -1076,9 +1076,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C4222781C50E40C00434178 /* FileControllerTests.m in Sources */,
+				5C4222781C50E40C00434178 /* CFGFileControllerTests.m in Sources */,
 				5C05AE5B1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m in Sources */,
-				5C88E3E41C4CF49500527A25 /* ConfigControllerTests.m in Sources */,
+				5C88E3E41C4CF49500527A25 /* CFGConfigControllerTests.m in Sources */,
 				5C42227D1C510F5200434178 /* CFGResponseFactory.m in Sources */,
 				5C88E3D21C4CE50C00527A25 /* ConfigoSDKTests.m in Sources */,
 			);

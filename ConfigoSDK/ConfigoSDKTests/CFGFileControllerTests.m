@@ -11,11 +11,11 @@
 #import "CFGFileController.h"
 #import "CFGResponseFactory.h"
 
-@interface FileControllerTests : XCTestCase
+@interface CFGFileControllerTests : XCTestCase
 @property (nonatomic, strong) CFGFileController *fileController;
 @end
 
-@implementation FileControllerTests
+@implementation CFGFileControllerTests
 
 - (void)setUp {
     [super setUp];
