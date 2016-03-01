@@ -87,7 +87,7 @@ static id _shared = nil;
         [self determineShouldLog];
         
         NNLogDebug(@"Configo: Init", (@{@"devKey" : devKey, @"appId" : appId}));
-        [CFGLogger logLevel: CFGLogLevelVerbose log: @"Configo Initialized\n devKey: %@ \nappId: %@", devKey, appId];
+        [CFGLogger logLevel: CFGLogLevelVerbose log: @"Configo Initialized \ndevKey: %@ \nappId: %@", devKey, appId];
         
         [NNReachabilityManager sharedManager];
         
@@ -97,6 +97,7 @@ static id _shared = nil;
         
         self.devKey = devKey;
         self.appId = appId;
+        
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
         _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
         _networkController = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
@@ -248,17 +249,11 @@ static id _shared = nil;
 #pragma mark - Setters
 
 - (void)setCallback:(CFGCallback)callback {
-    //Checking wether we should invoke the callback immediately after set
-    BOOL shouldInvokeCallback = NO;
-    
-    if(!self.listenerCallback && _activeConfigoResponse) {
-        shouldInvokeCallback = YES;
-    }
-    
-    self.listenerCallback = callback;
-    
-    if(shouldInvokeCallback) {
+    if(!self.listenerCallback && _activeConfigoResponse && _state == CFGConfigLoadedFromServer) {
+        self.listenerCallback = callback;
         [self invokeListenersCallbacksWithError: nil];
+    } else {
+        self.listenerCallback = callback;
     }
 }
 
@@ -328,7 +323,11 @@ static id _shared = nil;
 
 - (void)determineShouldLog {
     NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    [NNLogger setLogging: [bundleId isEqualToString: @"io.configo.example"]];
+    if(bundleId) {
+        [NNLogger setLogging: [bundleId isEqualToString: @"io.configo.example"]];
+    } else {
+        //Probably a testing target
+    }
 }
 
 - (BOOL)shouldUpdateActiveConfig {
@@ -369,6 +368,10 @@ static id _shared = nil;
 }
 
 - (void)setLoggingLevel:(CFGLogLevel)level {
+    [self.class setLoggingLevel: level];
+}
+
++ (void)setLoggingLevel:(CFGLogLevel)level {
     [CFGLogger setLoggingLevel: level];
 }
 

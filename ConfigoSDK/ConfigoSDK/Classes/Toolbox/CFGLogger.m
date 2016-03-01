@@ -18,7 +18,7 @@ static CFGLogLevel logLevel = CFGLogLevelVerbose;
 }
 
 + (void)logLevel:(CFGLogLevel)level log:(NSString *)format, ... {
-    if(logLevel >= level) {
+    if(logLevel <= level) {
         va_list args;
         va_start(args, format);
         NSString *log = [[NSString alloc] initWithFormat: format arguments: args];
@@ -30,7 +30,10 @@ static CFGLogLevel logLevel = CFGLogLevelVerbose;
     NSString *header = [NSString stringWithFormat: @"******************* ConfigoSDK (%@) - %@ *******************", ConfigoSDKVersion, [self stringFromLogLevel: level]];
     NSString *footer = [@"" stringByPaddingToLength: header.length withString: @"*" startingAtIndex: 0];
     NSLog(@"%@", header);
-    NSLog(@"%@", log);
+    NSArray *logs = [log componentsSeparatedByString: @"\n"];
+    for(NSString *line in logs) {
+        NSLog(@"%@", line);
+    }
     NSLog(@"%@", footer);
 }
 

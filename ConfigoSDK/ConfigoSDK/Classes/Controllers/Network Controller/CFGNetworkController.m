@@ -113,7 +113,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
         _pollingStatus = NO;
         
 //        NNLogDebug(@"Polling Status: HTTPResponse", response);
-//        NNLogDebug(@"Polling status: Response data", responseObject);
+        NNLogDebug(@"Polling status: Response data", responseObject);
         
         NSError *retError = error;
         BOOL shouldUpdate = false;

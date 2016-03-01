@@ -91,14 +91,16 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 + (instancetype)sharedInstance;
 
 /**
- *	@brief  Set the logging level.
+ *	@brief Set the logging level.
  *	@param level The level of the logs produced by the ConfigoSDK.
  */
-- (void)setLoggingLevel:(CFGLogLevel)level;
+- (void)setLoggingLevel:(CFGLogLevel)level DEPRECATED_MSG_ATTRIBUTE("use '+ setLoggingLevel:' instead.");
++ (void)setLoggingLevel:(CFGLogLevel)level;
 
 /**
  *	@brief The callback that will be called once the config loading process is complete.
  *	@param callback	A block of code to execute.
+ *  @discussion If no callback was set before, and there's new data available - the callback will be executed immediately with the cached data.
  */
 - (void)setCallback:(CFGCallback)callback;
 

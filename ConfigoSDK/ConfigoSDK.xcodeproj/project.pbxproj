@@ -59,6 +59,8 @@
 		5CB451DD1BFE10A100BB0E97 /* CFGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */; };
 		5CB451DE1BFE10A100BB0E97 /* CFGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */; };
 		5CB451E01BFE127200BB0E97 /* CFGLogLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CDD0EA41C846A640040784C /* v1-status-false-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 5CDD0EA21C846A640040784C /* v1-status-false-success.json */; };
+		5CDD0EA51C846A640040784C /* v2-getConfig-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 5CDD0EA31C846A640040784C /* v2-getConfig-success.json */; };
 		5CEA82F11B8DF976008F6D3B /* CFGConfigoDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */; };
 		5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */; };
 		5CEE86621C4D4DF400D310C2 /* CFGConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEE86601C4D4DF400D310C2 /* CFGConfig.h */; };
@@ -173,6 +175,8 @@
 		5CB451DB1BFE10A100BB0E97 /* CFGLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGLogger.h; path = Classes/Toolbox/CFGLogger.h; sourceTree = "<group>"; };
 		5CB451DC1BFE10A100BB0E97 /* CFGLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGLogger.m; path = Classes/Toolbox/CFGLogger.m; sourceTree = "<group>"; };
 		5CB451DF1BFE125900BB0E97 /* CFGLogLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CFGLogLevel.h; path = Constants/CFGLogLevel.h; sourceTree = "<group>"; };
+		5CDD0EA21C846A640040784C /* v1-status-false-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "v1-status-false-success.json"; path = "../../../response-files/v1-status-false-success.json"; sourceTree = "<group>"; };
+		5CDD0EA31C846A640040784C /* v2-getConfig-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "v2-getConfig-success.json"; path = "../../../response-files/v2-getConfig-success.json"; sourceTree = "<group>"; };
 		5CE91FE71C7F54B800DF9A8D /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		5CEA82EF1B8DF976008F6D3B /* CFGConfigoDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFGConfigoDataController.h; sourceTree = "<group>"; };
 		5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CFGConfigoDataController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -382,6 +386,7 @@
 		5C88E3D01C4CE50C00527A25 /* ConfigoSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				5CDD0E9F1C84669F0040784C /* Response Files */,
 				5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */,
 				5C05AE5A1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m */,
 				5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */,
@@ -472,6 +477,15 @@
 				5C05AE501C7E0D1700AD7D93 /* Logger */,
 			);
 			name = Toolbox;
+			sourceTree = "<group>";
+		};
+		5CDD0E9F1C84669F0040784C /* Response Files */ = {
+			isa = PBXGroup;
+			children = (
+				5CDD0EA21C846A640040784C /* v1-status-false-success.json */,
+				5CDD0EA31C846A640040784C /* v2-getConfig-success.json */,
+			);
+			name = "Response Files";
 			sourceTree = "<group>";
 		};
 		5CEA82E31B8DA0A8008F6D3B /* Configo */ = {
@@ -984,6 +998,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CDD0EA51C846A640040784C /* v2-getConfig-success.json in Resources */,
+				5CDD0EA41C846A640040784C /* v1-status-false-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,9 +1181,19 @@
 			baseConfigurationReference = 1F394503302E03E981E51AF3 /* Pods-ConfigoSDKTests.release.xcconfig */;
 			buildSettings = {
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = ConfigoSDKTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/OCMock\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/OHHTTPStubs\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-all_load",
