@@ -41,6 +41,9 @@ Configo gives the control back to mobile teams, enabling them to iterate quickly
 2. Add the following line in your `application:didFinishLaunchingWithOptions:` method with your API key and developer key (your keys can be found in the dashboard):
 
     ```objective-c
+    //OPTIONAL: set the log level 
+    [Configo setLogLevel: CFGLogLevelNone];
+    
     [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID"];
     ```
   
@@ -133,7 +136,7 @@ In a JSON of the form:
 The second value in the array can be accessed like so:
 
 ```objective-c
-[[Configo sharedInstance] configValueForKeyPath: @"object.array[1]"];
+[[Configo sharedInstance] configValueForKeyPath: @"object.array[1]" fallbackValue: nil];
 ```
 
 Alternatively, the configuration `NSDictionary` can be accessed directly by calling `rawConfig`.

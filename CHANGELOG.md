@@ -2,7 +2,7 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
-## [0.4.4] - 2015-03-01 
+## [0.4.4] - 2015-03-02 
 ### Deprecated
 - `configValueForKeyPath:` use `configValueForKeyPath:fallbackValue:` with `nil` for the 2nd argument instead.
 - `featureFlagForKey:` use `featureFlagForKey:fallback:` with `NO` for the 2nd argument instead.

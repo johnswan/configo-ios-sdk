@@ -154,6 +154,7 @@
 		5C4222771C50E40C00434178 /* CFGFileControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGFileControllerTests.m; sourceTree = "<group>"; };
 		5C42227B1C510F5200434178 /* CFGResponseFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGResponseFactory.h; path = Factory/CFGResponse/CFGResponseFactory.h; sourceTree = "<group>"; };
 		5C42227C1C510F5200434178 /* CFGResponseFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGResponseFactory.m; path = Factory/CFGResponse/CFGResponseFactory.m; sourceTree = "<group>"; };
+		5C435BE31C874EDD00E2CB40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5C54701E1B84B55700C026D8 /* CFGInternalError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGInternalError.m; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5C7BAB2B1C3C2A3B00889570 /* ConfigoSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = ConfigoSDK.podspec; path = /Users/natanavra/Projects/Development/Configo/iOS/ConfigoSDK.podspec; sourceTree = "<absolute>"; };
@@ -411,6 +412,7 @@
 		5C93DE731B806E150074D62A = {
 			isa = PBXGroup;
 			children = (
+				5C435BE31C874EDD00E2CB40 /* README.md */,
 				5CE91FE71C7F54B800DF9A8D /* CHANGELOG.md */,
 				5C7BAB2B1C3C2A3B00889570 /* ConfigoSDK.podspec */,
 				5C93DE7F1B806E150074D62A /* ConfigoSDK */,

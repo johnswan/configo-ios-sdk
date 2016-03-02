@@ -36,7 +36,6 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 
 + (NSURL *)getConfigURL;
 + (NSURL *)statusPollURL;
-+ (NSString *)baseURLString;
 + (CFGEnvironment)currentEnvironment;
 
 @end

@@ -13,7 +13,7 @@
 
 #pragma mark - Global Constants
 
-NSString *const ConfigoSDKVersion = @"0.4.2";
+NSString *const ConfigoSDKVersion = @"0.4.4";
 
 NSString *const CFGFileNamePrefix = @"configo";
 
@@ -87,17 +87,13 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
 #pragma mark - Helpers
 
 + (NSString *)apiVersionToString:(CFGApiVersion)version {
-    NSString *retval = nil;
     switch(version) {
         case CFGApiVersionOne:
         default:
-            retval = CFGVersionOne;
-            break;
+            return CFGVersionOne;
         case CFGApiVersionTwo:
-            retval = CFGVersionTwo;
-            break;
+            return CFGVersionTwo;
     }
-    return retval;
 }
 
 @end
