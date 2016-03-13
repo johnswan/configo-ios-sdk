@@ -2,6 +2,10 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
+## [Unreleased]
+### Added
+- Event tracking (`CFGEvent`)
+
 ## [0.4.4] - 2015-03-02 
 ### Deprecated
 - `configValueForKeyPath:` use `configValueForKeyPath:fallbackValue:` with `nil` for the 2nd argument instead.
