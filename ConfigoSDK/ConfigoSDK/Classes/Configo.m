@@ -7,6 +7,7 @@
 //
 
 #import "Configo.h"
+#import "ConfigoPrivate.h"
 #import "CFGFileController.h"
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
@@ -31,26 +32,6 @@ NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 NSString *const ConfigoNotificationUserInfoRawConfigKey = @"rawConfig";
 NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 
-
-#pragma mark - Private Declarations
-
-@interface Configo ()
-@property (nonatomic, copy) NSString *devKey;
-@property (nonatomic, copy) NSString *appId;
-@property (nonatomic, strong) CFGConfigoDataController *configoDataController;
-@property (nonatomic, strong) CFGFileController *fileController;
-@property (nonatomic, strong) CFGEventsController *eventsController;
-@property (nonatomic, strong) CFGNetworkController *networkController;
-@property (nonatomic, strong) CFGConfigValueFetcher *configValueFetcher;
-
-@property (nonatomic, strong) CFGResponse *activeConfigoResponse;
-@property (nonatomic, strong) CFGResponse *latestConfigoResponse;
-
-@property (nonatomic, copy) CFGCallback listenerCallback;
-@property (nonatomic, copy) CFGCallback tempListenerCallback;
-
-@property (nonatomic, copy) NSTimer *pollingTimer;
-@end
 
 #pragma mark - Implementation
 

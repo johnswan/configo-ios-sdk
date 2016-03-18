@@ -8,6 +8,10 @@
 
 #import <XCTest/XCTest.h>
 #import "Configo.h"
+#import "ConfigoPrivate.h"
+
+#import "CFGEventsController.h"
+#import "CFGEvent.h"
 
 #import <OCMock/OCMock.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
@@ -41,6 +45,17 @@
     
     value = [_configo configValueForKeyPath: @"dict.dict.key" fallbackValue: nil];
     XCTAssertEqualObjects(@"inner", value);
+}
+
+- (void)testEventAddition {
+    NSString *expectedName = @"clickEvent";
+    NSDictionary *expectedProps = @{@"prop1" : @"value"};
+    [_configo trackEvent: expectedName withProperties: expectedProps];
+    CFGEvent *event = [[[_configo eventsController] events] lastObject];
+    NSString *name = event.name;
+    NSDictionary *props = event.properties;
+    XCTAssertEqualObjects(expectedName, name);
+    XCTAssertEqualObjects(expectedProps, props);
 }
 
 #pragma mark - Setup
