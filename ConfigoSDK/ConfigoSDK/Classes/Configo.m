@@ -10,6 +10,7 @@
 #import "CFGFileController.h"
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
+#import "CFGEventsController.h"
 #import "CFGPrivateConfigService.h"
 #import "CFGConfigValueFetcher.h"
 #import "CFGLogger.h"
@@ -38,6 +39,7 @@ NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
 @property (nonatomic, strong) CFGFileController *fileController;
+@property (nonatomic, strong) CFGEventsController *eventsController;
 @property (nonatomic, strong) CFGNetworkController *networkController;
 @property (nonatomic, strong) CFGConfigValueFetcher *configValueFetcher;
 
@@ -101,6 +103,7 @@ static id _shared = nil;
         _configoDataController = [[CFGConfigoDataController alloc] initWithDevKey: devKey appId: appId];
         _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
         _networkController = [[CFGNetworkController alloc] initWithDevKey: devKey appId: appId];
+        _eventsController = [[CFGEventsController alloc] initWithDevKey: devKey appId: appId udid: [_configoDataController udid]];
         _configValueFetcher = [[CFGConfigValueFetcher alloc] init];
         
         _latestConfigoResponse = [self responseFromFileWithDevKey: devKey withAppId: appId];
@@ -272,6 +275,12 @@ static id _shared = nil;
      //If user calls this method consecutively - this will be triggered every time.
      //[self pullConfig];
      }*/
+}
+
+#pragma mark - Events Handling
+
+- (void)trackEvent:(NSString *)event withProperties:(NSDictionary *)properties {
+    [_eventsController addEvent: event withProperties: properties];
 }
 
 #pragma mark - Config Getters

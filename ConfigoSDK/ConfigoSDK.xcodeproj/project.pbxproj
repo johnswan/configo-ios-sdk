@@ -46,6 +46,16 @@
 		5C42227D1C510F5200434178 /* CFGResponseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42227C1C510F5200434178 /* CFGResponseFactory.m */; };
 		5C54701F1B84B55700C026D8 /* CFGInternalError.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C54701D1B84B55700C026D8 /* CFGInternalError.h */; };
 		5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C54701E1B84B55700C026D8 /* CFGInternalError.m */; };
+		5C6498651C99BE7E00510071 /* CFGBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6498641C99BE7E00510071 /* CFGBaseTestCase.m */; };
+		5C64986B1C9AE05400510071 /* OHHTTPStubsUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C64986A1C9AE05400510071 /* OHHTTPStubsUtilities.m */; };
+		5C7C77281C96BBB300DE033B /* CFGLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C77271C96BBB300DE033B /* CFGLoggerTests.m */; };
+		5C7C772A1C96BCC100DE033B /* CFGNetworkControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C77291C96BCC100DE033B /* CFGNetworkControllerTests.m */; };
+		5C7C772C1C96BDAF00DE033B /* v1-event-push-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C7C772B1C96BDAF00DE033B /* v1-event-push-success.json */; };
+		5C7C77301C96D86D00DE033B /* CFGEventFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C772F1C96D86D00DE033B /* CFGEventFactory.m */; };
+		5C7C77321C96FC4D00DE033B /* v1-event-push-failed.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C7C77311C96FC4D00DE033B /* v1-event-push-failed.json */; };
+		5C7C77361C97015400DE033B /* CFGEventsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C7C77341C97015400DE033B /* CFGEventsController.h */; };
+		5C7C77371C97015400DE033B /* CFGEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C77351C97015400DE033B /* CFGEventsController.m */; };
+		5C7C77391C97018700DE033B /* CFGEventsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */; };
 		5C87AF741C7E271B008D7785 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C05AE5C1C7E140500AD7D93 /* Foundation.framework */; };
 		5C88E3D21C4CE50C00527A25 /* ConfigoSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */; };
 		5C88E3D41C4CE50C00527A25 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */; };
@@ -163,7 +173,20 @@
 		5C435BE31C874EDD00E2CB40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5C54701D1B84B55700C026D8 /* CFGInternalError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CFGInternalError.h; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5C54701E1B84B55700C026D8 /* CFGInternalError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CFGInternalError.m; path = "Classes/Models/Response Header/Internal Error/CFGInternalError.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5C6498641C99BE7E00510071 /* CFGBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGBaseTestCase.m; sourceTree = "<group>"; };
+		5C6498681C99BF6C00510071 /* CFGBaseTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFGBaseTestCase.h; sourceTree = "<group>"; };
+		5C6498691C9AE05400510071 /* OHHTTPStubsUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubsUtilities.h; sourceTree = "<group>"; };
+		5C64986A1C9AE05400510071 /* OHHTTPStubsUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubsUtilities.m; sourceTree = "<group>"; };
 		5C7BAB2B1C3C2A3B00889570 /* ConfigoSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = ConfigoSDK.podspec; path = /Users/natanavra/Projects/Development/Configo/iOS/ConfigoSDK.podspec; sourceTree = "<absolute>"; };
+		5C7C77271C96BBB300DE033B /* CFGLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGLoggerTests.m; sourceTree = "<group>"; };
+		5C7C77291C96BCC100DE033B /* CFGNetworkControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGNetworkControllerTests.m; sourceTree = "<group>"; };
+		5C7C772B1C96BDAF00DE033B /* v1-event-push-success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "v1-event-push-success.json"; path = "../../../response-files/v1-event-push-success.json"; sourceTree = "<group>"; };
+		5C7C772E1C96D86D00DE033B /* CFGEventFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGEventFactory.h; path = Factory/CFGEvent/CFGEventFactory.h; sourceTree = "<group>"; };
+		5C7C772F1C96D86D00DE033B /* CFGEventFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGEventFactory.m; path = Factory/CFGEvent/CFGEventFactory.m; sourceTree = "<group>"; };
+		5C7C77311C96FC4D00DE033B /* v1-event-push-failed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "v1-event-push-failed.json"; path = "../../../response-files/v1-event-push-failed.json"; sourceTree = "<group>"; };
+		5C7C77341C97015400DE033B /* CFGEventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGEventsController.h; path = "Classes/Controllers/Events Controller/CFGEventsController.h"; sourceTree = "<group>"; };
+		5C7C77351C97015400DE033B /* CFGEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGEventsController.m; path = "Classes/Controllers/Events Controller/CFGEventsController.m"; sourceTree = "<group>"; };
+		5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGEventsControllerTests.m; sourceTree = "<group>"; };
 		5C88E3CF1C4CE50C00527A25 /* ConfigoSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigoSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoSDKTests.m; sourceTree = "<group>"; };
 		5C88E3D31C4CE50C00527A25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -377,6 +400,7 @@
 		5C4222791C510F0E00434178 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				5C7C772D1C96D85500DE033B /* CFGEvent */,
 				5C42227A1C510F2600434178 /* CFGResponse */,
 			);
 			name = Factory;
@@ -400,17 +424,50 @@
 			name = CFGInternalError;
 			sourceTree = "<group>";
 		};
+		5C64986C1C9AE08F00510071 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5C6498691C9AE05400510071 /* OHHTTPStubsUtilities.h */,
+				5C64986A1C9AE05400510071 /* OHHTTPStubsUtilities.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		5C7C772D1C96D85500DE033B /* CFGEvent */ = {
+			isa = PBXGroup;
+			children = (
+				5C7C772E1C96D86D00DE033B /* CFGEventFactory.h */,
+				5C7C772F1C96D86D00DE033B /* CFGEventFactory.m */,
+			);
+			name = CFGEvent;
+			sourceTree = "<group>";
+		};
+		5C7C77331C97013800DE033B /* Events Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5C7C77341C97015400DE033B /* CFGEventsController.h */,
+				5C7C77351C97015400DE033B /* CFGEventsController.m */,
+			);
+			name = "Events Controller";
+			sourceTree = "<group>";
+		};
 		5C88E3D01C4CE50C00527A25 /* ConfigoSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				5C39AB921C95C1DA00028913 /* CFGSandbox.m */,
+				5C88E3D31C4CE50C00527A25 /* Info.plist */,
+				5C4222791C510F0E00434178 /* Factory */,
 				5CDD0E9F1C84669F0040784C /* Response Files */,
+				5C64986C1C9AE08F00510071 /* Utilities */,
+				5C6498681C99BF6C00510071 /* CFGBaseTestCase.h */,
+				5C6498641C99BE7E00510071 /* CFGBaseTestCase.m */,
 				5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */,
 				5C05AE5A1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m */,
 				5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */,
 				5C4222771C50E40C00434178 /* CFGFileControllerTests.m */,
-				5C4222791C510F0E00434178 /* Factory */,
-				5C88E3D31C4CE50C00527A25 /* Info.plist */,
+				5C7C77271C96BBB300DE033B /* CFGLoggerTests.m */,
+				5C7C77291C96BCC100DE033B /* CFGNetworkControllerTests.m */,
+				5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */,
+				5C39AB921C95C1DA00028913 /* CFGSandbox.m */,
 			);
 			path = ConfigoSDKTests;
 			sourceTree = "<group>";
@@ -501,6 +558,8 @@
 		5CDD0E9F1C84669F0040784C /* Response Files */ = {
 			isa = PBXGroup;
 			children = (
+				5C7C77311C96FC4D00DE033B /* v1-event-push-failed.json */,
+				5C7C772B1C96BDAF00DE033B /* v1-event-push-success.json */,
 				5CDD0EA21C846A640040784C /* v1-status-false-success.json */,
 				5CDD0EA31C846A640040784C /* v2-getConfig-success.json */,
 			);
@@ -519,6 +578,7 @@
 		5CEA82ED1B8DF95A008F6D3B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C7C77331C97013800DE033B /* Events Controller */,
 				5C27020F1C82EBDA00D7508E /* Config Controller */,
 				5C1186261BFA0F4F0048CBAA /* Private Config Manager */,
 				5C33AB111B8CB30000D85791 /* File Manager */,
@@ -891,6 +951,7 @@
 				5C33AB0E1B8CAD6400D85791 /* CFGFileController.h in Headers */,
 				5CF08C2F1C26FBAD00A85493 /* NNURLRequestSerializer.h in Headers */,
 				5CF08C521C26FBAD00A85493 /* NNLibrariesEssentials.h in Headers */,
+				5C7C77361C97015400DE033B /* CFGEventsController.h in Headers */,
 				5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */,
 				5CF08C251C26FBAD00A85493 /* NNSecurity.h in Headers */,
 				5CF08C501C26FBAD00A85493 /* NNConstants.h in Headers */,
@@ -1018,7 +1079,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7C772C1C96BDAF00DE033B /* v1-event-push-success.json in Resources */,
 				5CDD0EA51C846A640040784C /* v2-getConfig-success.json in Resources */,
+				5C7C77321C96FC4D00DE033B /* v1-event-push-failed.json in Resources */,
 				5CDD0EA41C846A640040784C /* v1-status-false-success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,9 +1178,15 @@
 				5C4222781C50E40C00434178 /* CFGFileControllerTests.m in Sources */,
 				5C05AE5B1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m in Sources */,
 				5C88E3E41C4CF49500527A25 /* CFGConfigControllerTests.m in Sources */,
+				5C7C77391C97018700DE033B /* CFGEventsControllerTests.m in Sources */,
 				5C42227D1C510F5200434178 /* CFGResponseFactory.m in Sources */,
+				5C7C77281C96BBB300DE033B /* CFGLoggerTests.m in Sources */,
+				5C6498651C99BE7E00510071 /* CFGBaseTestCase.m in Sources */,
 				5C39AB931C95C1DA00028913 /* CFGSandbox.m in Sources */,
 				5C88E3D21C4CE50C00527A25 /* ConfigoSDKTests.m in Sources */,
+				5C64986B1C9AE05400510071 /* OHHTTPStubsUtilities.m in Sources */,
+				5C7C772A1C96BCC100DE033B /* CFGNetworkControllerTests.m in Sources */,
+				5C7C77301C96D86D00DE033B /* CFGEventFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,6 +1215,7 @@
 				5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */,
 				5CF08C401C26FBAD00A85493 /* NSObject+NNAdditions.m in Sources */,
 				5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */,
+				5C7C77371C97015400DE033B /* CFGEventsController.m in Sources */,
 				5CF08C4F1C26FBAD00A85493 /* NNUtilities.m in Sources */,
 				5C5470201B84B55700C026D8 /* CFGInternalError.m in Sources */,
 				5CF08C421C26FBAD00A85493 /* NSString+NNAdditions.m in Sources */,
@@ -1184,6 +1254,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C11C850F2514EFE6EB29343 /* Pods-ConfigoSDKTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = ConfigoSDKTests/Info.plist;
@@ -1195,6 +1266,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.ConfigoSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Debug;
 		};
@@ -1202,6 +1274,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F394503302E03E981E51AF3 /* Pods-ConfigoSDKTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = ConfigoSDKTests/Info.plist;
@@ -1222,6 +1295,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.configo.ConfigoSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Release;
 		};
@@ -1331,6 +1405,7 @@
 		5C93DE941B806E150074D62A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1362,12 +1437,14 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Debug;
 		};
 		5C93DE951B806E150074D62A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1397,6 +1474,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 			};
 			name = Release;
 		};

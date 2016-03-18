@@ -37,16 +37,16 @@ static NSString *const kInternalErrorKey = @"internalError";
 }
 
 - (NSDictionary *)jsonRepresentation {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary: [super jsonRepresentation]];
-    [dict nnSafeSetObject: _trxId forKey: kTrxIdKey];
-    [dict nnSafeSetObject: @(_statusCode) forKey: kStatusCodeKey];
-    [dict nnSafeSetObject: _statusMessage forKey: kStatusMessageKey];
-    [dict nnSafeSetObject: [_internalError jsonRepresentation] forKey: kInternalErrorKey];
-    return dict;
+    return [self dictionaryRepresentation];
 }
 
 - (NSDictionary *)dictionaryRepresentation {
-    return [self jsonRepresentation];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary: [super dictionaryRepresentation]];
+    [dict nnSafeSetObject: _trxId forKey: kTrxIdKey];
+    [dict nnSafeSetObject: @(_statusCode) forKey: kStatusCodeKey];
+    [dict nnSafeSetObject: _statusMessage forKey: kStatusMessageKey];
+    [dict nnSafeSetObject: [_internalError dictionaryRepresentation] forKey: kInternalErrorKey];
+    return dict;
 }
 
 @end

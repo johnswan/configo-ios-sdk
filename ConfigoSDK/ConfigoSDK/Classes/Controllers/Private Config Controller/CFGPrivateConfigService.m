@@ -93,7 +93,8 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
                                  @"pollingInterval": @{
                                          @"ios" : @(CFGDefaultPollingInterval),
                                          @"android" : @25000
-                                         }
+                                         },
+                                 @"events-push-interval" : @(CFGDefaultEventPushInterval)
                                  },
                          @"features": @[@{
                                             @"key": @"GET-CONFIG-V2",
@@ -125,6 +126,15 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
     NSInteger retval = 0;
     if([value respondsToSelector: @selector(integerValue)]) {
         retval = [value integerValue];
+    }
+    return retval;
+}
+
+- (double)doubleForKeyPath:(NSString *)keyPath {
+    id value = [self valueForKeyPath: keyPath];
+    double retval = 0;
+    if([value respondsToSelector: @selector(doubleValue)]) {
+        retval = [value doubleValue];
     }
     return retval;
 }

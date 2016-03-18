@@ -30,15 +30,15 @@ static NSString *const kInternalErrorSubdomain = @"internalError";
 }
 
 - (NSDictionary *)jsonRepresentation {
+    return [self dictionaryRepresentation];
+}
+
+- (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict nnSafeSetObject: @(_statusCode) forKey: kStatusCodeKey];
     [dict nnSafeSetObject: _errorDescription forKey: kDescriptionKey];
     [dict nnSafeSetObject: _devStack forKey: kDevStackKey];
     return dict;
-}
-
-- (NSDictionary *)dictionaryRepresentation {
-    return [self jsonRepresentation];
 }
 
 - (NSError *)error {

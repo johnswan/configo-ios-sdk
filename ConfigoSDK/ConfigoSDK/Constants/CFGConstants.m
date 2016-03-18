@@ -14,10 +14,10 @@
 #pragma mark - Global Constants
 
 NSString *const ConfigoSDKVersion = @"0.4.4";
-
 NSString *const CFGFileNamePrefix = @"configo";
-
 NSString *const CFGErrorDomain = @"io.configo.error";
+NSString *const CFGSessionStartEventName = @"CONFIGO_SESSION_START";
+NSString *const CFGSessionEndEventName = @"CONFIGO_SESSION_END";
 
 #pragma mark - Private Constants
 
@@ -27,8 +27,10 @@ NSString *const CFGBaseProductionPath = @"https://api.configo.io";
 
 NSString *const CFGGetConfigPath = @"/user/getConfig";
 NSString *const CFGStatusPollPath = @"/user/status";
+NSString *const CFGEventsPushPath = @"/events/push";
 
 NSInteger const CFGDefaultPollingInterval = 25;
+NSInteger const CFGDefaultEventPushInterval = 60;
 
 NSString *const CFGVersionOne = @"/v1";
 NSString *const CFGVersionTwo = @"/v2";
@@ -43,6 +45,31 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
 
 @implementation CFGConstants
 
+#pragma mark - Error Builder
+
++ (NSError *)errorWithType:(CFGErrorCode)code userInfo:(NSDictionary *)info {
+    NSString *domain = [CFGErrorDomain stringByAppendingFormat: @".%@", [self errorCodeToString: code]];
+    return [NSError errorWithDomain: domain code: code userInfo: info];
+}
+
++ (NSString *)errorCodeToString:(CFGErrorCode)code {
+    NSString *retval = nil;
+    switch(code) {
+        case CFGErrorBadResponse:
+            retval = @"badResponse";
+            break;
+        case CFGErrorRequestFailed:
+            retval = @"requestFailed";
+            break;
+        default:
+            retval = @"unexpected";
+            break;
+    }
+    return retval;
+}
+
+#pragma mark - URL Builders
+
 + (NSURL *)getConfigURL {
     CFGApiVersion version = CFGPrivateFeatureFlag(@"GET-CONFIG-V2") ? CFGApiVersionTwo : CFGApiVersionOne;
     NSString *urlString = [self apiURLStringWithVersion: version withPath: CFGGetConfigPath];
@@ -53,6 +80,13 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
     NSString *urlStr = [self apiURLStringWithVersion: CFGApiVersionOne withPath: CFGStatusPollPath];
     return [NSURL URLWithString: urlStr];
 }
+
++ (NSURL *)eventsPushUrl {
+    NSString *urlStr = [self apiURLStringWithVersion: CFGApiVersionOne withPath: CFGEventsPushPath];
+    return [NSURL URLWithString: urlStr];
+}
+
+#pragma mark - Builders
 
 + (NSString *)apiURLStringWithVersion:(CFGApiVersion)version withPath:(NSString *)path {
     NSMutableString *urlString = [NSMutableString string];

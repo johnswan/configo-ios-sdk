@@ -27,6 +27,7 @@ static NSString *const kGETKey_deviceId = @"deviceId";
 static NSString *const kResponseKey_header = @"header";
 static NSString *const kResponseKey_response = @"response";
 static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
+static NSString *const kResponseKey_message = @"message";
 
 
 @interface CFGNetworkController ()
@@ -37,6 +38,11 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
 
 
 @implementation CFGNetworkController
+
+- (instancetype)init {
+    NSAssert(false, @"Use `initWithDevKey:appId:` instead.");
+    return nil;
+}
 
 - (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId {
     if(self = [super init]) {
@@ -68,7 +74,7 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
         CFGResponse *configoResponse = [[CFGResponse alloc] initWithDictionary: object];
 
         if(!error && !configoResponse) {
-            retError = [NSError errorWithDomain: @"io.configo.badResponse" code: 40 userInfo: nil];
+            retError = [NSError errorWithDomain: CFGErrorDomain code: 40 userInfo: nil];
         } else if(error) {
             NNLogDebug(@"Loading Config: Error", error);
             retError = error;
@@ -127,16 +133,67 @@ static NSString *const kResponseKey_shouldUpdate = @"shouldUpdate";
             shouldUpdate = [NNJSONUtilities validBooleanFromObject: responseJson[kResponseKey_shouldUpdate]];
         }
         
-        callback(shouldUpdate, retError);
+        if(callback) {
+            callback(shouldUpdate, retError);
+        }
     }];
+}
+
+- (void)sendEvents:(NSArray *)events withUdid:(NSString *)udid withCallback:(CFGSendEventsCallback)callback {
+    if(!udid || events.count == 0) {
+        NNLogDebug(@"Bad params provided", nil);
+    } else {
+        NNURLConnectionManager *mgr = [NNURLConnectionManager sharedManager];
+        [mgr setHttpHeaders: [self requestHeaders]];
+        mgr.requestSerializer = [NNJSONRequestSerializer serializer];
+        mgr.responseSerializer = [NNJSONResponseSerializer serializer];
+        
+        NSURL *url = [CFGConstants eventsPushUrl];
+        NSDictionary *params = @{@"udid" : udid,
+                                 @"events" : events};
+        NNLogDebug(@"Sending events", params);
+        [mgr POST: url parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            NNLogDebug(@"Send events response data:", responseObject);
+            
+            NSError *retError = error;
+            BOOL success = NO;
+            if([responseObject isKindOfClass: [NSDictionary class]] && !error) {
+                NSDictionary *json = (NSDictionary *)responseObject;
+                CFGResponseHeader *responseHeader = [[CFGResponseHeader alloc] initWithDictionary: json[kResponseKey_header]];
+                if(responseHeader.internalError) {
+                    retError = [responseHeader.internalError error];
+                } else {
+                    NSDictionary *responseContent = json[kResponseKey_response];
+                    NSString *message = responseContent[kResponseKey_message];
+                    success = [message caseInsensitiveCompare: @"success"] == NSOrderedSame;
+                    if(!success) {
+                        NSDictionary *userinfo = nil;
+                        if(message) {
+                            userinfo = @{@"message" : message};
+                        }
+                        retError = [NSError errorWithDomain: CFGErrorDomain code: CFGErrorRequestFailed userInfo: userinfo];
+                    }
+                }
+            }
+            
+            if(!success && retError) {
+                NNLogDebug(@"Failed to push events", retError);
+            }
+            if(callback) {
+                callback(success, retError);
+            }
+        }];
+    }
 }
 
 #pragma mark - Helpers
 
 - (NSDictionary *)requestHeaders {
-    return @{kHTTPHeaderKey_authHeader : @"natanavra",
+    return @{
+             kHTTPHeaderKey_authHeader : @"natanavra",
              kHTTPHeaderKey_devKey : _devKey,
-             kHTTPHeaderKey_appId : _appId};
+             kHTTPHeaderKey_appId : _appId
+             };
 }
 
 

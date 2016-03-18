@@ -9,5 +9,10 @@
 #ifndef CFGBaseTestCase_h
 #define CFGBaseTestCase_h
 
+#import <XCTest/XCTest.h>
+
+@interface CFGBaseTestCase : XCTestCase
+- (void)checkAssertBlock:(void(^)())block afterDelay:(NSTimeInterval)delay;
+@end
 
 #endif /* CFGBaseTestCase_h */

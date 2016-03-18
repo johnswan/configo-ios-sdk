@@ -65,8 +65,8 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
         _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
         _configoData = [_fileController readConfigoData: &err];
         
-        if(!_configoData) {
-            NNLogDebug(@"ConfigoData file not found", err);
+        if(!_configoData || !_configoData.udid) {
+            NNLogDebug(@"ConfigoData file not found or bad", err);
             [self basicLoad];
         } else {
             NNLogDebug(@"ConfigoData loaded from file", _configoData);
@@ -134,13 +134,16 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     _customUserIdChanged = NO;
     _userContextChanged = NO;
     _configoData.deviceDetails = _currentDeviceDetails;
-    _configoData.udid = [self udid];
     BOOL success = [_fileController saveConfigoData: _configoData error: err];
     NNLogDebug(success ? @"ConfigoData save success" : @"ConfigoData save failed" , err ? *err : nil);
     return success;
 }
 
 #pragma mark - Getters
+
+- (NSString *)udid {
+    return _configoData.udid;
+}
 
 - (NSDictionary *)userContext {
     return _configoData.userContext;
@@ -222,10 +225,6 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 }
 
 #pragma mark - Helpers
-
-- (NSString *)udid {
-    return [UIDevice udidFromKeychain: nil];
-}
 
 - (NSDictionary *)deviceDetails {
     NSMutableDictionary *details = [NSMutableDictionary dictionary];

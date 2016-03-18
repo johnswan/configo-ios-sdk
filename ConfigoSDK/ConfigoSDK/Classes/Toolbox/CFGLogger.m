@@ -27,14 +27,7 @@ static CFGLogLevel logLevel = CFGLogLevelVerbose;
 }
 
 + (void)printLog:(NSString *)log withLogLevel:(CFGLogLevel)level {
-    NSString *header = [NSString stringWithFormat: @"******************* ConfigoSDK (%@) - %@ *******************", ConfigoSDKVersion, [self stringFromLogLevel: level]];
-    NSString *footer = [@"" stringByPaddingToLength: header.length withString: @"*" startingAtIndex: 0];
-    NSLog(@"%@", header);
-    NSArray *logs = [log componentsSeparatedByString: @"\n"];
-    for(NSString *line in logs) {
-        NSLog(@"%@", line);
-    }
-    NSLog(@"%@", footer);
+    NSLog(@"[ConfigoSDK (%@): %@] %@", ConfigoSDKVersion, [self stringFromLogLevel: level], log);
 }
 
 + (NSString *)stringFromLogLevel:(CFGLogLevel)logLevel {

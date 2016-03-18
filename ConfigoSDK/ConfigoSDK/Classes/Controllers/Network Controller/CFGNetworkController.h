@@ -16,14 +16,16 @@
 
 typedef void(^CFGConfigLoadCallback)(CFGResponse *response, NSError *error);
 typedef void(^CFGStatusPollCallback)(BOOL shouldUpdate, NSError *error);
+typedef void(^CFGSendEventsCallback)(BOOL success, NSError *error);
 
 @interface CFGNetworkController : NSObject
 
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
 - (instancetype)initWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 
 - (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback;
 - (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback;
-
+- (void)sendEvents:(NSArray *)events withUdid:(NSString *)udid withCallback:(CFGSendEventsCallback)callback;
 
 
 @end

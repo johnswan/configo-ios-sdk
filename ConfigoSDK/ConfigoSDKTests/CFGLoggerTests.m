@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
+#import "CFGLogger.h"
+
 @interface CFGLoggerTests : XCTestCase
 
 @end
@@ -24,16 +26,10 @@
     [super tearDown];
 }
 
-- (void)testExample {
+- (void)testFormat {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+    [CFGLogger logLevel: CFGLogLevelVerbose log: @"Testing Logger"];
 }
 
 @end

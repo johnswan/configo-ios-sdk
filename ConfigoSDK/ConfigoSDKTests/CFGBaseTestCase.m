@@ -6,11 +6,9 @@
 //  Copyright © 2016 Configo. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
-@interface CFGBaseTestCase : XCTestCase
-
-@end
+#import "CFGBaseTestCase.h"
+#import <OHHTTPStubs/OHHTTPStubs.h>
+#import <OHHTTPStubs/OHHTTPStubsResponse.h>
 
 @implementation CFGBaseTestCase
 
@@ -22,18 +20,18 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    [OHHTTPStubs removeAllStubs];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)checkAssertBlock:(void(^)())block afterDelay:(NSTimeInterval)delay {
+    NSParameterAssert(block);
+    NSParameterAssert(delay > 0);
+    XCTestExpectation *expectation = [self expectationWithDescription: @"assert block wait"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        block();
+        [expectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout: (delay + 0.5) handler: nil];
 }
 
 @end

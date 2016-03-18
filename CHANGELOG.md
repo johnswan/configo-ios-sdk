@@ -4,7 +4,14 @@ This project follows the [Semantic Versioning](http://semver.org) style.
 
 ## [Unreleased]
 ### Added
-- Event tracking (`CFGEvent`)
+- Event tracking API `trackEvent:withProperties:`.
+
+### Changed
+- Logging format.
+
+### Internal
+#### Added
+- `CFGEventsController` for controlling event queueing, pushing, scheduling and error handling
 
 ## [0.4.4] - 2015-03-02 
 ### Deprecated

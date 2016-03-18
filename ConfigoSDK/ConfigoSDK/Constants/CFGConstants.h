@@ -13,15 +13,16 @@
  String Constants
  ********************************************************/
 FOUNDATION_EXPORT NSString *const ConfigoSDKVersion;
-
 FOUNDATION_EXPORT NSString *const CFGFileNamePrefix;
-
 FOUNDATION_EXPORT NSString *const CFGErrorDomain;
+FOUNDATION_EXPORT NSString *const CFGSessionStartEventName;
+FOUNDATION_EXPORT NSString *const CFGSessionEndEventName;
 
 /********************************************************
  Other Constants
  ********************************************************/
 FOUNDATION_EXPORT NSInteger const CFGDefaultPollingInterval;
+FOUNDATION_EXPORT NSInteger const CFGDefaultEventPushInterval;
 
 /********************************************************
  Interface Declaration
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 
 + (NSURL *)getConfigURL;
 + (NSURL *)statusPollURL;
++ (NSURL *)eventsPushUrl;
 + (CFGEnvironment)currentEnvironment;
 
 @end

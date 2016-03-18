@@ -44,6 +44,10 @@ static NSString *const kTimestampKey = @"timestamp";
 }
 
 - (NSDictionary *)jsonRepresentation {
+    return [self dictionaryRepresentation];
+}
+
+-(NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     NSNumber *timestampNum = [NSNumber numberWithDouble: _timestamp];
@@ -56,10 +60,6 @@ static NSString *const kTimestampKey = @"timestamp";
     [dict nnSafeSetObject: response forKey: kResponseKey];
     
     return dict;
-}
-
--(NSDictionary *)dictionaryRepresentation {
-    return [self jsonRepresentation];
 }
 
 @end

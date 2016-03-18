@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class CFGEvent;
+
 @interface CFGEventFactory : NSObject
+
++ (CFGEvent *)randomEvent;
++ (NSArray *)randomEventsArray;
 
 @end

@@ -141,6 +141,13 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key;
 
 /**
+ *  @brief Track an analytics event associated with the user.
+ *  @param event The event's name. Events with a <code>nil</code> name will be ignored.
+ *  @param properties The properties associated with the event (must be JSON compaitable: <code>NSNumber, NSString, NSArray, NSDictionary, NSNull</code>).
+ */
+- (void)trackEvent:(NSString *)event withProperties:(NSDictionary *)properties;
+
+/**
  *	@brief The raw config
  *  @discussion Using <code>configValueForKeyPath:</code> is strongly advised, as the dictionary can be drilled with dot notation for easier config values retrieval.
  *	@return The config <code>NSDictionary</code>

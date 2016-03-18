@@ -12,7 +12,7 @@
 
 #import "CFGConfigController.h"
 #import "CFGFileController.h"
-#import "CFGNetworkController.h"
+@class CFGNetworkController;
 
 #import "CFGResponseFactory.h"
 #import "CFGResponse.h"
