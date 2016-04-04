@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Turrisio. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LDBLoginViewController.h"
 
 #import <ConfigoSDK/ConfigoSDK.h>
 
-@interface ViewController ()
+@interface LDBLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *drillField;
 @property (weak, nonatomic) IBOutlet UITextView *configView;
 @property (weak, nonatomic) IBOutlet UIView *colorView;

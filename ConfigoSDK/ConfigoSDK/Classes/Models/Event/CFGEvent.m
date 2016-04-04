@@ -21,13 +21,14 @@ static NSString *const kPropertiesKey = @"properties";
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if(self = [super initWithDictionary: dict]) {
         _name = [dict[kNameKey] copy];
+        if(!_name) {
+            return nil;
+        }
+        
         _sessionId = [dict[kSessionIdKey] copy];
         NSNumber *timestampNumber = dict[kTimestampKey];
         _timestamp = [timestampNumber doubleValue];
         _properties = [dict[kPropertiesKey] copy];
-    }
-    if(!_name) {
-        return nil;
     }
     return self;
 }

@@ -1,23 +1,25 @@
 //
 //  AppDelegate.m
-//  ConfigoExample
+//  LeumiDemo
 //
-//  Created by Natan Abramov on 16/08/15.
-//  Copyright (c) 2015 Turrisio. All rights reserved.
+//  Created by Natan Abramov on 03/04/2016.
+//  Copyright © 2016 Turrisio. All rights reserved.
 //
 
 #import "LDBAppDelegate.h"
 #import <ConfigoSDK/ConfigoSDK.h>
 
-@interface AppDelegate ()
+@interface LDBAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation LDBAppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [Configo initWithDevKey: @"2f0ad31bb0b266507483c96cc9f24cf0" appId: @"28f4d6feedbd35e42e431b90dec534cd"];
+    [Configo initWithDevKey: @"2f0ad31bb0b266507483c96cc9f24cf0" appId: @"57015450d852b02d6595a675"];
+    [[Configo sharedInstance] setDynamicallyRefreshValues: YES];
     return YES;
 }
 

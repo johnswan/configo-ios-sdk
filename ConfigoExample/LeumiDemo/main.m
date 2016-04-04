@@ -1,9 +1,9 @@
 //
 //  main.m
-//  ConfigoExample
+//  LeumiDemo
 //
-//  Created by Natan Abramov on 16/08/15.
-//  Copyright (c) 2015 Turrisio. All rights reserved.
+//  Created by Natan Abramov on 03/04/2016.
+//  Copyright © 2016 Turrisio. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -40,7 +40,7 @@
 }
 
 - (BOOL)featureFlagForKey:(NSString *)key fallback:(BOOL)fallback {
-    BOOL foundValue;
+    BOOL foundValue = NO;
     BOOL retval = [self featureFlagForKey: key fromConfig: _config fallback: fallback foundValue: &foundValue];
     if(!foundValue && _useFallbackConfig) {
         retval = [self featureFlagForKey: key fromConfig: _fallbackConfig fallback: fallback foundValue: nil];

@@ -1,4 +1,7 @@
 platform :ios, '7.0'
 
+link_with 'ConfigoExample', 'LeumiDemo'
+
 pod 'ConfigoSDK', :path => '../'
 #pod 'ConfigoSDK', '~> 0.4'
+
