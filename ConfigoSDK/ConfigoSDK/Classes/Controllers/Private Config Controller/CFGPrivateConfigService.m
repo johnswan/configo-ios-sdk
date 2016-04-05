@@ -94,7 +94,9 @@ NSString *const CFGPrivateConfigLoadedNotification = @"io.configo.privateconfig.
                                          @"ios" : @(CFGDefaultPollingInterval),
                                          @"android" : @25000
                                          },
-                                 @"events-push-interval" : @(CFGDefaultEventPushInterval)
+                                 @"events-push-interval" : @{
+                                         @"ios" : @(CFGDefaultEventPushInterval)
+                                         }
                                  },
                          @"features": @[@{
                                             @"key": @"GET-CONFIG-V2",

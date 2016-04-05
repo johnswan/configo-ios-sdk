@@ -24,13 +24,14 @@ NSString *const CFGSessionEndEventName = @"CONFIGO_SESSION_END";
 //NSString *const CFGBaseLocalPath = @"http://local.configo.io:8001";
 NSString *const CFGBaseDevelopmentPath = @"http://local.configo.io:8001";
 NSString *const CFGBaseProductionPath = @"https://api.configo.io";
+NSString *const CFGBaseYosiMachinePath = @"http://10.56.108.19:8001";
 
 NSString *const CFGGetConfigPath = @"/user/getConfig";
 NSString *const CFGStatusPollPath = @"/user/status";
 NSString *const CFGEventsPushPath = @"/events/push";
 
 NSInteger const CFGDefaultPollingInterval = 25;
-NSInteger const CFGDefaultEventPushInterval = 60;
+NSInteger const CFGDefaultEventPushInterval = 5;
 
 NSString *const CFGVersionOne = @"/v1";
 NSString *const CFGVersionTwo = @"/v2";
@@ -105,13 +106,18 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
         case CFGEnvironmentProduction:
             retval = CFGBaseProductionPath;
             break;
+        case CFGEnvironmentYosiMachine:
+            retval = CFGBaseYosiMachinePath;
+            break;
     }
     return retval;
 }
 
 + (CFGEnvironment)currentEnvironment {
-#warning Always Production
-    if(false && ([NNUtilities isDebugMode] && [UIDevice isDeviceSimulator])) {
+    BOOL useYosiMachine = YES;
+    if(useYosiMachine) {
+        return CFGEnvironmentYosiMachine;
+    } else if(false && ([NNUtilities isDebugMode] && [UIDevice isDeviceSimulator])) {
         return CFGEnvironmentDevelopment;
     } else {
         return CFGEnvironmentProduction;

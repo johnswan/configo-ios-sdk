@@ -48,15 +48,18 @@
         _events = [NSMutableArray array];
         _netController = [[CFGNetworkController alloc] initWithDevKey: _devKey
                                                                 appId: _appId];
-        [self observeApplicationTerminateNotification];
         [self startSession];
+        [self observeApplicationTerminateNotification];
         [self setupTimer];
     }
     return self;
 }
 
 - (void)setupTimer {
-    NSTimeInterval interval = CFGPrivateConfigDouble(@"events-push-interval");
+    NSTimeInterval interval = CFGPrivateConfigDouble(@"events-push-interval.ios");
+    if(interval == 0) {
+        interval = CFGDefaultEventPushInterval;
+    }
     _sendScheduler = [NSTimer scheduledTimerWithTimeInterval: interval target: self selector: @selector(sendEvents) userInfo: nil repeats: YES];
 }
 
