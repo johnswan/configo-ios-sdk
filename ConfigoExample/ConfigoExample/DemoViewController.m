@@ -42,6 +42,8 @@
     _loginBtn.layer.borderColor = _loginBtn.titleLabel.textColor.CGColor;
     
     [self refreshView];
+    
+    [[Configo sharedInstance] trackEvent: @"Login Loaded" withProperties: @{@"from" : @"splash"}];
 }
 
 - (void)registerConfigoCallback {
@@ -49,7 +51,7 @@
     [[Configo sharedInstance] setDynamicallyRefreshValues: YES];
     [[Configo sharedInstance] setCallback: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
         if(error) {
-            //Problem
+            //Problem
         } else {
             [self refreshView];
         }

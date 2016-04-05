@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Turrisio. All rights reserved.
 //
 
-#import "LDBAppDelegate.h"
+#import "AppDelegate.h"
 #import <ConfigoSDK/ConfigoSDK.h>
 
 @interface AppDelegate ()
@@ -17,7 +17,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [Configo initWithDevKey: @"2f0ad31bb0b266507483c96cc9f24cf0" appId: @"28f4d6feedbd35e42e431b90dec534cd"];
+    NSString *yosiDevKey = @"e222a45f39fb16b1e091238e90093e70";
+    NSString *yosiAppId = @"56c5825cbd961b614d239592";
+    NSString *prodDevKey = @"2f0ad31bb0b266507483c96cc9f24cf0";
+    NSString *prodAppId = @"28f4d6feedbd35e42e431b90dec534cd";
+    [Configo initWithDevKey: yosiDevKey appId: yosiAppId];
     return YES;
 }
 

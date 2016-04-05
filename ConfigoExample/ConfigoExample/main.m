@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LDBAppDelegate.h"
+#import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LDBAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }
