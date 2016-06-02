@@ -5,9 +5,12 @@ This project follows the [Semantic Versioning](http://semver.org) style.
 ## [Unreleased]
 ### Added
 - Event tracking API `trackEvent:withProperties:`.
+- Clear all user context via `clearUserContext`.
+- Add multiple callback listeners via `addListenerCallback:`.
 
 ### Changed
 - Logging format.
+- `CFGFeature` object describing a feature flag is now a public class.
 
 ### Internal
 #### Added

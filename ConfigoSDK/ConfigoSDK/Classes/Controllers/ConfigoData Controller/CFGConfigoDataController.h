@@ -25,6 +25,7 @@
 - (NSDictionary *)userContext;
 - (BOOL)setUserContext:(NSDictionary *)userContext;
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key;
+- (void)clearUserContext;
 
 - (BOOL)saveConfigoDataWithDevKey:(NSString *)devKey appId:(NSString *)appId;
 - (BOOL)saveConfigoDataWithDevKey:(NSString *)devKey appId:(NSString *)appId error:(NSError **)err;

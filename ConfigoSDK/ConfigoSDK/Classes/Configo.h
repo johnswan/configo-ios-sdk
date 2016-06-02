@@ -104,6 +104,8 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  */
 - (void)setCallback:(CFGCallback)callback;
 
+- (void)addListenerCallback:(CFGCallback)callback;
+
 /** @brief Trigger pulling a config from the server. */
 - (void)pullConfig;
 
@@ -139,6 +141,8 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  *  @return false if <code>value</code> can not be converted to JSON, true otherwise.
  */
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key;
+
+- (void)clearUserContext;
 
 /**
  *  @brief Track an analytics event associated with the user.

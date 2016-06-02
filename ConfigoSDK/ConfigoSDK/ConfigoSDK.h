@@ -12,6 +12,8 @@
 #define CONFIGO_SDK_HEADER
 
 #import "Configo.h"
+#import "CFGFeature.h"
 #import "CFGLogLevel.h"
+
 
 #endif

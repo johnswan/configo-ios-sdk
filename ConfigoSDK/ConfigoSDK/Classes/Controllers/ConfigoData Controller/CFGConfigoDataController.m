@@ -171,6 +171,10 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     }
 }
 
+- (void)clearUserContext {
+    [_configoData clearUserContext];
+}
+
 - (BOOL)setUserContext:(NSDictionary *)userContext {
     //Test is done at caller level for now. (We want to keep it simple and not filter the NSDictionary)
     //id validContext = [NNJSONUtilities makeValidJSONObject: userContext];

@@ -8,6 +8,7 @@
 
 #import "Configo.h"
 #import "ConfigoPrivate.h"
+
 #import "CFGFileController.h"
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
@@ -241,13 +242,26 @@ static id _shared = nil;
     }
 }
 
+/** This is of course a bad implmentation, we can't remove the callback (even though I thought of id but's it's meh. */
+- (void)addListenerCallback:(CFGCallback)callback {
+    if(!_callbacks) {
+        _callbacks = [NSMutableArray array];
+    }
+    if(callback) {
+        [_callbacks addObject: [callback copy]];
+    }
+}
+
 - (void)setCustomUserId:(NSString *)userId {
     [_configoDataController setCustomUserId: userId];
 }
 
 - (BOOL)setUserContext:(NSDictionary *)context {
-    //[self setCustomUserId: nil userContext: context]; //Incorrect, will trigger changing the customUserId
     return [_configoDataController setUserContext: context];
+}
+
+- (void)clearUserContext {
+    [_configoDataController clearUserContext];
 }
 
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key {
@@ -312,12 +326,13 @@ static id _shared = nil;
 #pragma mark - Helpers
 
 - (void)determineShouldLog {
-    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    /*NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
     if(bundleId) {
-        [NNLogger setLogging: [bundleId isEqualToString: @"io.configo.example"]];
+        BOOL log = [bundleId isEqualToString: @"io.configo.example"]; //|| [bundleId isEqualToString: @"io.configo.LeumiDemo"];
+        [NNLogger setLogging: log];
     } else {
         //Probably a testing target
-    }
+    }*/
 }
 
 - (BOOL)shouldUpdateActiveConfig {
@@ -334,6 +349,10 @@ static id _shared = nil;
 }
 
 - (void)invokeListenersCallbacksWithError:(NSError *)error {
+    for(CFGCallback callback in _callbacks) {
+        callback(error, [self rawConfig], [self featuresList]);
+    }
+    
     if(_listenerCallback) {
         _listenerCallback(error, [self rawConfig], [self featuresList]);
     }

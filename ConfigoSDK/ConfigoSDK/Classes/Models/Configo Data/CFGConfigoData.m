@@ -52,6 +52,11 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
     return dict;
 }
 
+
+- (void)clearUserContext {
+    [_mutableUserContext removeAllObjects];
+}
+
 - (NSDictionary *)userContext {
     NSDictionary *retval = nil;
     if(_mutableUserContext.count > 0) {

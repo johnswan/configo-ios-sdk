@@ -26,6 +26,7 @@
 
 @property (nonatomic, copy) CFGCallback listenerCallback;
 @property (nonatomic, copy) CFGCallback tempListenerCallback;
+@property (nonatomic, strong) NSMutableArray *callbacks;
 
 @property (nonatomic, copy) NSTimer *pollingTimer;
 @end

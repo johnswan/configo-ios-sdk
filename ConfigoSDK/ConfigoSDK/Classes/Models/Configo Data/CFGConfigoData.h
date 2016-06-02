@@ -16,8 +16,8 @@
 
 
 - (NSDictionary *)userContext;
+- (void)clearUserContext;
 - (void)setUserContext:(NSDictionary *)userContext;
-
 - (void)setUserContextValue:(id)value forKey:(NSString *)key;
 
 @end
