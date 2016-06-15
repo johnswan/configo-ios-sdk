@@ -32,8 +32,6 @@
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
 		5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27020B1C8272D900D7508E /* CFGFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C27020E1C8272D900D7508E /* CFGFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27020C1C8272D900D7508E /* CFGFeature.m */; };
-		5C2702121C82EBDA00D7508E /* CFGConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2702101C82EBDA00D7508E /* CFGConfigController.h */; };
-		5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2702111C82EBDA00D7508E /* CFGConfigController.m */; };
 		5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB071B8CA84500D85791 /* CFGConfigoData.h */; };
 		5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C33AB081B8CA84500D85791 /* CFGConfigoData.m */; };
 		5C33AB0E1B8CAD6400D85791 /* CFGFileController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C33AB0C1B8CAD6400D85791 /* CFGFileController.h */; };
@@ -62,7 +60,6 @@
 		5C88E3D41C4CE50C00527A25 /* ConfigoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C93DE7D1B806E150074D62A /* ConfigoSDK.framework */; };
 		5C88E3DB1C4CEF3000527A25 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DA1C4CEF3000527A25 /* CoreTelephony.framework */; };
 		5C88E3DD1C4CEF3500527A25 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C88E3DC1C4CEF3500527A25 /* SystemConfiguration.framework */; };
-		5C88E3E41C4CF49500527A25 /* CFGConfigControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3E31C4CF49500527A25 /* CFGConfigControllerTests.m */; };
 		5C93DE831B806E150074D62A /* ConfigoSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DE821B806E150074D62A /* ConfigoSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE41B80744D0074D62A /* Configo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C93DEE21B80744D0074D62A /* Configo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C93DEE51B80744D0074D62A /* Configo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEE31B80744D0074D62A /* Configo.m */; };
@@ -960,7 +957,6 @@
 				5CACCDC41B821120009E343C /* CFGResponseHeader.h in Headers */,
 				5CF08C251C26FBAD00A85493 /* NNSecurity.h in Headers */,
 				5CF08C501C26FBAD00A85493 /* NNConstants.h in Headers */,
-				5C2702121C82EBDA00D7508E /* CFGConfigController.h in Headers */,
 				5CF08C371C26FBAD00A85493 /* NSData+NNSecurity.h in Headers */,
 				5C93DEE41B80744D0074D62A /* Configo.h in Headers */,
 				5CF08C4C1C26FBAD00A85493 /* NNLogger.h in Headers */,
@@ -1181,7 +1177,6 @@
 			files = (
 				5C4222781C50E40C00434178 /* CFGFileControllerTests.m in Sources */,
 				5C05AE5B1C7E0F8600AD7D93 /* CFGConfigValueFetcherTests.m in Sources */,
-				5C88E3E41C4CF49500527A25 /* CFGConfigControllerTests.m in Sources */,
 				5C7C77391C97018700DE033B /* CFGEventsControllerTests.m in Sources */,
 				5C42227D1C510F5200434178 /* CFGResponseFactory.m in Sources */,
 				5C7C77281C96BBB300DE033B /* CFGLoggerTests.m in Sources */,
@@ -1216,7 +1211,6 @@
 				5CF08C241C26FBAD00A85493 /* NNReachabilityManager.m in Sources */,
 				5CF08C471C26FBAD00A85493 /* UIDevice+NNAdditions.m in Sources */,
 				5CF08C3C1C26FBAD00A85493 /* NSDictionary+NNAdditions.m in Sources */,
-				5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */,
 				5CF08C401C26FBAD00A85493 /* NSObject+NNAdditions.m in Sources */,
 				5C33AB0A1B8CA84500D85791 /* CFGConfigoData.m in Sources */,
 				5C7C77371C97015400DE033B /* CFGEventsController.m in Sources */,

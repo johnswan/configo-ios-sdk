@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/configo-io/configo-ios-sdk.git", :tag => s.version, :submodules => true }
 
   s.source_files  = "ConfigoSDK/ConfigoSDK/**/*.{h,m}", "ConfigoSDK/ConfigoSDK/Classes/NNLibraries/**/*.{h,m}"
-  s.public_header_files = "ConfigoSDK/ConfigoSDK/ConfigoSDK.h", "ConfigoSDK/ConfigoSDK/Classes/Configo.h", "ConfigoSDK/ConfigoSDK/Constants/CFGLogLevel.h", "ConfigoSDK/ConfigoSDK/Classes/Models/Config/CFGFeature.h", "ConfigoSDK/ConfigoSDK/Classes/NNLibraries/Classes/Frameworks/NNJSONObject/NNJSONObject.h"
+  s.public_header_files = "ConfigoSDK/ConfigoSDK/ConfigoSDK.h", "ConfigoSDK/ConfigoSDK/Classes/Configo.h", "ConfigoSDK/ConfigoSDK/Constants/CFGLogLevel.h"
 
   s.framework  = 'SystemConfiguration', 'CoreTelephony'
   s.requires_arc = true

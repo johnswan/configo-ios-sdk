@@ -14,9 +14,10 @@
 
 #import "NNLibrariesEssentials.h"
 #import "NNURLConnectionManager.h"
+#import "NNSecurity.h"
 
 //HTTP header keys constants
-static NSString *const kHTTPHeaderKey_authHeader = @"x-configo-auth";
+static NSString *const kHTTPHeaderKey_timestamp = @"x-configo-timestamp";
 static NSString *const kHTTPHeaderKey_devKey = @"x-configo-devKey";
 static NSString *const kHTTPHeaderKey_appId = @"x-configo-appId";
 
@@ -55,19 +56,19 @@ static NSString *const kResponseKey_message = @"message";
 - (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
     NNLogDebug(@"Loading Config: start", nil);
     
-    NSDictionary *headers = [self requestHeaders];
-    
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
-    [connectionMgr setHttpHeaders: headers];
     connectionMgr.requestSerializer = [NNJSONRequestSerializer serializer];
     connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
     
+    NSURL *configUrl = [CFGConstants getConfigURL];
+    NSDictionary *headers = [self requestHeaders];
+    NSNumber *timestampNumber = headers[kHTTPHeaderKey_timestamp];
+    NSInteger timestamp = [timestampNumber longValue];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
     
-    NSURL *configUrl = [CFGConstants getConfigURL];
     NNLogDebug(@"Loading Config: POST", (@{@"URL" : configUrl, @"Headers" : headers, @"Params" : params}));
     
-    [connectionMgr POST: configUrl parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
+    [connectionMgr POST: configUrl headers: headers parameters: params completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
         //NNLogDebug(@"Loading Config: HTTPResponse", response);
         NNLogDebug(@"Loading Config: Response Data", object);
         NSError *retError = nil;
@@ -104,18 +105,15 @@ static NSString *const kResponseKey_message = @"message";
     NNLogDebug(@"Polling status: start", nil);
     
     _pollingStatus = YES;
-    
-    NSDictionary *headers = [self requestHeaders];
-    
+        
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
-    [connectionMgr setHttpHeaders: headers];
     connectionMgr.requestSerializer = [NNHTTPRequestSerializer serializer];
     connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
     
     NSURL *pollURL = [CFGConstants statusPollURL];
     NSDictionary *params = @{kGETKey_deviceId : udid};
     
-    [connectionMgr GET: pollURL parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+    [connectionMgr GET: pollURL headers: [self requestHeaders] parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         _pollingStatus = NO;
         
 //        NNLogDebug(@"Polling Status: HTTPResponse", response);
@@ -144,7 +142,6 @@ static NSString *const kResponseKey_message = @"message";
         NNLogDebug(@"Bad params provided", nil);
     } else {
         NNURLConnectionManager *mgr = [NNURLConnectionManager sharedManager];
-        [mgr setHttpHeaders: [self requestHeaders]];
         mgr.requestSerializer = [NNJSONRequestSerializer serializer];
         mgr.responseSerializer = [NNJSONResponseSerializer serializer];
         
@@ -152,7 +149,7 @@ static NSString *const kResponseKey_message = @"message";
         NSDictionary *params = @{@"udid" : udid,
                                  @"events" : events};
         NNLogDebug(@"Sending events", params);
-        [mgr POST: url parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        [mgr POST: url headers: [self requestHeaders] parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
             NNLogDebug(@"Send events response data:", responseObject);
             
             NSError *retError = error;
@@ -189,8 +186,10 @@ static NSString *const kResponseKey_message = @"message";
 #pragma mark - Helpers
 
 - (NSDictionary *)requestHeaders {
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970];
+    NSNumber *timestamp = [NSNumber numberWithLong: (long)interval];
     return @{
-             kHTTPHeaderKey_authHeader : @"natanavra",
+             kHTTPHeaderKey_timestamp : timestamp,
              kHTTPHeaderKey_devKey : _devKey,
              kHTTPHeaderKey_appId : _appId
              };

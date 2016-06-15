@@ -19,10 +19,12 @@
 
 #import "CFGConstants.h"
 #import "CFGResponse.h"
+#import "CFGFeature.h"
 #import "CFGConfig.h"
 
 #import "NNLibrariesEssentials.h"
 #import "NNReachabilityManager.h"
+#import "NSDictionary+NNAdditions.h"
 
 #pragma mark - Constants
 
@@ -32,6 +34,7 @@ NSString *const ConfigoConfigurationLoadErrorNotification = @"io.configo.config.
 NSString *const ConfigoNotificationUserInfoErrorKey = @"configoError";
 NSString *const ConfigoNotificationUserInfoRawConfigKey = @"rawConfig";
 NSString *const ConfigoNotificationUserInfoFeaturesListKey = @"featuresList";
+NSString *const ConfigoNotificationUserInfoFeaturesDictionaryKey = @"featuresDictionary";
 
 
 #pragma mark - Implementation
@@ -298,6 +301,15 @@ static id _shared = nil;
     return _activeConfigoResponse.configObj.featuresArray;
 }
 
+- (NSDictionary *)featuresDictionary {
+    NSMutableDictionary *retval = [NSMutableDictionary dictionary];
+    NSArray *featuresArray = _activeConfigoResponse.configObj.featuresArray;
+    for(CFGFeature *feature in featuresArray) {
+        [retval nnSafeSetObject: @(feature.enabled) forKey: feature.key];
+    }
+    return [retval copy];
+}
+
 - (BOOL)featureFlagForKey:(NSString *)key {
     return [self featureFlagForKey: key fallback: NO];
 }
@@ -350,14 +362,14 @@ static id _shared = nil;
 
 - (void)invokeListenersCallbacksWithError:(NSError *)error {
     for(CFGCallback callback in _callbacks) {
-        callback(error, [self rawConfig], [self featuresList]);
+        callback(error, [self rawConfig], [self featuresDictionary]);
     }
     
     if(_listenerCallback) {
-        _listenerCallback(error, [self rawConfig], [self featuresList]);
+        _listenerCallback(error, [self rawConfig], [self featuresDictionary]);
     }
     if(_tempListenerCallback) {
-        _tempListenerCallback(error, [self rawConfig], [self featuresList]);
+        _tempListenerCallback(error, [self rawConfig], [self featuresDictionary]);
         self.tempListenerCallback = nil;
     }
 }
@@ -370,7 +382,8 @@ static id _shared = nil;
         notificationName = ConfigoConfigurationLoadErrorNotification;
     } else {
         userInfo = @{ConfigoNotificationUserInfoRawConfigKey : [self rawConfig] ?: [NSNull null],
-                     ConfigoNotificationUserInfoFeaturesListKey : [self featuresList] ?: [NSNull null]};
+                     ConfigoNotificationUserInfoFeaturesListKey : [self featuresList] ?: [NSNull null],
+                     ConfigoNotificationUserInfoFeaturesDictionaryKey : [self featuresDictionary] ?: [NSNull null]};
         notificationName = ConfigoConfigurationLoadCompleteNotification;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName: notificationName object: self userInfo: userInfo];

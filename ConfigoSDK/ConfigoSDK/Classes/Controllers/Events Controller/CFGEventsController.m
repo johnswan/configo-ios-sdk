@@ -12,6 +12,7 @@
 
 #import "CFGNetworkController.h"
 #import "CFGPrivateConfigService.h"
+#import "CFGLogger.h"
 
 #import "NNUtilities.h"
 #import "NSArray+NNAdditions.h"
@@ -23,6 +24,7 @@
 @property (nonatomic, copy) NSString *udid;
 @property (nonatomic, strong) CFGNetworkController *netController;
 @property (nonatomic, strong, getter=_events) NSMutableArray *events;
+@property (nonatomic, strong) NSMutableArray *sentEvents;
 @property (nonatomic, strong) NSTimer *sendScheduler;
 @end
 
@@ -60,7 +62,7 @@
     if(interval == 0) {
         interval = CFGDefaultEventPushInterval;
     }
-    _sendScheduler = [NSTimer scheduledTimerWithTimeInterval: interval target: self selector: @selector(sendEvents) userInfo: nil repeats: YES];
+//    _sendScheduler = [NSTimer scheduledTimerWithTimeInterval: interval target: self selector: @selector(sendEvents) userInfo: nil repeats: YES];
 }
 
 - (void)observeApplicationTerminateNotification {
@@ -114,25 +116,29 @@
 
 - (void)flushEvents {
     _state = CFGEventsStateQueued;
-    NNLogDebug(@"Flushing events", @(_events.count));
-    [_events removeAllObjects];
+    NNLogDebug(@"Flushing events", @(_sentEvents.count));
+    [_events removeObjectsInArray: _sentEvents];
 }
 
 #pragma mark - Event Sending
 
 - (void)sendEvents {
     if(_events.count == 0 || _state == CFGEventsStateInProgress) {
-        NNLogDebug(@"No events to send, or already sending", nil);
+        NNLogDebug(_events.count == 0 ? @"No events to send" : @"Already sending events", nil);
         return;
     }
     NNLogDebug(@"Sending events", nil);
     _state = CFGEventsStateInProgress;
+    _sentEvents = [_events copy];
+    
     [_netController sendEvents: _events withUdid: _udid withCallback: ^(BOOL success, NSError *error) {
         if(success && !error) {
+            [CFGLogger logLevel: CFGLogLevelVerbose log: @"Sent %li events successfully", (long)_events.count];
             NNLogDebug(@"Sending events success", nil);
             [self flushEvents];
         } else {
             _state = CFGEventsStateFailed;
+            [CFGLogger logLevel: CFGLogLevelError log: @"Failed sending %li events", (long)_events.count];
             NNLogDebug(@"Failed to send events", error);
         }
     }];

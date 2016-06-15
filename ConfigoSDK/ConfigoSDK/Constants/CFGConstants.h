@@ -30,8 +30,8 @@ FOUNDATION_EXPORT NSInteger const CFGDefaultEventPushInterval;
 
 typedef NS_ENUM(NSUInteger, CFGEnvironment) {
     CFGEnvironmentDevelopment,
-    CFGEnvironmentProduction,
-    CFGEnvironmentYosiMachine
+    CFGEnvironmentProduction, 
+    CFGEnvironmentLocalServer
 };
 
 @interface CFGConstants : NSObject
@@ -40,5 +40,6 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 + (NSURL *)statusPollURL;
 + (NSURL *)eventsPushUrl;
 + (CFGEnvironment)currentEnvironment;
+
 
 @end

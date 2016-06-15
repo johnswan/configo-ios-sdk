@@ -2,21 +2,24 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
-## [Unreleased]
+## [0.5.0] - 2016-06-20
+### Deprecated
+- `featuresList` use `featuresDictionary` instead.
+- `ConfigoNotificationUserInfoFeaturesListKey` use `ConfigoNotificationUserInfoFeaturesDictionaryKey` instead.
+
 ### Added
-- Event tracking API `trackEvent:withProperties:`.
 - Clear all user context via `clearUserContext`.
-- Add multiple callback listeners via `addListenerCallback:`.
+- `featuresDictionary` returning an NSDicitionary containing key-value pairs of the format `{"<featureKey" : <NSNumber boolean>}`.
 
 ### Changed
+- `CFGCallback` code block typedef now recieves featuresDictionary NSDictionary instead of the featureList NSArray.
 - Logging format.
-- `CFGFeature` object describing a feature flag is now a public class.
 
 ### Internal
-#### Added
-- `CFGEventsController` for controlling event queueing, pushing, scheduling and error handling
+#### Changed 
+- `getConfig` v2 only.
 
-## [0.4.4] - 2015-03-02 
+## [0.4.4] - 2016-03-02 
 ### Deprecated
 - `configValueForKeyPath:` use `configValueForKeyPath:fallbackValue:` with `nil` for the 2nd argument instead.
 - `featureFlagForKey:` use `featureFlagForKey:fallback:` with `NO` for the 2nd argument instead.

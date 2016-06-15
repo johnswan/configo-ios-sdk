@@ -21,7 +21,7 @@
     NSString *yosiAppId = @"56c5825cbd961b614d239592";
     NSString *prodDevKey = @"2f0ad31bb0b266507483c96cc9f24cf0";
     NSString *prodAppId = @"28f4d6feedbd35e42e431b90dec534cd";
-    [Configo initWithDevKey: yosiDevKey appId: yosiAppId];
+    [Configo initWithDevKey: prodDevKey appId: prodAppId];
     return YES;
 }
 
