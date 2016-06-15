@@ -24,14 +24,14 @@ NSString *const CFGSessionEndEventName = @"CONFIGO_SESSION_END";
 //NSString *const CFGBaseLocalPath = @"http://local.configo.io:8001";
 NSString *const CFGBaseDevelopmentPath = @"http://local.configo.io:8001";
 NSString *const CFGBaseProductionPath = @"https://api.configo.io";
-NSString *const CFGBaseYosiMachinePath = @"http://10.56.108.19:8001";
+NSString *const CFGBaseLocalMachinePath = @"http://10.56.107.243:8001";
 
 NSString *const CFGGetConfigPath = @"/user/getConfig";
 NSString *const CFGStatusPollPath = @"/user/status";
-NSString *const CFGEventsPushPath = @"/events/push";
+NSString *const CFGEventsPushPath = @"/events/pushMockEvent";
 
-NSInteger const CFGDefaultPollingInterval = 25;
-NSInteger const CFGDefaultEventPushInterval = 5;
+NSInteger const CFGDefaultPollingInterval = 30;
+NSInteger const CFGDefaultEventPushInterval = 40;
 
 NSString *const CFGVersionOne = @"/v1";
 NSString *const CFGVersionTwo = @"/v2";
@@ -72,7 +72,8 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
 #pragma mark - URL Builders
 
 + (NSURL *)getConfigURL {
-    CFGApiVersion version = CFGPrivateFeatureFlag(@"GET-CONFIG-V2") ? CFGApiVersionTwo : CFGApiVersionOne;
+//    CFGApiVersion version = CFGPrivateFeatureFlag(@"GET-CONFIG-V2") ? CFGApiVersionTwo : CFGApiVersionOne;
+    CFGApiVersion version = CFGApiVersionTwo;
     NSString *urlString = [self apiURLStringWithVersion: version withPath: CFGGetConfigPath];
     return [NSURL URLWithString: urlString];
 }
@@ -100,24 +101,25 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
 + (NSString *)baseURLString {
     NSString *retval = nil;
     switch([self currentEnvironment]) {
+        case CFGEnvironmentLocalServer:
+            retval = CFGBaseLocalMachinePath;
+            break;
         case CFGEnvironmentDevelopment:
             retval = CFGBaseDevelopmentPath;
             break;
         case CFGEnvironmentProduction:
             retval = CFGBaseProductionPath;
             break;
-        case CFGEnvironmentYosiMachine:
-            retval = CFGBaseYosiMachinePath;
-            break;
     }
     return retval;
 }
 
 + (CFGEnvironment)currentEnvironment {
-    BOOL useYosiMachine = YES;
-    if(useYosiMachine) {
-        return CFGEnvironmentYosiMachine;
-    } else if(false && ([NNUtilities isDebugMode] && [UIDevice isDeviceSimulator])) {
+    BOOL useLocalIp = NO;
+    BOOL useDevelopment = YES;
+    if(useLocalIp) {
+        return CFGEnvironmentLocalServer;
+    } else if(useDevelopment || ([NNUtilities isDebugMode] && [UIDevice isDeviceSimulator])) {
         return CFGEnvironmentDevelopment;
     } else {
         return CFGEnvironmentProduction;
