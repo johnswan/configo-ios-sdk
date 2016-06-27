@@ -20,6 +20,8 @@
 
 - (NSDictionary *)configoDataForRequest;
 
+- (void)setPushToken:(NSData *)pushToken;
+
 - (BOOL)setCustomUserId:(NSString *)customUserId;
 
 - (NSDictionary *)userContext;

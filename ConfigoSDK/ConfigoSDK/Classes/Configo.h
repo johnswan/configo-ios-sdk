@@ -120,6 +120,20 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  */
 - (void)forceRefreshValues;
 
+
+/**
+ *  @brief Set the push notification token.
+ *  @param token the NSData token recieved in the AppDelegate <code>application:didRegisterForRemoteNotificationsWithDeviceToken:</code>
+ */
+- (void)setPushToken:(NSData *)token;
+
+/**
+ *  @brief Handles a remote push notification, parameters taken from <code>application:didReceiveRemoteNotification:fetchCompletionHandler:</code>
+ *  @param userInfo the notification object recieved.
+ *  @param completionHandler The completion handler block for a background remote fetch operation.
+ */
+- (void)handlePushNotification:(NSDictionary *)userInfo withHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+
 /**
  *	@brief Pass the user's unique id from your system to Configo, to have more precise targeting.
  *	@param userId user's unique identifier.

@@ -159,6 +159,10 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
 
 #pragma mark - Setters
 
+- (void)setPushToken:(NSData *)pushToken {
+    [_configoData setPushToken: pushToken];
+}
+
 - (BOOL)setCustomUserId:(NSString *)customUserId {
     if(!customUserId && !_configoData.customUserId) {
         return NO;

@@ -231,6 +231,16 @@ static id _shared = nil;
     }];
 }
 
+#pragma mark - Push Notifications
+
+- (void)setPushToken:(NSData *)token {
+    [_configoDataController setPushToken: token];
+}
+
+- (void)handlePushNotification:(NSDictionary *)userInfo withHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    //TODO: we need to handle the notification: pull config if it's a configo notification.
+}
+
 #pragma mark - Setters
 
 - (void)setCallback:(CFGCallback)callback {
@@ -242,7 +252,7 @@ static id _shared = nil;
     }
 }
 
-/** This is of course a bad implmentation, we can't remove the callback (even though I thought of id but's it's meh. */
+/** This is of course a bad implmentation, we can't remove the callback (even though I thought of id but's it's meh.) */
 - (void)addListenerCallback:(CFGCallback)callback {
     if(!_callbacks) {
         _callbacks = [NSMutableArray array];

@@ -11,6 +11,7 @@
 @interface CFGConfigoData : NNJSONObject <NSCopying>
 
 @property (nonatomic, copy) NSString *udid;
+@property (nonatomic, readonly, copy) NSString *pushToken;
 @property (nonatomic, copy) NSString *customUserId;
 @property (nonatomic, strong) NSDictionary *deviceDetails;
 
@@ -19,5 +20,6 @@
 - (void)clearUserContext;
 - (void)setUserContext:(NSDictionary *)userContext;
 - (void)setUserContextValue:(id)value forKey:(NSString *)key;
+- (void)setPushToken:(NSData *)token;
 
 @end

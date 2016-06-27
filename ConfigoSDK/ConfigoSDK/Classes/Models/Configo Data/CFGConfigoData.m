@@ -15,9 +15,11 @@ static NSString *const kUdidKey = @"udid";
 static NSString *const kCustomUserIdKey = @"customUserId";
 static NSString *const kUserContextKey = @"userContext";
 static NSString *const kDeviceDetailsKey = @"deviceDetails";
+static NSString *const kPushTokenKey = @"pushToken";
 
 @interface CFGConfigoData ()
 @property (nonatomic, strong) NSMutableDictionary *mutableUserContext;
+@property (nonatomic, readwrite, copy) NSString *pushToken;
 @end
 
 @implementation CFGConfigoData
@@ -49,6 +51,7 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
     [dict nnSafeSetObject: _customUserId forKey: kCustomUserIdKey];
     [dict nnSafeSetObject: [self userContext] forKey: kUserContextKey];
     [dict nnSafeSetObject: _deviceDetails forKey: kDeviceDetailsKey];
+    [dict nnSafeSetObject: _pushToken forKey: kPushTokenKey];
     return dict;
 }
 
@@ -87,6 +90,17 @@ static NSString *const kDeviceDetailsKey = @"deviceDetails";
     } else {
         [_mutableUserContext nnSafeSetObject: value forKey: key];
     }
+}
+
+- (void)setPushToken:(NSData *)token {
+    NSCharacterSet *junkCharsSet = [NSCharacterSet characterSetWithCharactersInString: @"<>"];
+    NSString *cleanToken = [[token description] stringByTrimmingCharactersInSet: junkCharsSet];
+    cleanToken = [cleanToken stringByReplacingOccurrencesOfString: @" " withString: @""];
+    self.pushToken = cleanToken;
+}
+
+- (void)setUdid:(NSString *)udid {
+    self.udid = udid;
 }
 
 @end

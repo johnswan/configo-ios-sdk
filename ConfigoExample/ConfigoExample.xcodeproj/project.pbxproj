@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35350496A6FA31A4B55D844B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C2B64F298476804CE2D44B /* libPods.a */; };
 		535696450EB136BB4276D8C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C2B64F298476804CE2D44B /* libPods.a */; };
-		5C1605491CB2C62D0047984F /* LDBPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1605481CB2C62D0047984F /* LDBPageViewController.m */; };
-		5C16054C1CB2CE3F0047984F /* LDBBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C16054B1CB2CE3F0047984F /* LDBBalanceViewController.m */; };
 		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; };
 		5C5846231CB3C071008D7A36 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB31B806F900074D62A /* ViewController.m */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
@@ -18,40 +15,11 @@
 		5C93DEB71B806F900074D62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB51B806F900074D62A /* Main.storyboard */; };
 		5C93DEB91B806F900074D62A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB81B806F900074D62A /* Images.xcassets */; };
 		5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEBA1B806F900074D62A /* LaunchScreen.xib */; };
-		5CC111341CB168C500555335 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC111331CB168C500555335 /* main.m */; };
-		5CC111371CB168C500555335 /* LDBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC111361CB168C500555335 /* LDBAppDelegate.m */; };
-		5CC1113A1CB168C500555335 /* LDBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC111391CB168C500555335 /* LDBLoginViewController.m */; };
-		5CC1113D1CB168C500555335 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC1113B1CB168C500555335 /* Main.storyboard */; };
-		5CC1113F1CB168C500555335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC1113E1CB168C500555335 /* Assets.xcassets */; };
-		5CC111421CB168C500555335 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC111401CB168C500555335 /* LaunchScreen.storyboard */; };
-		5CC1114D1CB168C500555335 /* LeumiDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1114C1CB168C500555335 /* LeumiDemoTests.m */; };
-		5CC111581CB168C500555335 /* LeumiDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC111571CB168C500555335 /* LeumiDemoUITests.m */; };
 		5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C11C18620F00CEF97D /* CoreTelephony.framework */; };
 		5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC924C31C18621500CEF97D /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5CC111491CB168C500555335 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DEA01B806F900074D62A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5CC1112F1CB168C500555335;
-			remoteInfo = LeumiDemo;
-		};
-		5CC111541CB168C500555335 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5C93DEA01B806F900074D62A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5CC1112F1CB168C500555335;
-			remoteInfo = LeumiDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		5C1605471CB2C62D0047984F /* LDBPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDBPageViewController.h; sourceTree = "<group>"; };
-		5C1605481CB2C62D0047984F /* LDBPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDBPageViewController.m; sourceTree = "<group>"; };
-		5C16054A1CB2CE3F0047984F /* LDBBalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDBBalanceViewController.h; sourceTree = "<group>"; };
-		5C16054B1CB2CE3F0047984F /* LDBBalanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDBBalanceViewController.m; sourceTree = "<group>"; };
 		5C219EA51C0AEBC5003CF89E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		5C219EA61C0AEBC5003CF89E /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		5C93DEA81B806F900074D62A /* ConfigoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfigoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,22 +32,6 @@
 		5C93DEB61B806F900074D62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C93DEB81B806F900074D62A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		5C93DEBB1B806F900074D62A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5CC111301CB168C500555335 /* LeumiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeumiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC111331CB168C500555335 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5CC111351CB168C500555335 /* LDBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDBAppDelegate.h; sourceTree = "<group>"; };
-		5CC111361CB168C500555335 /* LDBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDBAppDelegate.m; sourceTree = "<group>"; };
-		5CC111381CB168C500555335 /* LDBLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDBLoginViewController.h; sourceTree = "<group>"; };
-		5CC111391CB168C500555335 /* LDBLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDBLoginViewController.m; sourceTree = "<group>"; };
-		5CC1113C1CB168C500555335 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5CC1113E1CB168C500555335 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5CC111411CB168C500555335 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5CC111431CB168C500555335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5CC111481CB168C500555335 /* LeumiDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeumiDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC1114C1CB168C500555335 /* LeumiDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeumiDemoTests.m; sourceTree = "<group>"; };
-		5CC1114E1CB168C500555335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5CC111531CB168C500555335 /* LeumiDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeumiDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC111571CB168C500555335 /* LeumiDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeumiDemoUITests.m; sourceTree = "<group>"; };
-		5CC111591CB168C500555335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CC924C11C18620F00CEF97D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5CC924C31C18621500CEF97D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A1465D71694488F264261229 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -95,28 +47,6 @@
 				5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */,
 				5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */,
 				535696450EB136BB4276D8C4 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC1112D1CB168C500555335 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				35350496A6FA31A4B55D844B /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC111451CB168C500555335 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC111501CB168C500555335 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				5C93DEAA1B806F900074D62A /* ConfigoExample */,
-				5CC111311CB168C500555335 /* LeumiDemo */,
-				5CC1114B1CB168C500555335 /* LeumiDemoTests */,
-				5CC111561CB168C500555335 /* LeumiDemoUITests */,
 				5CC924C51C18637F00CEF97D /* Frameworks */,
 				5C93DEA91B806F900074D62A /* Products */,
 				BD0D725E7BC32C8FA84A1044 /* Pods */,
@@ -150,9 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				5C93DEA81B806F900074D62A /* ConfigoExample.app */,
-				5CC111301CB168C500555335 /* LeumiDemo.app */,
-				5CC111481CB168C500555335 /* LeumiDemoTests.xctest */,
-				5CC111531CB168C500555335 /* LeumiDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,52 +103,6 @@
 				5C93DEAD1B806F900074D62A /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5CC111311CB168C500555335 /* LeumiDemo */ = {
-			isa = PBXGroup;
-			children = (
-				5CC111351CB168C500555335 /* LDBAppDelegate.h */,
-				5CC111361CB168C500555335 /* LDBAppDelegate.m */,
-				5C1605471CB2C62D0047984F /* LDBPageViewController.h */,
-				5C1605481CB2C62D0047984F /* LDBPageViewController.m */,
-				5CC111381CB168C500555335 /* LDBLoginViewController.h */,
-				5CC111391CB168C500555335 /* LDBLoginViewController.m */,
-				5C16054A1CB2CE3F0047984F /* LDBBalanceViewController.h */,
-				5C16054B1CB2CE3F0047984F /* LDBBalanceViewController.m */,
-				5CC1113B1CB168C500555335 /* Main.storyboard */,
-				5CC1113E1CB168C500555335 /* Assets.xcassets */,
-				5CC111401CB168C500555335 /* LaunchScreen.storyboard */,
-				5CC111431CB168C500555335 /* Info.plist */,
-				5CC111321CB168C500555335 /* Supporting Files */,
-			);
-			path = LeumiDemo;
-			sourceTree = "<group>";
-		};
-		5CC111321CB168C500555335 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5CC111331CB168C500555335 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5CC1114B1CB168C500555335 /* LeumiDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				5CC1114C1CB168C500555335 /* LeumiDemoTests.m */,
-				5CC1114E1CB168C500555335 /* Info.plist */,
-			);
-			path = LeumiDemoTests;
-			sourceTree = "<group>";
-		};
-		5CC111561CB168C500555335 /* LeumiDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5CC111571CB168C500555335 /* LeumiDemoUITests.m */,
-				5CC111591CB168C500555335 /* Info.plist */,
-			);
-			path = LeumiDemoUITests;
 			sourceTree = "<group>";
 		};
 		5CC924C51C18637F00CEF97D /* Frameworks */ = {
@@ -270,62 +148,6 @@
 			productReference = 5C93DEA81B806F900074D62A /* ConfigoExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5CC1112F1CB168C500555335 /* LeumiDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC111601CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemo" */;
-			buildPhases = (
-				CCE2E74411BF21606779CAEC /* Check Pods Manifest.lock */,
-				5CC1112C1CB168C500555335 /* Sources */,
-				5CC1112D1CB168C500555335 /* Frameworks */,
-				5CC1112E1CB168C500555335 /* Resources */,
-				B8842FDA4A1A80865E22AFAD /* Embed Pods Frameworks */,
-				57BD616B4FB53C36A738BAD4 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = LeumiDemo;
-			productName = LeumiDemo;
-			productReference = 5CC111301CB168C500555335 /* LeumiDemo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		5CC111471CB168C500555335 /* LeumiDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC111611CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemoTests" */;
-			buildPhases = (
-				5CC111441CB168C500555335 /* Sources */,
-				5CC111451CB168C500555335 /* Frameworks */,
-				5CC111461CB168C500555335 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5CC1114A1CB168C500555335 /* PBXTargetDependency */,
-			);
-			name = LeumiDemoTests;
-			productName = LeumiDemoTests;
-			productReference = 5CC111481CB168C500555335 /* LeumiDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5CC111521CB168C500555335 /* LeumiDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC111621CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemoUITests" */;
-			buildPhases = (
-				5CC1114F1CB168C500555335 /* Sources */,
-				5CC111501CB168C500555335 /* Frameworks */,
-				5CC111511CB168C500555335 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5CC111551CB168C500555335 /* PBXTargetDependency */,
-			);
-			name = LeumiDemoUITests;
-			productName = LeumiDemoUITests;
-			productReference = 5CC111531CB168C500555335 /* LeumiDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -337,23 +159,18 @@
 				TargetAttributes = {
 					5C93DEA71B806F900074D62A = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = QR3EF439CY;
+						DevelopmentTeam = A6L3AKSZBQ;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
-					};
-					5CC1112F1CB168C500555335 = {
-						CreatedOnToolsVersion = 7.2;
-					};
-					5CC111471CB168C500555335 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 5CC1112F1CB168C500555335;
-					};
-					5CC111521CB168C500555335 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 5CC1112F1CB168C500555335;
 					};
 				};
 			};
@@ -370,9 +187,6 @@
 			projectRoot = "";
 			targets = (
 				5C93DEA71B806F900074D62A /* ConfigoExample */,
-				5CC1112F1CB168C500555335 /* LeumiDemo */,
-				5CC111471CB168C500555335 /* LeumiDemoTests */,
-				5CC111521CB168C500555335 /* LeumiDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -385,30 +199,6 @@
 				5C93DEB71B806F900074D62A /* Main.storyboard in Resources */,
 				5C93DEBC1B806F900074D62A /* LaunchScreen.xib in Resources */,
 				5C93DEB91B806F900074D62A /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC1112E1CB168C500555335 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5CC111421CB168C500555335 /* LaunchScreen.storyboard in Resources */,
-				5CC1113F1CB168C500555335 /* Assets.xcassets in Resources */,
-				5CC1113D1CB168C500555335 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC111461CB168C500555335 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC111511CB168C500555335 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,21 +250,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		57BD616B4FB53C36A738BAD4 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5CAAD80B1BDC255800C562F2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,36 +262,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2./Fabric.framework/run 856e69edba8d56490fe5ec6a785710f9cfddbf38 de4cac50358be4044e53b5393262e47fd6ac04a4e4e2ab1bc646e0a176f85ef2";
-		};
-		B8842FDA4A1A80865E22AFAD /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CCE2E74411BF21606779CAEC /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -532,48 +277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5CC1112C1CB168C500555335 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C1605491CB2C62D0047984F /* LDBPageViewController.m in Sources */,
-				5CC1113A1CB168C500555335 /* LDBLoginViewController.m in Sources */,
-				5CC111371CB168C500555335 /* LDBAppDelegate.m in Sources */,
-				5CC111341CB168C500555335 /* main.m in Sources */,
-				5C16054C1CB2CE3F0047984F /* LDBBalanceViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC111441CB168C500555335 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5CC1114D1CB168C500555335 /* LeumiDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5CC1114F1CB168C500555335 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5CC111581CB168C500555335 /* LeumiDemoUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5CC1114A1CB168C500555335 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5CC1112F1CB168C500555335 /* LeumiDemo */;
-			targetProxy = 5CC111491CB168C500555335 /* PBXContainerItemProxy */;
-		};
-		5CC111551CB168C500555335 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5CC1112F1CB168C500555335 /* LeumiDemo */;
-			targetProxy = 5CC111541CB168C500555335 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5C93DEB51B806F900074D62A /* Main.storyboard */ = {
@@ -592,22 +296,6 @@
 			);
 			name = LaunchScreen.xib;
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		5CC1113B1CB168C500555335 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5CC1113C1CB168C500555335 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5CC111401CB168C500555335 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5CC111411CB168C500555335 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -714,7 +402,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.pushexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -738,90 +426,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.configo.pushexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		5CC1115A1CB168C500555335 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1465D71694488F264261229 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = LeumiDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		5CC1115B1CB168C500555335 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA9405262543206646078334 /* Pods.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = LeumiDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		5CC1115C1CB168C500555335 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = LeumiDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeumiDemo.app/LeumiDemo";
-			};
-			name = Debug;
-		};
-		5CC1115D1CB168C500555335 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = LeumiDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeumiDemo.app/LeumiDemo";
-			};
-			name = Release;
-		};
-		5CC1115E1CB168C500555335 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = LeumiDemoUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = LeumiDemo;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		5CC1115F1CB168C500555335 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = LeumiDemoUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.configo.LeumiDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = LeumiDemo;
-				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -842,33 +449,6 @@
 			buildConfigurations = (
 				5C93DECC1B806F900074D62A /* Debug */,
 				5C93DECD1B806F900074D62A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5CC111601CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5CC1115A1CB168C500555335 /* Debug */,
-				5CC1115B1CB168C500555335 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5CC111611CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5CC1115C1CB168C500555335 /* Debug */,
-				5CC1115D1CB168C500555335 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5CC111621CB168C500555335 /* Build configuration list for PBXNativeTarget "LeumiDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5CC1115E1CB168C500555335 /* Debug */,
-				5CC1115F1CB168C500555335 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

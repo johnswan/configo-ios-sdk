@@ -19,10 +19,33 @@
     // Override point for customization after application launch.
     NSString *yosiDevKey = @"e222a45f39fb16b1e091238e90093e70";
     NSString *yosiAppId = @"56c5825cbd961b614d239592";
-    NSString *prodDevKey = @"2f0ad31bb0b266507483c96cc9f24cf0";
-    NSString *prodAppId = @"28f4d6feedbd35e42e431b90dec534cd";
+//    NSString *prodDevKey = @"2f0ad31bb0b266507483c96cc9f24cf0";
+//    NSString *prodAppId = @"28f4d6feedbd35e42e431b90dec534cd";
     [Configo initWithDevKey: yosiDevKey appId: yosiAppId];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"Registered notification with settings");
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [deviceToken base64EncodedStringWithOptions: kNilOptions];
+    NSLog(@"Registered notification with token:\n %@\n%@", deviceToken, token);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Failed to register for notifications: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"Recieved push");
+    if(completionHandler) {
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
