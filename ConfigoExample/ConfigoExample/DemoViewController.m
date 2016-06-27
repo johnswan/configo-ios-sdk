@@ -42,7 +42,7 @@
     _loginBtn.layer.borderColor = _loginBtn.titleLabel.textColor.CGColor;
     
     [self refreshView];
-    }
+}
 
 - (void)registerConfigoCallback {
     //Make the configurations dynamically refresh in runtime (Don't wait for next launch/start)

@@ -62,8 +62,6 @@ static NSString *const kResponseKey_message = @"message";
     
     NSURL *configUrl = [CFGConstants getConfigURL];
     NSDictionary *headers = [self requestHeaders];
-    NSNumber *timestampNumber = headers[kHTTPHeaderKey_timestamp];
-    NSInteger timestamp = [timestampNumber longValue];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
     
     NNLogDebug(@"Loading Config: POST", (@{@"URL" : configUrl, @"Headers" : headers, @"Params" : params}));

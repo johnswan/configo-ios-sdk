@@ -2,7 +2,7 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
-## [0.5.0] - 2016-06-20
+## [0.5.0] - 2016-06-27
 ### Deprecated
 - `featuresList` use `featuresDictionary` instead.
 - `ConfigoNotificationUserInfoFeaturesListKey` use `ConfigoNotificationUserInfoFeaturesDictionaryKey` instead.
