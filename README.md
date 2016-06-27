@@ -9,7 +9,7 @@ Configo gives the control back to mobile teams, enabling them to iterate quickly
 * If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
 
   ```ruby
-  pod "ConfigoSDK", "~> 0.4"
+  pod "ConfigoSDK", "~> 0.5"
   ```
 
 * Alternatively, ConfigoSDK can be added manually to your Xcode project.
@@ -50,7 +50,7 @@ Configo gives the control back to mobile teams, enabling them to iterate quickly
 Optionally a block of code (i.e. `callback`) can be passed upon initialization, the block will be executed once the the loading process is complete:
 
   ```objective-c
-  [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID" callback: ^(NSError *err, NSDictionary *config, NSArray *features) {
+  [Configo initWithDevKey: @"YOUR_DEV_KEY" appId: @"YOUR_APP_ID" callback: ^(NSError *err, NSDictionary *config, NSDictionary *features) {
     if(err) {
       NSLog(@"Failed to load config");
     } else {
@@ -152,7 +152,7 @@ Feature flags can be checked like so:
 <b>NOTE:</b> The fallback BOOL will be returned if an error occurred or the feature was not found.
 </pre>
 
-The full list of the current user's active features can be retrieved using `featuresList`.
+The full list of the current user's active features can be retrieved using `featuresDictionary`.
 
 ## Trigger Refresh
 
@@ -161,7 +161,7 @@ Configo constantly synchronizes with the dashboard upon app launch and by using 
 Sometimes a manual refresh of the configurations is required (with an optional `callback`):
 
 ```objective-c
-[[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *config, NSArray *features) {
+[[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *config, NSDictionary *features) {
       //Code for handling feature list/configuration update
 }];
 ```
@@ -189,7 +189,7 @@ Configo's operational state can be retrieved using several methods:
 
 Every time a configuration is updated an `NSNotification` is triggered.
 
-* If the update was successful an `ConfigoConfigurationLoadCompleteNotification` will be broadcast with a `userInfo` containing values under the keys `ConfigoNotificationUserInfoRawConfigKey` and `ConfigoNotificationUserInfoFeaturesListKey` with the config and features list respectively.
+* If the update was successful an `ConfigoConfigurationLoadCompleteNotification` will be broadcast with a `userInfo` containing values under the keys `ConfigoNotificationUserInfoRawConfigKey` and `ConfigoNotificationUserInfoFeaturesDictionaryKey` with the config and features list respectively.
 * If an error occurred an `ConfigoConfigurationLoadErrorNotification` will be broadcast with a `userInfo` containing the error under the key `ConfigoNotificationUserInfoErrorKey`.
 
 
@@ -198,7 +198,7 @@ Every time a configuration is updated an `NSNotification` is triggered.
 Using a Objective-C `blocks` is a convenient way to execute code in response to events. Configo expects all blocks to be of the `CFGCallback` type with the following definition:
 
 ```objective-c
-typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSArray *featuresList);
+typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSDictionary *featuresList);
 ```
 
 a callback can be set upon initialization: `+ initWithDevKey:appId:callback:`
