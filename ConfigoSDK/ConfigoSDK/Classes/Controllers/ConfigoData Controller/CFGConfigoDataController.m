@@ -19,25 +19,25 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 
-static NSString *const kPOSTKey_deviceDetails = @"deviceDetails";
-static NSString *const kPOSTKey_userContext = @"userContext";
-static NSString *const kPOSTKey_customUserId = @"customUserId";
+static NSString *const kPOSTKey_deviceDetails   = @"deviceDetails";
+static NSString *const kPOSTKey_userContext     = @"userContext";
+static NSString *const kPOSTKey_customUserId    = @"customUserId";
 
-static NSString *const kPOSTKey_Udid = @"udid";
-static NSString *const kPOSTKey_deviceDetails_sdkVersion = @"sdkVersion";
-static NSString *const kPOSTKey_deviceDetails_deviceName = @"deviceName";
-static NSString *const kPOSTKey_deviceDetails_carrierName = @"carrierName";
-static NSString *const kPOSTKey_deviceDetails_deviceModel = @"deviceModel";
-static NSString *const kPOSTKey_deviceDetails_os = @"os";
-static NSString *const kPOSTKey_deviceDetails_osVersion = @"osVersion";
-static NSString *const kPOSTKey_deviceDetails_deviceLanguage = @"deviceLanguage";
-static NSString *const kPOSTKey_deviceDetails_screenSize = @"screenSize";
-static NSString *const kPOSTKey_deviceDetails_bundleId = @"bundleId";
-static NSString *const kPOSTKey_deviceDetails_appName = @"appName";
-static NSString *const kPOSTKey_deviceDetails_appVersion = @"appVersion";
-static NSString *const kPOSTKey_deviceDetails_appBuild = @"appBuildNumber";
-static NSString *const kPOSTKey_deviceDetails_connectionType = @"connectionType";
-static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
+static NSString *const kPOSTKey_Udid                            = @"udid";
+static NSString *const kPOSTKey_deviceDetails_sdkVersion        = @"sdkVersion";
+static NSString *const kPOSTKey_deviceDetails_deviceName        = @"deviceName";
+static NSString *const kPOSTKey_deviceDetails_carrierName       = @"carrierName";
+static NSString *const kPOSTKey_deviceDetails_deviceModel       = @"deviceModel";
+static NSString *const kPOSTKey_deviceDetails_os                = @"os";
+static NSString *const kPOSTKey_deviceDetails_osVersion         = @"osVersion";
+static NSString *const kPOSTKey_deviceDetails_deviceLanguage    = @"deviceLanguage";
+static NSString *const kPOSTKey_deviceDetails_screenSize        = @"screenSize";
+static NSString *const kPOSTKey_deviceDetails_bundleId          = @"bundleId";
+static NSString *const kPOSTKey_deviceDetails_appName           = @"appName";
+static NSString *const kPOSTKey_deviceDetails_appVersion        = @"appVersion";
+static NSString *const kPOSTKey_deviceDetails_appBuild          = @"appBuildNumber";
+static NSString *const kPOSTKey_deviceDetails_connectionType    = @"connectionType";
+static NSString *const kPOSTKey_deviceDetails_timezone          = @"timezoneOffset";
 
 
 @interface CFGConfigoDataController ()
@@ -244,7 +244,14 @@ static NSString *const kPOSTKey_deviceDetails_timezone = @"timezoneOffset";
     NSString *language = @"en";
     NSArray *preferredLanguages = [NSLocale preferredLanguages];
     if(preferredLanguages.count > 0) {
-        language = preferredLanguages[0];
+        NSString *firstLang = preferredLanguages[0];
+        if([firstLang rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString: @"-_"]].location != NSNotFound) {
+            NSDictionary *localeDict = [NSLocale componentsFromLocaleIdentifier: firstLang];
+            NSString *langValue = [localeDict objectForKey: NSLocaleLanguageCode];
+            if(langValue) {
+                language = langValue;
+            }
+        }
     }
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];

@@ -36,15 +36,14 @@
                                                       });
                                                   }];
     
-    [[Configo sharedInstance] setCallback: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
-        NSLog(@"Configo callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
+    [[Configo sharedInstance] setCallback: ^(NSError *err, NSDictionary *rawConfig, NSDictionary *features) {
+        NSLog(@"Configo callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, features);
     }];
     
-    [[Configo sharedInstance] trackEvent: @"Loaded Login View" withProperties: @{@"from" : @"splash"}];
 }
 
 - (IBAction)pullConfig:(id)sender {
-    [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *rawConfig, NSDictionary *featuresList) {
         NSLog(@"pullConfig temp callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
     }];
 }
