@@ -11,9 +11,11 @@
 #import "CFGResponse.h"
 #import "CFGResponseHeader.h"
 #import "CFGInternalError.h"
+#import "CFGLogger.h"
 
 #import "NNLibrariesEssentials.h"
 #import "NNURLConnectionManager.h"
+#import "NNReachabilityManager.h"
 #import "NNSecurity.h"
 
 //HTTP header keys constants
@@ -49,11 +51,17 @@ static NSString *const kResponseKey_message = @"message";
     if(self = [super init]) {
         self.devKey = devKey;
         self.appId = appId;
+        [NNReachabilityManager sharedManager];
     }
     return self;
 }
 
 - (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
+    if(![self isNetworkReachable]) {
+        if(callback) {
+            callback(nil, [self notReachableError]);
+        }
+    } else {
     NNLogDebug(@"Loading Config: start", nil);
     
     NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
@@ -91,15 +99,18 @@ static NSString *const kResponseKey_message = @"message";
             callback(configoResponse, retError);
         }
     }];
+    }
 }
 
 
 - (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback {
-    if(_pollingStatus) {
+    if(![self isNetworkReachable]) {
+        if(callback) {
+            callback(nil, [self notReachableError]);
+        }
+    } else if(_pollingStatus) {
         NNLogDebug(@"Already Polling status", nil);
-        return;
-    }
-    
+    } else {
     NNLogDebug(@"Polling status: start", nil);
     
     _pollingStatus = YES;
@@ -133,10 +144,15 @@ static NSString *const kResponseKey_message = @"message";
             callback(shouldUpdate, retError);
         }
     }];
+    }
 }
 
 - (void)sendEvents:(NSArray *)events withUdid:(NSString *)udid withCallback:(CFGSendEventsCallback)callback {
-    if(!udid || events.count == 0) {
+    if(![self isNetworkReachable]) {
+        if(callback) {
+            callback(nil, [self notReachableError]);
+        }
+    } else if(!udid || events.count == 0) {
         NNLogDebug(@"Bad params provided", nil);
     } else {
         NNURLConnectionManager *mgr = [NNURLConnectionManager sharedManager];
@@ -191,6 +207,18 @@ static NSString *const kResponseKey_message = @"message";
              kHTTPHeaderKey_devKey : _devKey,
              kHTTPHeaderKey_appId : _appId
              };
+}
+
+- (NSError *)notReachableError {
+    return [CFGConstants errorWithType: CFGErrorNotConnected userInfo: nil];
+}
+
+- (BOOL)isNetworkReachable {
+    BOOL retval = [[NNReachabilityManager sharedManager] isReachable];
+    if(!retval) {
+        [CFGLogger logLevel: CFGLogLevelWarning log: @"Network is not reachable"];
+    }
+    return retval;
 }
 
 

@@ -2,6 +2,11 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
+## [Unreleased]
+### Added
+- `CFGNetworkController` tests for network reachability before making any request.
+
+
 ## [0.5.0] - 2016-06-27
 ### Deprecated
 - `featuresList` use `featuresDictionary` instead.
