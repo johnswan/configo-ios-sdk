@@ -82,6 +82,7 @@ static id _shared = nil;
         [self observePrivateConfig];
         [CFGPrivateConfigService sharedConfigService];
         
+        self.badCredentials = NO;
         self.devKey = devKey;
         self.appId = appId;
         
@@ -155,10 +156,15 @@ static id _shared = nil;
 }
 
 - (void)pollStatus {
+    if(self.badCredentials) {
+        return;
+    }
     [_networkController pollStatusWithUdid: [_configoDataController udid] callback: ^(BOOL shouldUpdate, NSError *error) {
         if(!error && shouldUpdate) {
             NNLogDebug(@"TICK - shouldUpdate true", nil);
             [self pullConfig];
+        } else if(error.code == CFGErrorInvalidAppId || error.code == CFGErrorUnauthorized) {
+            self.badCredentials = YES;
         } else {
             NNLogDebug(@"TICK - shouldUpdate false", nil);
         }
@@ -178,7 +184,7 @@ static id _shared = nil;
 }
 
 - (void)pullConfig:(CFGCallback)callback {
-    if(_state == CFGConfigLoadingInProgress) {
+    if(_state == CFGConfigLoadingInProgress || self.badCredentials) {
         return;
     }
     
@@ -196,41 +202,45 @@ static id _shared = nil;
         [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Start"];
     }
     
+    [self requestConfigWithCallback: callback];
+}
+
+- (void)requestConfigWithCallback:(CFGCallback)callback {
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [_networkController requestConfigWithConfigoData: configoData callback: ^(CFGResponse *response, NSError *error) {
         //Check before hand (because it relies on statuses that change in this function)
         BOOL shouldNotifyUser = [self shouldUpdateActiveConfig];
         
-        if(response && !error) {
+        if(error) {
+            NNLogDebug(@"Loading Config: Error", error);
+            if(error.code == CFGErrorUnauthorized || error.code == CFGErrorInvalidAppId) {
+                self.badCredentials = YES;
+                [CFGLogger logLevel: CFGLogLevelError log: @"Invalid devKey or appId"];
+            }
+        } else if(response) {
             _latestConfigoResponse = response;
-            
             [_configoDataController saveConfigoDataWithDevKey: _devKey appId: _appId];
             [self saveResponse: _latestConfigoResponse withDevKey: _devKey withAppId: _appId];
-            
-            if(shouldNotifyUser) {
+        }
+        
+        if(shouldNotifyUser) {
+            if(error) {
+                _state = CFGConfigFailedLoadingFromServer;
+                [CFGLogger logLevel: CFGLogLevelError log: @"Loading Config Failed: %@", error];
+            } else if(response) {
                 _state = CFGConfigLoadedFromServer;
                 _activeConfigoResponse = _latestConfigoResponse;
                 _configValueFetcher.config = _activeConfigoResponse.configObj;
                 
                 [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Complete"];
             }
-        }
-        //Declare an "error" state only if the config was supposed to be updated. So false states are not reported.
-        else if(shouldNotifyUser) {
-            _state = CFGConfigFailedLoadingFromServer;
-            NNLogDebug(@"Loading Config: Error", error);
-            
-            [CFGLogger logLevel: CFGLogLevelError log: @"Loading Config Failed: %@", error];
-        }
-        
-        //Invoke only if the user was expecting an update to the config
-        if(shouldNotifyUser) {
-            //Invoke callbacks and send notifications with either success or errors (depends on the error object passed).
             [self sendNotificationWithError: error];
             [self invokeListenersCallbacksWithError: error];
         }
-        //Start polling
-        [self setupPollingTimer];
+        
+        if(!self.badCredentials) {
+            [self setupPollingTimer];
+        }
     }];
 }
 

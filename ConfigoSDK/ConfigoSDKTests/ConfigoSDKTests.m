@@ -27,7 +27,7 @@
 
 - (void)testCallback {
     XCTestExpectation *expectaction = [self expectationWithDescription: @"callback expectation"];
-    [_configo setCallback: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
+    [_configo setCallback: ^(NSError *error, NSDictionary *rawConfig, NSDictionary *featuresList) {
         //Callback is being called when loaded from storage. (Probably what Guy was yapping about)
         NSLog(@"Callback: %@", rawConfig);
         XCTAssertNil(error);
@@ -50,7 +50,6 @@
 - (void)testEventAddition {
     NSString *expectedName = @"clickEvent";
     NSDictionary *expectedProps = @{@"prop1" : @"value"};
-    [_configo trackEvent: expectedName withProperties: expectedProps];
     CFGEvent *event = [[[_configo eventsController] events] lastObject];
     NSString *name = event.name;
     NSDictionary *props = event.properties;
@@ -74,7 +73,7 @@
 }
 
 - (void)setupHttpStubs {
-    [OHHTTPStubs onStubActivation:^(NSURLRequest *request, id<OHHTTPStubsDescriptor> stub) {
+    [OHHTTPStubs onStubActivation: ^(NSURLRequest *request, id<OHHTTPStubsDescriptor> stub, OHHTTPStubsResponse *response) {
         NSLog(@"%@ stubbed by %@.", request.URL, stub.name);
     }];
     

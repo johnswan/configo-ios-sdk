@@ -12,4 +12,6 @@ typedef NS_ENUM(NSUInteger, CFGErrorCode) {
     CFGErrorNotConnected = 1,
     CFGErrorBadResponse = 40,
     CFGErrorRequestFailed = 41,
+    CFGErrorInvalidAppId = 400156,
+    CFGErrorUnauthorized = 401
 };

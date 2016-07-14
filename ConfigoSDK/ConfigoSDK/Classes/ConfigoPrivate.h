@@ -13,6 +13,7 @@
 @class CFGResponse;
 
 @interface Configo ()
+@property (nonatomic, assign) BOOL badCredentials;
 @property (nonatomic, copy) NSString *devKey;
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, strong) CFGConfigoDataController *configoDataController;
