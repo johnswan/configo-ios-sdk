@@ -9,7 +9,7 @@ Configo gives the control back to mobile teams, enabling them to iterate quickly
 * If you're using [CocoaPods](https://cocoapods.org) add the following line to the `Podfile`:
 
   ```ruby
-  pod "ConfigoSDK", "~> 0.4"
+  pod "ConfigoSDK", "~> 0.5"
   ```
 
 * Alternatively, ConfigoSDK can be added manually to your Xcode project.
@@ -21,6 +21,7 @@ Configo gives the control back to mobile teams, enabling them to iterate quickly
     ```
     SystemConfiguration.framework
     CoreTelephony.framework
+    CoreLocation.framework
     ```
     
   5. To have the ConfigoSDK code load fully and correctly, 
@@ -79,7 +80,11 @@ Anonymous users can be segmented by their device attributes:
 * Carrier Name
 * Device Language
 * Time Zone
-* Location (Country)
+* Location, if available (Country / City)
+
+<pre>
+<b>NOTE:</b> The SDK will collect the location only if authorized by the user. The SDK will <b>not</b> prompt the user for using location services. This must be triggered by the developer.
+</pre>
 
 Identifying and segmenting users for targeted configurations can be done with the following:
 

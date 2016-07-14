@@ -75,7 +75,7 @@
 }
 
 - (void)setupStubLogs {
-    [OHHTTPStubs onStubActivation:^(NSURLRequest *request, id<OHHTTPStubsDescriptor> stub) {
+    [OHHTTPStubs onStubActivation:^(NSURLRequest *request, id<OHHTTPStubsDescriptor> stub, OHHTTPStubsResponse *response) {
         NSLog(@"%@ stubbed by %@.", request.URL, stub.name);
     }];
 }

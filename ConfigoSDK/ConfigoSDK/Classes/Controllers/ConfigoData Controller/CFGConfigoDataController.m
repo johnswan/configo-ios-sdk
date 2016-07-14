@@ -8,6 +8,7 @@
 #import "CFGConfigoDataController.h"
 #import "CFGConfigoData.h"
 #import "CFGFileController.h"
+#import "CFGLocationController.h"
 #import "CFGConstants.h"
 
 #import "NNLibrariesEssentials.h"
@@ -38,10 +39,12 @@ static NSString *const kPOSTKey_deviceDetails_appVersion        = @"appVersion";
 static NSString *const kPOSTKey_deviceDetails_appBuild          = @"appBuildNumber";
 static NSString *const kPOSTKey_deviceDetails_connectionType    = @"connectionType";
 static NSString *const kPOSTKey_deviceDetails_timezone          = @"timezoneOffset";
+static NSString *const kPOSTKey_deviceDetails_location          = @"location";
 
 
 @interface CFGConfigoDataController ()
 @property (nonatomic, strong) CFGFileController *fileController;
+@property (nonatomic, strong) CFGLocationController *locationController;
 @property (nonatomic) BOOL userContextChanged;
 @property (nonatomic) BOOL customUserIdChanged;
 @property (nonatomic, strong) CFGConfigoData *configoData;
@@ -64,6 +67,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone          = @"timezoneOffs
         NSError *err = nil;
         _fileController = [[CFGFileController alloc] initWithDevKey: devKey appId: appId];
         _configoData = [_fileController readConfigoData: &err];
+        _locationController = [[CFGLocationController alloc] init];
         
         if(!_configoData || !_configoData.udid) {
             NNLogDebug(@"ConfigoData file not found or bad", err);
@@ -71,13 +75,6 @@ static NSString *const kPOSTKey_deviceDetails_timezone          = @"timezoneOffs
         } else {
             NNLogDebug(@"ConfigoData loaded from file", _configoData);
         }
-    }
-    return self;
-}
-
-- (instancetype)initWithConfigoData:(CFGConfigoData *)configoData {
-    if(self = [super init]) {
-        _configoData = [configoData copy];
     }
     return self;
 }
@@ -291,6 +288,7 @@ static NSString *const kPOSTKey_deviceDetails_timezone          = @"timezoneOffs
     details[kPOSTKey_deviceDetails_appBuild] = buildNumber;
     details[kPOSTKey_deviceDetails_connectionType] = connectionType;
     details[kPOSTKey_deviceDetails_timezone] = timezoneOffset;
+    [details nnSafeSetObject: [_locationController getLocationDictionary] forKey: kPOSTKey_deviceDetails_location];
     
     return details;
 }

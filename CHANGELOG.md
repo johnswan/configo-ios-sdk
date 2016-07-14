@@ -2,6 +2,11 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
+## [Unreleased]
+### Added
+- GPS location is now sent to server if available (getConfig)
+- `CFGLocationController` for handling location related, including authorization.
+
 ## [0.5.1] - 2016-07-14
 ### Added
 - `CFGNetworkController` tests for network reachability before making any request.

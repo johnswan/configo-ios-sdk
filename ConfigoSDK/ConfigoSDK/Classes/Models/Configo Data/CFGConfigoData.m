@@ -100,7 +100,7 @@ static NSString *const kPushTokenKey = @"pushToken";
 }
 
 - (void)setUdid:(NSString *)udid {
-    self.udid = udid;
+    _udid = udid;
 }
 
 @end
