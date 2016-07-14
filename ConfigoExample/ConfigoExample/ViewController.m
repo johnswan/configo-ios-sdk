@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 
+#import <CoreLocation/CoreLocation.h>
 #import <ConfigoSDK/ConfigoSDK.h>
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *drillField;
 @property (weak, nonatomic) IBOutlet UITextView *configView;
 @property (weak, nonatomic) IBOutlet UIView *colorView;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
@@ -21,6 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager requestWhenInUseAuthorization];
+    
     // Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter] addObserverForName: ConfigoConfigurationLoadCompleteNotification
                                                       object: nil
@@ -36,15 +42,14 @@
                                                       });
                                                   }];
     
-    [[Configo sharedInstance] setCallback: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] setCallback: ^(NSError *err, NSDictionary *rawConfig, NSDictionary *featuresList) {
         NSLog(@"Configo callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
     }];
     
-    [[Configo sharedInstance] trackEvent: @"Loaded Login View" withProperties: @{@"from" : @"splash"}];
 }
 
 - (IBAction)pullConfig:(id)sender {
-    [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] pullConfig: ^(NSError *err, NSDictionary *rawConfig, NSDictionary *featuresList) {
         NSLog(@"pullConfig temp callback, got the config back!\n config:\n%@\nFeatures:\n%@", rawConfig, featuresList);
     }];
 }

@@ -10,6 +10,7 @@
 		535696450EB136BB4276D8C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C2B64F298476804CE2D44B /* libPods.a */; };
 		5C219EA71C0AEBC5003CF89E /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C219EA61C0AEBC5003CF89E /* DemoViewController.m */; };
 		5C5846231CB3C071008D7A36 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB31B806F900074D62A /* ViewController.m */; };
+		5C82BFFE1D37D5C100423952 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C82BFFD1D37D5C100423952 /* CoreLocation.framework */; };
 		5C93DEAE1B806F900074D62A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEAD1B806F900074D62A /* main.m */; };
 		5C93DEB11B806F900074D62A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C93DEB01B806F900074D62A /* AppDelegate.m */; };
 		5C93DEB71B806F900074D62A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C93DEB51B806F900074D62A /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		5C219EA51C0AEBC5003CF89E /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		5C219EA61C0AEBC5003CF89E /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		5C82BFFD1D37D5C100423952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5C93DEA81B806F900074D62A /* ConfigoExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConfigoExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C93DEAC1B806F900074D62A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		5C93DEAD1B806F900074D62A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C82BFFE1D37D5C100423952 /* CoreLocation.framework in Frameworks */,
 				5CC924C41C18621500CEF97D /* SystemConfiguration.framework in Frameworks */,
 				5CC924C21C18620F00CEF97D /* CoreTelephony.framework in Frameworks */,
 				535696450EB136BB4276D8C4 /* libPods.a in Frameworks */,
@@ -108,6 +111,7 @@
 		5CC924C51C18637F00CEF97D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C82BFFD1D37D5C100423952 /* CoreLocation.framework */,
 				5CC924C31C18621500CEF97D /* SystemConfiguration.framework */,
 				5CC924C11C18620F00CEF97D /* CoreTelephony.framework */,
 				D0C2B64F298476804CE2D44B /* libPods.a */,

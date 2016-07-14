@@ -57,7 +57,6 @@
 		5C7C77391C97018700DE033B /* CFGEventsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */; };
 		5C82BFF61D37BCE200423952 /* CFGLocationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C82BFF41D37BCE200423952 /* CFGLocationController.h */; };
 		5C82BFF71D37BCE200423952 /* CFGLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82BFF51D37BCE200423952 /* CFGLocationController.m */; };
-		5C82BFF91D37D11B00423952 /* CFGLocationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C82BFF81D37D11B00423952 /* CFGLocationControllerTests.m */; };
 		5C82BFFC1D37D24000423952 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C82BFFA1D37D22100423952 /* CoreLocation.framework */; };
 		5C87AF741C7E271B008D7785 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C05AE5C1C7E140500AD7D93 /* Foundation.framework */; };
 		5C88E3D21C4CE50C00527A25 /* ConfigoSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */; };
@@ -192,7 +191,6 @@
 		5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGEventsControllerTests.m; sourceTree = "<group>"; };
 		5C82BFF41D37BCE200423952 /* CFGLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFGLocationController.h; path = "Classes/Controllers/location-controller/CFGLocationController.h"; sourceTree = "<group>"; };
 		5C82BFF51D37BCE200423952 /* CFGLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFGLocationController.m; path = "Classes/Controllers/location-controller/CFGLocationController.m"; sourceTree = "<group>"; };
-		5C82BFF81D37D11B00423952 /* CFGLocationControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFGLocationControllerTests.m; sourceTree = "<group>"; };
 		5C82BFFA1D37D22100423952 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5C88E3CF1C4CE50C00527A25 /* ConfigoSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigoSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C88E3D11C4CE50C00527A25 /* ConfigoSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfigoSDKTests.m; sourceTree = "<group>"; };
@@ -482,7 +480,6 @@
 				5C7C77271C96BBB300DE033B /* CFGLoggerTests.m */,
 				5C7C77291C96BCC100DE033B /* CFGNetworkControllerTests.m */,
 				5C7C77381C97018700DE033B /* CFGEventsControllerTests.m */,
-				5C82BFF81D37D11B00423952 /* CFGLocationControllerTests.m */,
 				5C39AB921C95C1DA00028913 /* CFGSandbox.m */,
 			);
 			path = ConfigoSDKTests;
@@ -1202,7 +1199,6 @@
 				5C7C77281C96BBB300DE033B /* CFGLoggerTests.m in Sources */,
 				5C6498651C99BE7E00510071 /* CFGBaseTestCase.m in Sources */,
 				5C39AB931C95C1DA00028913 /* CFGSandbox.m in Sources */,
-				5C82BFF91D37D11B00423952 /* CFGLocationControllerTests.m in Sources */,
 				5C88E3D21C4CE50C00527A25 /* ConfigoSDKTests.m in Sources */,
 				5C64986B1C9AE05400510071 /* OHHTTPStubsUtilities.m in Sources */,
 				5C7C772A1C96BCC100DE033B /* CFGNetworkControllerTests.m in Sources */,

@@ -43,13 +43,12 @@
     
     [self refreshView];
     
-    [[Configo sharedInstance] trackEvent: @"Login Loaded" withProperties: @{@"from" : @"splash"}];
 }
 
 - (void)registerConfigoCallback {
     //Make the configurations dynamically refresh in runtime (Don't wait for next launch/start)
     [[Configo sharedInstance] setDynamicallyRefreshValues: YES];
-    [[Configo sharedInstance] setCallback: ^(NSError *error, NSDictionary *rawConfig, NSArray *featuresList) {
+    [[Configo sharedInstance] setCallback: ^(NSError *error, NSDictionary *rawConfig, NSDictionary *featuresList) {
         if(error) {
             //Problem
         } else {

@@ -181,10 +181,10 @@ static id _shared = nil;
         [CFGLogger logLevel: CFGLogLevelVerbose log: @"Loading Config Start"];
     }
     
-    [self requestConfigWithCallback: callback];
+    [self requestConfig];
 }
 
-- (void)requestConfigWithCallback:(CFGCallback)callback {
+- (void)requestConfig {
     NSDictionary *configoData = [_configoDataController configoDataForRequest];
     [_networkController requestConfigWithConfigoData: configoData callback: ^(CFGResponse *response, NSError *error) {
         //Check before hand (because it relies on statuses that change in this function)
