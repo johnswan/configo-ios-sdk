@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, CFGErrorCode) {
+    CFGErrorNotConnected = 1,
     CFGErrorBadResponse = 40,
     CFGErrorRequestFailed = 41,
 };

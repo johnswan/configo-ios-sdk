@@ -30,7 +30,7 @@
 		5C11862A1BFA103A0048CBAA /* CFGPrivateConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1186281BFA103A0048CBAA /* CFGPrivateConfigService.m */; };
 		5C1B63241B8F45C8000CCD9D /* CFGNetworkController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1B63221B8F45C8000CCD9D /* CFGNetworkController.h */; };
 		5C1B63251B8F45C8000CCD9D /* CFGNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B63231B8F45C8000CCD9D /* CFGNetworkController.m */; };
-		5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27020B1C8272D900D7508E /* CFGFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27020B1C8272D900D7508E /* CFGFeature.h */; };
 		5C27020E1C8272D900D7508E /* CFGFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27020C1C8272D900D7508E /* CFGFeature.m */; };
 		5C2702121C82EBDA00D7508E /* CFGConfigController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2702101C82EBDA00D7508E /* CFGConfigController.h */; };
 		5C2702131C82EBDA00D7508E /* CFGConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2702111C82EBDA00D7508E /* CFGConfigController.m */; };
@@ -79,7 +79,7 @@
 		5CEA82F21B8DF976008F6D3B /* CFGConfigoDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA82F01B8DF976008F6D3B /* CFGConfigoDataController.m */; };
 		5CEE86621C4D4DF400D310C2 /* CFGConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CEE86601C4D4DF400D310C2 /* CFGConfig.h */; };
 		5CEE86631C4D4DF400D310C2 /* CFGConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE86611C4D4DF400D310C2 /* CFGConfig.m */; };
-		5CF08C1F1C26FBAD00A85493 /* NNJSONObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF08BC61C26FBAD00A85493 /* NNJSONObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CF08C1F1C26FBAD00A85493 /* NNJSONObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF08BC61C26FBAD00A85493 /* NNJSONObject.h */; };
 		5CF08C201C26FBAD00A85493 /* NNJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF08BC71C26FBAD00A85493 /* NNJSONObject.m */; };
 		5CF08C211C26FBAD00A85493 /* NNReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF08BC91C26FBAD00A85493 /* NNReachability.h */; };
 		5CF08C221C26FBAD00A85493 /* NNReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF08BCA1C26FBAD00A85493 /* NNReachability.m */; };
@@ -944,11 +944,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CF08C1F1C26FBAD00A85493 /* NNJSONObject.h in Headers */,
-				5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */,
 				5CF08C451C26FBAD00A85493 /* NNSelectable.h in Headers */,
 				5CACEF811C2FE665005E6111 /* CFGConstants.h in Headers */,
 				5CF08C391C26FBAD00A85493 /* NSDate+NNAdditions.h in Headers */,
+				5C27020D1C8272D900D7508E /* CFGFeature.h in Headers */,
+				5CF08C1F1C26FBAD00A85493 /* NNJSONObject.h in Headers */,
 				5CF08C311C26FBAD00A85493 /* NNURLResponseSerializer.h in Headers */,
 				5C33AB091B8CA84500D85791 /* CFGConfigoData.h in Headers */,
 				5C05AE581C7E0DC400AD7D93 /* CFGConfigValueFetcher.h in Headers */,

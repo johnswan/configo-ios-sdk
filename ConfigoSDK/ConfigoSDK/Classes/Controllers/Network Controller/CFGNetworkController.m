@@ -11,9 +11,11 @@
 #import "CFGResponse.h"
 #import "CFGResponseHeader.h"
 #import "CFGInternalError.h"
+#import "CFGLogger.h"
 
 #import "NNLibrariesEssentials.h"
 #import "NNURLConnectionManager.h"
+#import "NNReachabilityManager.h"
 #import "NNSecurity.h"
 
 //HTTP header keys constants
@@ -50,108 +52,120 @@ static NSString *const kResponseKey_message = @"message";
     if(self = [super init]) {
         self.devKey = devKey;
         self.appId = appId;
+        [NNReachabilityManager sharedManager];
     }
     return self;
 }
 
 - (void)requestConfigWithConfigoData:(NSDictionary *)data callback:(CFGConfigLoadCallback)callback {
-    NNLogDebug(@"Loading Config: start", nil);
-    
-    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
-    connectionMgr.requestSerializer = [NNJSONRequestSerializer serializer];
-    connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
-    
-    NSURL *configUrl = [CFGConstants getConfigURL];
-    NSDictionary *headers = [self requestHeaders];
-    NSNumber *timestampNumber = headers[kHTTPHeaderKey_timestamp];
-    NSInteger timestamp = [timestampNumber longValue];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
-    
-    NNLogDebug(@"Loading Config: POST", (@{@"URL" : configUrl, @"Headers" : headers, @"Params" : params}));
-    
-    [connectionMgr POST: configUrl headers: headers parameters: params processBlock: ^BOOL(NSMutableURLRequest *request) {
-        NSString *secret = [NSString stringWithFormat: @"%@%@%ld", _devKey, _appId, (long)timestamp];
-        NSString *postBody = [[NSString alloc] initWithData: request.HTTPBody encoding: NSUTF8StringEncoding];
-        NSData *hashData = [NNSecurity hmacSha256HashString: postBody withKey: secret];
-        NSString *signature = [hashData base64EncodedStringWithOptions: 0];
-        if(signature) {
-            [request setValue: signature forHTTPHeaderField: kHTTPHeaderKey_signature];
-            return YES;
-        }
-        return NO;
-    } completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
-        //NNLogDebug(@"Loading Config: HTTPResponse", response);
-        NNLogDebug(@"Loading Config: Response Data", object);
-        NSError *retError = nil;
-        CFGResponse *configoResponse = [[CFGResponse alloc] initWithDictionary: object];
-
-        if(!error && !configoResponse) {
-            retError = [NSError errorWithDomain: CFGErrorDomain code: 40 userInfo: nil];
-        } else if(error) {
-            NNLogDebug(@"Loading Config: Error", error);
-            retError = error;
-        } else if(configoResponse) {
-            CFGResponseHeader *responseHeader = [configoResponse responseHeader];
-            if(responseHeader.internalError) {
-                NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
-                retError = [responseHeader.internalError error];
-            } else {
-                NNLogDebug(@"Loading Config: Done", nil);
-            }
-        }
-        
+    if(![self isNetworkReachable]) {
         if(callback) {
-            callback(configoResponse, retError);
+            callback(nil, [self notReachableError]);
         }
-    }];
+    } else {
+        NNLogDebug(@"Loading Config: start", nil);
+        
+        NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
+        connectionMgr.requestSerializer = [NNJSONRequestSerializer serializer];
+        connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
+        
+        NSURL *configUrl = [CFGConstants getConfigURL];
+        NSDictionary *headers = [self requestHeaders];
+        NSNumber *timestampNumber = headers[kHTTPHeaderKey_timestamp];
+        NSInteger timestamp = [timestampNumber longValue];
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary: data];
+        
+        NNLogDebug(@"Loading Config: POST", (@{@"URL" : configUrl, @"Headers" : headers, @"Params" : params}));
+        
+        [connectionMgr POST: configUrl headers: headers parameters: params processBlock: ^BOOL(NSMutableURLRequest *request) {
+            NSString *secret = [NSString stringWithFormat: @"%@%@%ld", _devKey, _appId, (long)timestamp];
+            NSString *postBody = [[NSString alloc] initWithData: request.HTTPBody encoding: NSUTF8StringEncoding];
+            NSData *hashData = [NNSecurity hmacSha256HashString: postBody withKey: secret];
+            NSString *signature = [hashData base64EncodedStringWithOptions: 0];
+            if(signature) {
+                [request setValue: signature forHTTPHeaderField: kHTTPHeaderKey_signature];
+                return YES;
+            }
+            return NO;
+        } completion: ^(NSHTTPURLResponse *response, id object, NSError *error) {
+            //NNLogDebug(@"Loading Config: HTTPResponse", response);
+            NNLogDebug(@"Loading Config: Response Data", object);
+            NSError *retError = nil;
+            CFGResponse *configoResponse = [[CFGResponse alloc] initWithDictionary: object];
+            
+            if(!error && !configoResponse) {
+                retError = [NSError errorWithDomain: CFGErrorDomain code: 40 userInfo: nil];
+            } else if(error) {
+                NNLogDebug(@"Loading Config: Error", error);
+                retError = error;
+            } else if(configoResponse) {
+                CFGResponseHeader *responseHeader = [configoResponse responseHeader];
+                if(responseHeader.internalError) {
+                    NNLogDebug(@"Loading Config: Internal error", responseHeader.internalError);
+                    retError = [responseHeader.internalError error];
+                } else {
+                    NNLogDebug(@"Loading Config: Done", nil);
+                }
+            }
+            
+            if(callback) {
+                callback(configoResponse, retError);
+            }
+        }];
+    }
 }
 
 
 - (void)pollStatusWithUdid:(NSString *)udid callback:(CFGStatusPollCallback)callback {
-    if(_pollingStatus) {
-        NNLogDebug(@"Already Polling status", nil);
-        return;
-    }
-    
-    NNLogDebug(@"Polling status: start", nil);
-    
-    _pollingStatus = YES;
-    
-    NSDictionary *headers = [self requestHeaders];
-    
-    NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
-    connectionMgr.requestSerializer = [NNHTTPRequestSerializer serializer];
-    connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
-    
-    NSURL *pollURL = [CFGConstants statusPollURL];
-    NSDictionary *params = @{kGETKey_deviceId : udid};
-    
-    [connectionMgr GET: pollURL headers: [self requestHeaders] parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        _pollingStatus = NO;
-        
-//        NNLogDebug(@"Polling Status: HTTPResponse", response);
-        NNLogDebug(@"Polling status: Response data", responseObject);
-        
-        NSError *retError = error;
-        BOOL shouldUpdate = false;
-        if(!error && [responseObject isKindOfClass: [NSDictionary class]]) {
-            NSDictionary *json = (NSDictionary *)responseObject;
-            NSDictionary *headerObj = [NNJSONUtilities validObjectFromObject: json[kResponseKey_header]];
-            CFGResponseHeader *header = [[CFGResponseHeader alloc] initWithDictionary: headerObj];
-            retError = [header.internalError error];
-            
-            NSDictionary *responseJson = [NNJSONUtilities validObjectFromObject: json[kResponseKey_response]];
-            shouldUpdate = [NNJSONUtilities validBooleanFromObject: responseJson[kResponseKey_shouldUpdate]];
-        }
-        
+    if(![self isNetworkReachable]) {
         if(callback) {
-            callback(shouldUpdate, retError);
+            callback(nil, [self notReachableError]);
         }
-    }];
+    } else if(_pollingStatus) {
+        NNLogDebug(@"Already Polling status", nil);
+    } else {
+        NNLogDebug(@"Polling status: start", nil);
+        
+        _pollingStatus = YES;
+        
+        NNURLConnectionManager *connectionMgr = [NNURLConnectionManager sharedManager];
+        connectionMgr.requestSerializer = [NNHTTPRequestSerializer serializer];
+        connectionMgr.responseSerializer = [NNJSONResponseSerializer serializer];
+        
+        NSURL *pollURL = [CFGConstants statusPollURL];
+        NSDictionary *params = @{kGETKey_deviceId : udid};
+        
+        [connectionMgr GET: pollURL headers: [self requestHeaders] parameters: params completion: ^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            _pollingStatus = NO;
+            
+            //        NNLogDebug(@"Polling Status: HTTPResponse", response);
+            NNLogDebug(@"Polling status: Response data", responseObject);
+            
+            NSError *retError = error;
+            BOOL shouldUpdate = false;
+            if(!error && [responseObject isKindOfClass: [NSDictionary class]]) {
+                NSDictionary *json = (NSDictionary *)responseObject;
+                NSDictionary *headerObj = [NNJSONUtilities validObjectFromObject: json[kResponseKey_header]];
+                CFGResponseHeader *header = [[CFGResponseHeader alloc] initWithDictionary: headerObj];
+                retError = [header.internalError error];
+                
+                NSDictionary *responseJson = [NNJSONUtilities validObjectFromObject: json[kResponseKey_response]];
+                shouldUpdate = [NNJSONUtilities validBooleanFromObject: responseJson[kResponseKey_shouldUpdate]];
+            }
+            
+            if(callback) {
+                callback(shouldUpdate, retError);
+            }
+        }];
+    }
 }
 
 - (void)sendEvents:(NSArray *)events withUdid:(NSString *)udid withCallback:(CFGSendEventsCallback)callback {
-    if(!udid || events.count == 0) {
+    if(![self isNetworkReachable]) {
+        if(callback) {
+            callback(nil, [self notReachableError]);
+        }
+    } else if(!udid || events.count == 0) {
         NNLogDebug(@"Bad params provided", nil);
     } else {
         NNURLConnectionManager *mgr = [NNURLConnectionManager sharedManager];
@@ -207,6 +221,18 @@ static NSString *const kResponseKey_message = @"message";
              kHTTPHeaderKey_devKey : _devKey,
              kHTTPHeaderKey_appId : _appId
              };
+}
+
+- (NSError *)notReachableError {
+    return [CFGConstants errorWithType: CFGErrorNotConnected userInfo: nil];
+}
+
+- (BOOL)isNetworkReachable {
+    BOOL retval = [[NNReachabilityManager sharedManager] isReachable];
+    if(!retval) {
+        [CFGLogger logLevel: CFGLogLevelWarning log: @"Network is not reachable"];
+    }
+    return retval;
 }
 
 

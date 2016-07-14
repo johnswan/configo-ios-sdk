@@ -13,7 +13,7 @@
 
 #pragma mark - Global Constants
 
-NSString *const ConfigoSDKVersion = @"0.4.4";
+NSString *const ConfigoSDKVersion = @"0.5.1";
 NSString *const CFGFileNamePrefix = @"configo";
 NSString *const CFGErrorDomain = @"io.configo.error";
 NSString *const CFGSessionStartEventName = @"CONFIGO_SESSION_START";
@@ -54,19 +54,16 @@ typedef NS_ENUM(NSUInteger, CFGApiVersion) {
 }
 
 + (NSString *)errorCodeToString:(CFGErrorCode)code {
-    NSString *retval = nil;
     switch(code) {
+        case CFGErrorNotConnected:
+            return @"notConnected";
         case CFGErrorBadResponse:
-            retval = @"badResponse";
-            break;
+            return @"badResponse";
         case CFGErrorRequestFailed:
-            retval = @"requestFailed";
-            break;
+            return @"requestFailed";
         default:
-            retval = @"unexpected";
-            break;
+            return @"unexpected";
     }
-    return retval;
 }
 
 #pragma mark - URL Builders

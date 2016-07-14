@@ -2,8 +2,10 @@
 All changes to the SDK will be documented in this file.
 This project follows the [Semantic Versioning](http://semver.org) style.
 
-## [Unreleased]
+## [0.5.1] - 2016-07-14
 ### Added
+- `CFGNetworkController` tests for network reachability before making any request.
+- `CFGEventsController` for controlling event queueing, pushing, scheduling and error handling
 - Event tracking API `trackEvent:withProperties:`.
 - Clear all user context via `clearUserContext`.
 - Add multiple callback listeners via `addListenerCallback:`.

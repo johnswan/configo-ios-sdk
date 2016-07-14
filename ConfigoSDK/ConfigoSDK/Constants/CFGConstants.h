@@ -41,5 +41,7 @@ typedef NS_ENUM(NSUInteger, CFGEnvironment) {
 + (NSURL *)eventsPushUrl;
 + (CFGEnvironment)currentEnvironment;
 
++ (NSError *)errorWithType:(CFGErrorCode)code userInfo:(NSDictionary *)info;
+
 
 @end

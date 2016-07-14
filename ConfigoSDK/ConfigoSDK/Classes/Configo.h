@@ -12,11 +12,11 @@
 
 /**
  *	@brief A block to be executed after the config is loaded from the remote source.
- *  @param error        An optional error (NSError) if something went wrong, or <code>null</code> if everything went well.
- *	@param rawConfig	The config (NSDictionary) that was loaded.
- *	@param featuresList	The featureList (NSArray) that was loaded.
+ *  @param error                An optional error (NSError) if something went wrong, or <code>null</code> if everything went well.
+ *	@param rawConfig            The config (NSDictionary) that was loaded.
+ *	@param featuresDictionary	The features dictionary holding pairs of <code>{"<featureKey>" : <NSNumber boolean>}</code>.
  */
-typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSArray *featuresList);
+typedef void(^CFGCallback)(NSError *error, NSDictionary *rawConfig, NSDictionary *featuresDictionary);
 
 
 /** The name of the notification that will be broadcast when the configuration is loaded successfully. */
@@ -28,7 +28,9 @@ FOUNDATION_EXPORT NSString *const ConfigoNotificationUserInfoErrorKey;
 /** The key of the config (NSDictionary) in the userInfo dictionary of the <code>ConfigoConfigurationLoadCompleteNotification</code> */
 FOUNDATION_EXPORT NSString *const ConfigoNotificationUserInfoRawConfigKey;
 /** The key of the features list (NSArray) in the userInfo dictionary of the <code>ConfigoConfigurationLoadCompleteNotification</code> */
-FOUNDATION_EXPORT NSString *const ConfigoNotificationUserInfoFeaturesListKey;
+FOUNDATION_EXPORT NSString *const ConfigoNotificationUserInfoFeaturesListKey __attribute__((deprecated("Use `ConfigoNotificationUserInfoFeaturesDictionaryKey` instead")));
+/** The key of the features dictionary (NSDictionary) in the userInfo dictionary of the <code>ConfigoConfigurationLoadCompleteNotification</code> */
+FOUNDATION_EXPORT NSString *const ConfigoNotificationUserInfoFeaturesDictionaryKey;
 
 /**
  *  @brief The current load state of the config.
@@ -156,14 +158,10 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
  */
 - (BOOL)setUserContextValue:(id)value forKey:(NSString *)key;
 
-- (void)clearUserContext;
-
 /**
- *  @brief Track an analytics event associated with the user.
- *  @param event The event's name. Events with a <code>nil</code> name will be ignored.
- *  @param properties The properties associated with the event (must be JSON compaitable: <code>NSNumber, NSString, NSArray, NSDictionary, NSNull</code>).
+ *  @brief Clears all previously set userContext, essentially removing the user from its targeting groups.
  */
-- (void)trackEvent:(NSString *)event withProperties:(NSDictionary *)properties;
+- (void)clearUserContext;
 
 /**
  *	@brief The raw config
@@ -184,9 +182,14 @@ typedef NS_ENUM(NSUInteger, CFGConfigLoadState) {
 - (id)configValueForKeyPath:(NSString *)keyPath fallbackValue:(id)fallbackValue;
 
 /**
- *  @return NSArray containing a list of feature keys (NSString) that are "on" for the user (can be empty).
+ *  @return NSArray containing NSDictionary elements, each is a pair of feature key and enabled pair.
  */
-- (NSArray *)featuresList;
+- (NSArray *)featuresList DEPRECATED_MSG_ATTRIBUTE("Use `featuresDictionary` instead");
+
+/**
+ *  @return An NSDictionary holding pairs of <code>{"<featureKey>" : <NSNumber boolean>}</code>.
+ */
+- (NSDictionary *)featuresDictionary;
 
 /**
  *  @brief Feature flag for a given key.
