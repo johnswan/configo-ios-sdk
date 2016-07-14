@@ -13,7 +13,6 @@
 #import "CFGConfigoDataController.h"
 #import "CFGNetworkController.h"
 #import "CFGEventsController.h"
-#import "CFGPrivateConfigService.h"
 #import "CFGConfigValueFetcher.h"
 #import "CFGLogger.h"
 
@@ -78,10 +77,6 @@ static id _shared = nil;
         
         [NNReachabilityManager sharedManager];
         
-        //Init private config
-        [self observePrivateConfig];
-        [CFGPrivateConfigService sharedConfigService];
-        
         self.badCredentials = NO;
         self.devKey = devKey;
         self.appId = appId;
@@ -112,26 +107,10 @@ static id _shared = nil;
     return ConfigoSDKVersion;
 }
 
-#pragma mark - Internal Config
-
-- (void)observePrivateConfig {
-    [[NSNotificationCenter defaultCenter] addObserverForName: CFGPrivateConfigLoadedNotification
-                                                      object: nil queue: [NSOperationQueue mainQueue]
-                                                  usingBlock: ^(NSNotification *note) {
-                                                      NNLogDebug(@"New private config, rebooting poll timer", nil);
-                                                      [_pollingTimer invalidate];
-                                                      //If the config is already loaded, and we only got the internal config, we should start poll.
-                                                      //Otherwise, the pullConfig completion will setup the poll timer.
-                                                      if(_state == CFGConfigLoadedFromServer) {
-                                                          [self setupPollingTimer];
-                                                      }
-                                                  }];
-}
-
 #pragma mark - Polling
 
 - (void)setupPollingTimer {
-    NSInteger pollingInterval = CFGPrivateConfigInteger(@"pollingInterval.ios");
+    NSInteger pollingInterval = CFGDefaultPollingInterval;
     NNLogDebug(@"Setting up polling timer", [NSNumber numberWithInteger: pollingInterval]);
     _pollingTimer = [NSTimer scheduledTimerWithTimeInterval: pollingInterval
                                                      target: self
